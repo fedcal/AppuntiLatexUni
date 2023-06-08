@@ -1,0 +1,7 @@
+\contentsline {section}{\numberline {1}Introduzione}{3}{section.1}%
+\contentsline {section}{\numberline {2}Linguaggi regolari}{4}{section.2}%
+\contentsline {section}{\numberline {3}Linguaggi Context Free}{9}{section.3}%
+\contentsline {section}{\numberline {4}Macchine di Turing - La tesi di Church Turing}{11}{section.4}%
+\contentsline {section}{\numberline {5}Decidibilità}{12}{section.5}%
+\contentsline {section}{\numberline {6}Riducibilità}{13}{section.6}%
+\contentsline {section}{\numberline {7}Glossario}{14}{section.7}%
