@@ -503,13 +503,13 @@ Ogni ipotesi cerca di approssimare la funzione target su un insieme sufficientem
 
 Date due ipotesi $h_k$ e $h_j$, $h_j$ è più generale o uguale a $h_k$ quando $h_j \geq h_k$ se e solo se ogni istanza che soddisfa $h_k$ soddisfa anche $h_j$. Inoltre possiamo definire che $h_j$ è strettamente più generale rispetto a $h_k$ quando $h_j > h_k$ e se e solo se $h_j \geq h_k$ e $h_k \not \geq h_j$.
 
-Un'ipotesi h \textbf{copre} un esempio positivo se è correttamente classifica l'esempio come positivo. Qundi si avrà la relazione $h(x) = c(x) = 1$. Un esempio $<x,c(x)>$ \textbf{soddisfa} le ipotesi h quando $h(x) = 1$ indipendentemente dal fatto che x sia un esempio negativo o positivo del concetto di destinazione. Mentre definiamo che un'ipotesi h è \textbf{consistente} con un esempio $<x,c(x)>$ quando h(x)=c(x). Infine definiamo un ipotesi h \textbf{consistente con un insieme di dati} D se è consistente con ogni esempio $x \in D$.
+Un'ipotesi h \textbf{copre} un esempio positivo se è correttamente classifica l'esempio come positivo. Quindi si avrà la relazione $h(x) = c(x) = 1$. Un esempio $<x,c(x)>$ \textbf{soddisfa} le ipotesi h quando $h(x) = 1$ indipendentemente dal fatto che x sia un esempio negativo o positivo del concetto di destinazione. Mentre definiamo che un'ipotesi h è \textbf{consistente} con un esempio $<x,c(x)>$ quando h(x)=c(x). Infine definiamo un ipotesi h \textbf{consistente con un insieme di dati} D se è consistente con ogni esempio $x \in D$.
 
 Per sfruttare \textit{l'ordinamento dal generale allo specifico}, si potrebbe iniziare con l'ipotesi più specifica in H, per poi generalizzare questa ipotesi ogni volta che essa non riesce a coprire un esempio di addestramento positivo osservato (\textbf{bottom-up search}).
 
 Per aiutarci in questo arduo compito descriviamo il procedimento dell'algoritmo \textbf{FIND-S}. Inizializziamo h all'ipotesi più specifica in H. Successivamente definiamo due cicli, quello più esterno per ogni istanza positiva x dell'insieme di traning esegue il ciclo su ogni attributo della condizione $a_i$ in h. Se il vincolo $a_i$ è soddisfatto per x, allora non si fa nulla, altrimenti si rimpiazza $a_i$ in h con il prossimo vincolo più generale soddisfatto da x. Alla fine dell'algoritmo viene restituita l'ipotesi h.
 
-In questo algoritmo non vi è nessuna revisione in caso di esempio negativo perchè si assume che il target concept c si trova in H e non vi sono errori nei dati di training. L'ipotesi h è l'ipotesi più specifica in H tale per cui $ c \geq_g h$, ma c non sarà mai sodisfatta da un esempio negativo.
+In questo algoritmo non vi è nessuna revisione in caso di esempio negativo perchè si assume che il target concept c si trova in H e non vi sono errori nei dati di training. L'ipotesi h è l'ipotesi più specifica in H tale per cui $ c \geq_g h$, ma c non sarà mai soddisfatta da un esempio negativo.
 
 L'algoritmo Find-S ha anche degli aspetti negativi. Non ci dice se l'apprendimento ha coperto il corretto target concept, se c'è solo un'ipotesi consistente in H con i dati o ci sono più di un'ipotesi. Inoltre non possiamo rilevare quando i dati di training sono inconsistenti, in quanto l'incoerenza negli esempi di addestramento può fuorviare Find-S, poiché ignora gli esempi negativi. Potrebbero esserci diverse ipotesi coerenti massimamente specifiche. L'algoritmo dovrebbe fare marcia indietro sulle sue scelte per esplorare un ramo diverso dell'ordinamento parziale rispetto al ramo che ha selezionato.
 
@@ -531,11 +531,11 @@ Il confine generale, o \textbf{general boundary} G, rispetto allo spazio delle i
 
 Il confine specifico, o \textbf{specific boundary}, S, rispetto allo spazio delle ipotesi H e all'insieme dei dati D, è l'insieme dei membri generali di H consistenti in D. $S \equiv \{ s \in H | Consistent(s,D) \land ( \neg \exists s' \in H [(s >_g s') \land Consistent(s',D)])\}$
 
-Una volta ottenuti questi due insiemi, possiamo definire un algoritmo per eliminare le ipotesi che non sono generali. Questo algoritmo prende il nome di \textbf{Candidate-Elimination}, nel quale in un primo passo si assegna a una varibile G le ipotesi generali in H e in una variabile S si assegnano le ipotesi specifiche in H. Successivamente per ogni esempio di traning d, \textbf{(controllo1)} si controlla se quest'ultimo è un esempio positivo e nel caso si rimuove da G ogni ipotesi inconsistente con d, per poi avviare una funzione UPDATE-S.
+Una volta ottenuti questi due insiemi, possiamo definire un algoritmo per eliminare le ipotesi che non sono generali. Questo algoritmo prende il nome di \textbf{Candidate-Elimination}, nel quale in un primo passo si assegna a una variabile G le ipotesi generali in H e in una variabile S si assegnano le ipotesi specifiche in H. Successivamente per ogni esempio di traning d, \textbf{(controllo1)} si controlla se quest'ultimo è un esempio positivo e nel caso si rimuove da G ogni ipotesi inconsistente con d, per poi avviare una funzione UPDATE-S.
 
 La funzione UPDATE-S ha il compito di controllare ogni ipotesi s in S che non è consistente con d, eliminando s da S, per poi aggiungere a S tutte le generalizzazioni minimali h di s tali che h è consistente con d e qualche membro di G è più generale di h. Infine rimuove da S ogni ipotesi che è più generale di un'altra ipotesi in S.
 
-Si ritorna al \textbf{controllo1} e se questo risultasse negativo, si rimuove da S ogni ipotesi inconsistente con d e si avvia una procedura UPDATE-G per aggiornare l'insieme G. Quest'ultima funzione controlla ogni ipotesi g in G che non è consistente con d e in questo caso rimuove g da G, aggiunge a G tutte le specializzazioni minimali h di g tali che h è consistente con d e qualche mebro di S è più specifico di h. Infine rimuove da G ogni ipotesi che è mmeno generale di altre ipotesi in G.
+Si ritorna al \textbf{controllo1} e se questo risultasse negativo, si rimuove da S ogni ipotesi inconsistente con d e si avvia una procedura UPDATE-G per aggiornare l'insieme G. Quest'ultima funzione controlla ogni ipotesi g in G che non è consistente con d e in questo caso rimuove g da G, aggiunge a G tutte le specializzazioni minimali h di g tali che h è consistente con d e qualche membro di S è più specifico di h. Infine rimuove da G ogni ipotesi che è meno generale di altre ipotesi in G.
 
 L'algoritmo \textit{candidate-elimination} convergerà verso il target concept a condizione che non ci sono errori negli esempi di training ed è presente qualche ipotesi in HS che descrive correttamente il target concept. Infatti il target concept è appreso quando il confine di S e G converge a un'ipotesi singola e identica.
 
@@ -548,9 +548,9 @@ Quando ci troviamo difronte a concetti appresi parzialmente, abbiamo una minore 
 \item alla percentuale di ipotesi che votano positivamente, interpretando questo come la probabilità che l'istanza sia positiva dato il dato di training.
 \end{itemize}
 
-In questo ci viene in aiuto un algoritmo di \textit{interactive learning} che sceglie la nuova istanza (\textbf{query}) e restiutisce la corretta classificazione mediante un oracolo esterno. Se l'algoritmo sceglie sempre una query che è soddisfatta solo da metà delle ipotesi in VS, allora il target concept può essere trovato in $log_2 |VS|$ steps.
+In questo ci viene in aiuto un algoritmo di \textit{interactive learning} che sceglie la nuova istanza (\textbf{query}) e restituisce la corretta classificazione mediante un oracolo esterno. Se l'algoritmo sceglie sempre una query che è soddisfatta solo da metà delle ipotesi in VS, allora il target concept può essere trovato in $log_2 |VS|$ steps.
 
-Un problema da affrontare in questi tipi di problemi consiste nella gestione del rumore nelle istanze. Per poterlo gestirre si potrebbero rendere più blande le condizioni che descrivono la coerenza dei concetti con tutte le istanze di addestramento. Inoltre se si hanno un numero limitato e predeterminato di esempi classificati in modo errato, si potrebbero mantenere diversi insiemi G e S di consistenza variabile.
+Un problema da affrontare in questi tipi di problemi consiste nella gestione del rumore nelle istanze. Per poterlo gestisce si potrebbero rendere più blande le condizioni che descrivono la coerenza dei concetti con tutte le istanze di addestramento. Inoltre se si hanno un numero limitato e predeterminato di esempi classificati in modo errato, si potrebbero mantenere diversi insiemi G e S di consistenza variabile.
 
 \begin{center}
 
@@ -558,9 +558,9 @@ Un problema da affrontare in questi tipi di problemi consiste nella gestione del
 
 \end{center}
 
-L'insieme $S_i$ è coerente con tutti tranne gli i esempi di allenamento positivi. L'insieme $G_i$ è coerente con tutti tranne gli i esempi di allenamento negativi. Quando $G_0$ incrocia $S_0$ l'algoritmo può concluedere che nessun concept nello spazio delle regole è coerente con tutte le istanze di assestramento. L'algoritmo può recuperare e provare a trovare un concetto coerente con tutti gli esempi di addestramento tranne uno.
+L'insieme $S_i$ è coerente con tutti tranne gli i esempi di allenamento positivi. L'insieme $G_i$ è coerente con tutti tranne gli i esempi di allenamento negativi. Quando $G_0$ incrocia $S_0$ l'algoritmo può concludere che nessun concept nello spazio delle regole è coerente con tutte le istanze di assestamento. L'algoritmo può recuperare e provare a trovare un concetto coerente con tutti gli esempi di addestramento tranne uno.
 
-Una fondamentale propietà dell'inferenza deduttiva afferma che: "un algoritmo di apprendimento che non crea nessuna assunzione a priori riguardante l'identità del target concept, non ha basi relazionali per qualsiasi istanza invisibile". Questa proprietà prende il nome di \textbf{inductive bias} che può essere definita formalmente come segue.
+Una fondamentale proprietà dell'inferenza deduttiva afferma che: "un algoritmo di apprendimento che non crea nessuna assunzione a priori riguardante l'identità del target concept, non ha basi relazionali per qualsiasi istanza invisibile". Questa proprietà prende il nome di \textbf{inductive bias} che può essere definita formalmente come segue.
 
 \textbf{Definizione formale di inductive bias.} Consideriamo:
 \begin{itemize}
@@ -571,15 +571,15 @@ Una fondamentale propietà dell'inferenza deduttiva afferma che: "un algoritmo d
 \item denotiamo con $L(x_i,D_c)$ la classificazione assegnata all'istanza $x_i$ da L dopo l'allenamento sui dati $D_c$
 \end{itemize}
 
-L'inductive bias di L è qualsiasi insieme minimo di asserzioni B tale che per qualsiasi target concept c e corrispondenti esempi di addestrammento $D_c$: $(\forall x_i \in X) [( B \wedge D_c \wedge x_i ) \rightarrow L(x_i,D_c)]$ . Alcuni sistemi induttivi di modellazione possono essere espressi mediante sistemi deduttivi equivalenti. Il cosidetto inductive bias è un input esplicito begli algoritmi dei sistemi deduttivi.
+L'inductive bias di L è qualsiasi insieme minimo di asserzioni B tale che per qualsiasi target concept c e corrispondenti esempi di addestramento $D_c$: $(\forall x_i \in X) [( B \wedge D_c \wedge x_i ) \rightarrow L(x_i,D_c)]$ . Alcuni sistemi induttivi di modellazione possono essere espressi mediante sistemi deduttivi equivalenti. Il cosiddetto inductive bias è un input esplicito begli algoritmi dei sistemi deduttivi.
 
-Analizziamo l'introduzione dell'inductive bias all'interno dell'algoritmo del candidate-elimination. Il target concept c è contenuto nello spazio delle ipotesi H. Da $c \in H$ segue deduttivamente $ c \in  VS_{H,D}$. In questo algoritmo L restituisce la classificaziione $L(x_i,D_c)$ se e solo se ogni ipotesi in $VS_{H,D}$ produce anche questa classificazione, includendo anche le ipotesi $c \in VS_{H,D}$ (inductive bias). Quindi $c(x_i)=L(x_i,D_c)$.
+Analizziamo l'introduzione dell'inductive bias all'interno dell'algoritmo del candidate-elimination. Il target concept c è contenuto nello spazio delle ipotesi H. Da $c \in H$ segue deduttivamente $ c \in  VS_{H,D}$. In questo algoritmo L restituisce la classificazione $L(x_i,D_c)$ se e solo se ogni ipotesi in $VS_{H,D}$ produce anche questa classificazione, includendo anche le ipotesi $c \in VS_{H,D}$ (inductive bias). Quindi $c(x_i)=L(x_i,D_c)$.
 
 Il bias induttivo è un mezzo non procedurale per caratterizzare la politica degli algoritmi di apprendimento per generalizzare oltre i dati osservati. Confrontiamo diversi algoritmi di apprendimento in relazione all'inductive bias. 
 
 Nell'algoritmo \textbf{Rote learning}, si memorizzano gli esempi, viene classificato x se corrisponde a un esempio osservato in precedenza. In questo tipo di algoritmo non c'è nessun inductive bias. Per quanto riguarda l'algoritmo \textbf{candidate elimination}, l'inductive bias consiste nel target concept rappresentato dal suo spazio di ipotesi. Mentre per quanto riguarda l'algoritmo \textbf{Find-S}, l'inductive bias è il target concept rappresentato dal suo spazio di ipotesi e da tutte le istanze negative a meno che il contrario non sia implicato dalla sua altra conoscenza (una sorta di ragionamento predefinito o non monotono). 
 
-Per apprendere concetti disgiunti si può utilizzare l'algoritmmo Candidate-Elimination, il quale è un aloritmo con il minimo impegno, che generalizza solo quando è forzato a farlo. Però la disgiunzione fornisce un modo per evitare qualsiasi generalizzazione, per uci l'algoritmo non è mai costretto a farlo. Per apprendere i concetti disgiuntivi, bisogna trovare un metodo per controllare l'introduzione di disgiunzioni, in modo da prevenire disgiunzioni banali. La copertura sequenziale, o \textbf{sequential covering}, è un approccio diffuso all'apprendimento di serie di regole.
+Per apprendere concetti disgiunti si può utilizzare l'algoritmo Candidate-Elimination, il quale è un algoritmo con il minimo impegno, che generalizza solo quando è forzato a farlo. Però la disgiunzione fornisce un modo per evitare qualsiasi generalizzazione, per uci l'algoritmo non è mai costretto a farlo. Per apprendere i concetti disgiuntivi, bisogna trovare un metodo per controllare l'introduzione di disgiunzioni, in modo da prevenire disgiunzioni banali. La copertura sequenziale, o \textbf{sequential covering}, è un approccio diffuso all'apprendimento di serie di regole.
 
 Vi sono inoltre particolari algoritmi di copertura sequenziale che performano ripetutamente l'algoritmo di candidate-elimintaion per la ricerca di diverse descrizioni congiuntive che insieme coprono tutte le istanze di training. Ad ogni iterata, si trova un concetto congiuntivo che è coerente con alcuni degli esempi di training positivi e tutti gli esempi di training negativi. I casi positivi che sono stati presi in considerazione vengono rimossi da ulteriori considerazioni e il processo viene ripetuto finché tutti gli esempi positivi non sono stati coperti.
 
@@ -589,10 +589,157 @@ Uno pseudo-codice dell'algoritmo di copertura sequenziale è il seguente:
 Learned-rules $\leftarrow \emptyset$\\
 Rule $\leftarrow$ LEARN-ONE-RULE (Target-attribute,Attributes,Examples)\\
 while PERFORMANCE(Rule, Examples) $>$ Threshold do:\\
-	ciao\\
+$\{$
+Learned-rules$\rightarrow$ Learned-rules $\cup \{ Rulle \}$
+Examples $\rightarrow$ Examples - $\{$ examples coorrettamente coperti da Rule $\}$
+Rule $\rightarrow$ LEARN-ONE-RULE(Target-attribute,Attributes, Examples)
+$\}$
+Learned-rules $\rightarrow$ sort Learned-rules in accordo con PERFORMANCE over Examples
+return Learned-rules
 
 
-All'interno dell'algoritmo di copertura sequenziale viene utilizzato un particolare algoritmo chiamato \textbf{LEARN-ONE-RULE}. Questo particolare algoritmo accetta un insieme di esempi di traning sia positivi che negativi e restituisce una singola regola che copre tutti gli esempi. Questo algoritmo ha il pregio di essere molto accurato, ma non ha un'alta copertura. Generalmente 
+All'interno dell'algoritmo di copertura sequenziale viene utilizzato un particolare algoritmo chiamato \textbf{LEARN-ONE-RULE}. Questo particolare algoritmo accetta un insieme di esempi di traning sia positivi che negativi e restituisce una singola regola che copre tutti gli esempi. Questo algoritmo ha il pregio di essere molto accurato, ma non ha un'alta copertura. Questo algoritmo viene implementato attraverso l'algoritmo Candidate-Elimination. 
+
+Si inizia inizializzando S, il quale conterrà un esempio positivo di training. Per ogni istanza di training negativa si applica la routine Update-G a G. Scegliere una descrizione g da G come una congiunzione per l'insieme delle soluzioni. Poiché Update-G è stato applicato utilizzando tutti gli esempi negativi, g non copre esempi negativi. Tuttavia, g può coprire molti degli esempi positivi. A questo punto si rimuove da ulteriori considerazioni tutti gli esmpi positivi coperti da g. Infine si ripete tutti questi procedimenti fino a quando tutti gli esempi sono coperti.
+
+Un approccio diverso per implementare l'algoritmo LEARN-ONE-RULE è l'\textbf{algoritmo di ricerca General-to-Specific}, mediante il quale si organizza lo spazio di ricerca mediante un ordinamento dal generico allo specifico e si esplora lo spazio attraverso una \textbf{greedy fashion}. Nello specifico si utilizza una ricerca greedy toop-down o general-to-specific. 
+
+La ricerca dello spazio per le precondizioni delle regole iniziando considerando la precondizione della regola più generale possibile. Ad ogni passaggio, viene aggiunto il test che migliora maggiormente le prestazioni della regola. L'aggiunta di un nuovo test restringe la copertura della regola. Il test "migliore" è quello che include il maggior numero possibile di esempi positivi ed esclude il maggior numero possibile di esempi negativi. Supponiamo che una regola copra un totale di t istanze, di cui p sono esempi positivi e t-p sono esempi negativi. Poi scegli la regola che massimizza il rapporto di purezza p/t.
+
+Un esempio di algoritmo separete and conquer è il seguente:
+
+\begin{center}
+
+\fbox{\includegraphics[width=.8\textwidth, height=.5\textheight, keepaspectratio]{seperate-and-conquer-allgoritmo}}
+
+\end{center}
+
+Tutti gli algoritmi di seperate and conquer condividono la struttura base. Mentre, molti task di apprendimento richiedono delle modifiche a questo procedimento. Per esempio, la procedura di overfittin se c'è un po' di noisy all'interno dei dati. Pertanto molti algoritmi allentano questo vincolo e utilizzano criteri di arresto o metodi di post-elaborazione per essere in grado di apprendere teorie più semplici che non sono complete e coerenti, ma sono più predittive su dati invisibili.
+
+Altri algoritmi sostituiscono la ricerca dall'alto verso il basso del whileloop interno con una ricerca dal basso verso l'alto, in cui le regole vengono successivamente generalizzate a partire da una regola più specifica (ad esempio costituita da uno degli esempi positivi stessi). Tuttavia, altri algoritmi non utilizzano hillclimbing, ma impiegano algoritmi di ricerca meno miopi come la beam search o la bestfirst search.
+
+La \textbf{Beam Search} è una ricerca dal generale allo specifico viene implementata come una ricerca greedy depth-first senza backtracking. In questo algoritmo vi è il pericolo di una scelta subottimale in ogni fase. A volte per evitare questo rischio, l'algoritmo viene performato attraverso una lista di k candidati migliori a ogni step e successivamente viene scelto il migliore.
+
+Un altro problema che si incontra nell'algoritmo di separate and conquer è che il tipo delle condizioni usate nella formulazione delle ipotesi. Questo basilare algoritmo può formulare solo regole in logica proposizionale, ma la programmazione logica induttiva ha sviluppato algoritmi che possono imparare le regole nella logica del primo ordine. Un generico algoritmo di apprendimento delle regole separate and conquer che chiama varie subroutine che possono essere utilizzate per istanziare l'algoritmo generico in algoritmi specifici noti dalla letteratura.
+
+\begin{center}
+
+\fbox{\includegraphics[width=.8\textwidth, height=.5\textheight, keepaspectratio]{seperate-and-conquer-allgoritmo2}}
+
+\end{center}
+
+SeparateAndConquer inizia con una teoria vuota. Se ci sono esempi positivi nel set di addestramento chiama la subroutine FindBestRule per apprendere una regola che coprirà un sottoinsieme degli esempi positivi. Tutti gli esempi coperti vengono quindi separati dal set di addestramento, la regola appresa viene aggiunta alla teoria e un'altra regola viene appresa dagli esempi rimanenti. Le regole vengono apprese in questo modo fino a quando non rimangono esempi positivi o fino a quando RuleStoppingCriterion non viene attivato. Spesso la teoria risultante viene sottoposta a PostProcessing.
+
+\begin{center}
+
+\fbox{\includegraphics[width=.8\textwidth, height=.5\textheight, keepaspectratio]{seperate-and-conquer-allgoritmo3}}
+
+\end{center}
+
+La procedura FindBestRule cerca nello spazio delle ipotesi una regola che ottimizzi un determinato criterio di qualità definito in EvaluateRule. Il valore di questa funzione euristica di solito è "gli esempi più alti, più positivi e meno negativi sono coperti dalla regola del candidato". FindBestRule gestisce Rules, una lista ordinata di regole candidate, che viene inizializzato dalla procedura InitializeRule. Le nuove regole verranno inserite in punti appropriati (InsertSort), in modo che le regole siano sempre ordinate in ordine decrescente dalle valutazioni euristiche delle regole.
+
+Ad ogni ciclo SelectCandidates seleziona un sottoinsieme di queste regole candidate, che vengono poi raffinate utilizzando RefineRule. Ogni perfezionamento viene valutato e inserito nell'elenco delle regole ordinate a meno che StoppingCriterion non lo impedisca. Se la valutazione di NewRule è migliore della migliore regola trovata in precedenza, BestRule viene impostata su NewRule. FilterRules seleziona il sottoinsieme dell'elenco di regole ordinate che verrà utilizzato in ulteriori iterazioni. Quando tutte le regole candidate sono state elaborate, verrà restituita la regola migliore.
+
+Ad esempio, supponiamo di voler istanziare l'algoritmo generico nel semplice algoritmo separa e conquista. SimpleSeparateAndConquer cerca nello spazio delle ipotesi in modo dall'alto verso il basso. Initialize Rule restituirà quindi la regola più generale, ovvero la regola con il corpo {true}. RefineRule specializzerà una determinata regola aggiungendovi una condizione. Le regole saranno valutate dalla percentuale di esempi coperti che sono positivi, cioè EvaluateRule implementerà la subroutine Purity usata nel semplice algoritmo separate-and-conquer.
+
+FilterRules lascerà passare solo il miglior perfezionamento per l'iterazione successiva, in modo che SelectCandidates abbia sempre una sola scelta. Insieme, queste due procedure implementano la ricerca in salita. A partire dall'elenco ordinato di tutti i perfezionamenti verrà utilizzato solo il primo (e migliore) elemento, questa parte del codice è equivalente alla parte corrispondente in SimpleSeparateAndConquer. Entrambi i criteri di arresto saranno sempre falsi e le regole apprese non verranno postelaborate.
+
+Consideriamo adesso gli algoritmi di simultaneous covering con gli algoritmi di sequential covering. Gli algoritmi di sequential covering sono i più lenti. Per imparare un set di n regole, ogniuna delle quali contiene k attribute-value test nelle loro precondizioni, gli algoritmi di sequentiial covering performeranno $n \times k$ step primitivi di ricerca, indipendentemente dalle scelte.
+
+Gli algoritmi di copertura simultanea sono generalmente veloci, poichè ogni test coon m possibili risultati contribuisce a scegliere le precondizioni per almeno m regole. Gli algoritmi di copertura sequenziale effettuano un gran numero di scelte indipendenti, mentre gli algoritmi di copertura simultanea effettuano un basso numero di scelte dipendenti.
+
+Alcune volte ci si chiede se conviene indurre le regole direttamente o convertire un decision tree in un insieme di regole. La risposta a questa domanda dipende in base a quanti i dati di traning sono disponibili. Se i dati sono abbondanti, possono supportare il maggior numero di decisioni indipendenti richieste dagli algoritmi di copertura sequenziale. Se i dati sono scarsi, la condivisione delle decisioni relative ai presupposti di regole diverse può essere più efficace.
+
+Inoltre bisogna prendere in considerazione anche il task di apprendimento. Se la descrizione del concetto è altamente disgiuntiva con molte condizioni indipendenti, gli algoritmi di apprendimento dell'albero decisionale funzionano male quando i dati sono scarsi.
+
+Nell'apprendimento single-concept, l'elemento appreso è presentato con positive e negative istanze dello stesso concetto. Il sistema deve cercare le regole che descrivono il concetto di studio. Dato u nuovo caso x, se non soddisfa le precondizioni di ogni regola, deve essere considerata come un'istanza negativa. Altrimenti il sistema potrebbe apprendere le regole sia per le istanze positive che per quelle negative del concetto. Quest'ultimo è un caso semplice di multiple-concept learning, nel quale le precondizioni non sono necessariamente mutuamente esclusive.
+
+Quando si classifica un nuovo caso senza il partizionamento dello spazio delle istanze, possiamo ritrovarci in tre casi:
+
+\begin{itemize}
+	\item \textbf{nessuna classificazione}: l'istanza non soddisfa nessuna precondizione.
+	\item \textbf{singola classificazione}: l'istanza soddisfa le regole di precondizione con la stessa conclusione, sia che essa sia positiva, sia che essa sia negativa.
+	\item \textbf{classificazione multipla}: l'istanza soddisfa le regole di precondizione con differenti conclusioni.
+\end{itemize}
+
+Nell'apprendimento di concetti multipli, il sistema di apprendimento viene presentato con esempi di formazione che sono istanze di diversi concetti e deve trovare diverse descrizioni di concetti. Per ogni descrizione di concetto, c'è una regione corrispondente nello spazio dell'istanza. Quando i concetti sono indipendenti, un problema di apprendimento con più concetti può essere riformulato come una sequenza di problemi di apprendimento con un singolo concetto.
+
+L'unione degli insiemi di regole apprese per ogni concetto è l'output dell'algoritmo di apprendimento multiple concept. Se i concetti si escludono a vicenda, la classificazione multipla può essere un risultato indesiderato. Per evitare classificazioni multiple, l'aggiunta di una nuova regola all'insieme delle regole apprese può richiedere la modifica delle precondizioni delle regole esistenti (problema di integrazione della conoscenza. Quando i concetti sottostanti si sovrappongono, la classificazione multipla potrebbe essere una caratteristica desiderabile.
+
+Nei problemi di apprendimento di concetti multipli, gli esempi sono tipicamente descritti da vettori di caratteristiche: $<a_1,a_2,\dots,a_n,c>$, dove c è il target attribute. Distinti valori di c rappresentano differenti concetti, i quali sono intesi come mutuamente esclusivi, cioè indipendenti.
+
+Nel caso generale, gli esempi possono essere descritti da vettori di feature: $<a_1,a_2,\dots,a_n,c_1,c_2,\dots,c_m>$ dove $c_i$ sono gli attributi target. I concetti non sono necessariamente indipendenti. Le regole apprese possono includere queste dipendenze concettuali. Lo spazio dell'istanza di un problema di apprendimento a concetto singolo è definito anche da alcuni attributi target. Per decidere quali attributi dovrebbero essere considerati, bisogna scoprire le dipendenze tra gli attributi prima di iniziare il processo di apprendimento, per poi definire gli spazi delle istanze di conseguenza.
+
+Eventuali dipendenze tra attributi possono essere rilevate mediante tecniche statistiche (misura lambda, presentata nella sezione sull'analisi delle associazioni). Le dipendenze concettuali possono essere scoperte online, cioè durante il processo di apprendimento, lavorando simultaneamente con diversi spazi di istanza per ogni problema di apprendimento. Ciò equivale a esplorare diversi spazi di ricerca per ogni concetto da apprendere.
+
+\newpage
+
+\section{K-Means}
+
+Alcuni algoritmi per eseguire il clustering sui dati e trovare tutti i gruppi di istanze simili all'interno dei dataset sono ad esempio il k-means, EM o il Cobweb. I cluster possono essere visualizzati e comparati con i veri cluster, se presenti.
+
+Questo algoritmo prevede la definizione preventiva del numero di cluster, successivamente viene scelto casualmente un insieme di k punti chiamati \textbf{centroidi} che rappresentano i cluster iniziali. Il clustering procede iterativamente nel seguente modo:
+
+\begin{itemize}
+\item Assegna ogni punto al cluster il cui centroide è più vicino, generalmente si utlizza la distanza euclidea;
+\item Calcola i nuovi centroidi di ogni cluster come la media dei punti che vi appartengono;
+\item ripete i passaggi fino a quando non ci sono più cambiamenti significativi nella composizionne dei cluster.
+\end{itemize}
+
+Non sempre questo algoritmo identifica un raggruppamento perfetto, infatti il procedimento viene ripetuto scegliendo le distanze iniziali casualmente ed effettuando diversi raggruppamenti da cui scegliere alla fine. Tra i diversi raggruppamenti verrà scelto quello che minimizza le varianze complessivamente, ossia quello che minimizza la total variation within cluster.
+
+Andando ad analizzare i vantaggi e gli svantaggi. Tra i vantaggi possiamo vedere come questo algoritmo sia semplice da implementare con un'efficienza pari a O(nkdi) dove:
+
+\begin{itemize}
+\item d è la dimensionalità
+\item n è la cardinalità del dataset.
+\item k è il numero di cluster da identificare
+\item i è il numero di iterazioni necessarie per convergere
+\end{itemize}
+
+Mentre tra gli svantaggi possiamo notare che è necessario fissare a priori il numero di cluster k, inoltre questo algoritmo è sensibile al rumore nei dati e alla presenza di outlier, il risultato finale dipende da partizionamento scelto inizialmente. Inoltre i cluster assumono forzatamente forme sferiche, finendo sempre l'iterazione trovando i minimi locali.
+
+Se dovessimo dividere l'algoritmo in diversi step, possiamo definirne 6:
+\begin{itemize}
+\item \textbf{Step 1}: viene scelto il numero k di cluster in cui selezionare i dati (nel nostro esempio 3)
+\item \textbf{Step 2}: vengono selezionate randomicamente 3 istanze che andranno a rappresentare i 3 cluster iniziali.
+\item \textbf{Step 3}: viene calcolata la distanza tra il primo punto e i 3 cluster iniziali
+\item \textbf{Step 4}: assegna ogni punto al cluster più vicino
+\item \textbf{Step 5}: una volta assegnati tutti i punti, viene calcolata la media di ogni cluster.
+\item \textbf{Step 6}: si riassegnano le istanze basandosi sulle medie in modo iterativo finchè all'ultima iterazione non si noti variazioni rispetto all'iterazione precedente.
+\end{itemize}
+
+Non sempre l'algoritmo K-means identifica un raggruppamento perfetto, infatti inizialmente sceglie le istanze casualmente ed effettua diversi raggruppamenti da cui scegliere alla fine.
+
+Ci sono due metodi principali per scegliere il numero k di cluster. Attraverso il metodo \textbf{elbow method}, nel quale si minimizza la distanza tra i punti di un singolo cluster e si massimizza la distanza tra i cluster. Per calcolare la distanza tra due cluster si utilizza la formula del WCSS, ovvero la somma dei quadrati delle differenze tra i vari punti dei cluster.
+
+Mentre se si decide di scegliere il metodo \textbf{silhouette}, per ogni istanza i calcola la distanza media tra i e ogni altra osservazione j all'interno del cluster in cui i è stata raggruppata. In formula: $a(i) = \frac{1}{|C|-1} \sum_{j \in C_I, i \not = j} d(i,j)$. Per ogni istanza i calcola la distanza media tra i e ogni altra osservazione j all’interno degli altri cluster (cluster-wise) diversi da quello in cui risiede i e salva tale media soltanto per il cluster più vicino al cluster di i. Chiama questo valore b(i). In formula: $b(i) = min_{J \not = I} \frac{1}{|C_J|} \sum_{j\in C_J} d(i,j)$.
+
+Infine si definisce lo score Silhouette s(i) per i come segue:
+\begin{itemize}
+\item $1 - \frac{a(i)}{b(i)}$ se a(i)$<$b(i)
+\item 0 se a(i) $=$ b(i)
+\item $\frac{b(i)}{a(i)} - 1$ se a(i) $>$ b(i)
+\end{itemize}
+
+Inoltre il valore s(i) sarà sempre compreso tra -1 e 1.
+
+Per superare il problema di dover specificare i k cluster, possiamo utilizzare l'algoritmo \textbf{DBSCAN}, il quale è molto robusto in relazione agli outlier. Inoltre questo algoritmo analizza la densità locale alle osservazioni per individuare raggruppamenti anche in forma diversa da quella sferica. Questo è dovuto all'utilizzo del concetto di \textit{core-point} rispetto ad un numero minimo minPts, input utente, di punti vicini ad una determinata istanza e se tale istanza ha in un intorno almeno minPts istanze, allora è considerata core-point.
+
+Dopo aver identificato tutti i core-point, DBSCAN ne prende uno a caso e lo assegna al primo cluster. Quindi assegna allo stesso cluster tutti i core-point nell'intorno del core-point preso casualmente. DBSCAN fa questo per ogni core-point estendendo il cluster finché non raggiunge i punti che non sono core-point.
+
+Per ogni istanza che non è core-point, essa viene inglobata nel cluster se è vicina ad un core-point del cluster appena formato
+le istanze che non sono core-point consentono a DBSCAN di fermarsi poiché si è in prossimità di uno spazio delle osservazioni a minore densità rispetto allo spazio denso di core-point.
+
+Stessa cosa viene fatta per altre istanze separate dal primo cluster per identificare il secondo cluster, il terzo e cosi via. Al termine, le istanze che non sono core-point che non appartengono a nessun cluster vengono considerate outlier.
+
+Vi è un altro tipo di cluster è il \textbf{cluster gerarchico}, il cui obiettivo è quello di decomporre gerarchicamente la collezione di individui in una collezione di cluster innestati. Il risultato è rappresentato in forma di dendrogrammi all'interno del quale i nodi rappresentano i possibili cluster., i quali vengono generati bottom-up o top-down.
+
+\newpage
+
+\section{Decision Trees}
+
+Gli alberi di decisione sono usati in task di classificazione, ovvero l'assegnazione di oggetti a categorie che si escludono a vicenda. Il modello predittivo assume la forma di un decision tree, spesso quella specifica del binary tree.
  
 \end{document}
 

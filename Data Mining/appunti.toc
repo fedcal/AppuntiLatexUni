@@ -8,3 +8,5 @@
 \contentsline {subsubsection}{\numberline {1.1.6}Deployment}{20}{subsubsection.1.1.6}%
 \contentsline {section}{\numberline {2}Learning sets of rules}{21}{section.2}%
 \contentsline {subsection}{\numberline {2.1}Classificatore basato su regole}{21}{subsection.2.1}%
+\contentsline {section}{\numberline {3}K-Means}{30}{section.3}%
+\contentsline {section}{\numberline {4}Decision Trees}{32}{section.4}%
