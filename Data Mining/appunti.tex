@@ -740,8 +740,108 @@ Vi è un altro tipo di cluster è il \textbf{cluster gerarchico}, il cui obietti
 \section{Decision Trees}
 
 Gli alberi di decisione sono usati in task di classificazione, ovvero l'assegnazione di oggetti a categorie che si escludono a vicenda. Il modello predittivo assume la forma di un decision tree, spesso quella specifica del binary tree.
- 
+
+Per costruire un decision tree, in letteratura ci sono diversi metodi tra i quali:
+\begin{itemize}
+\item Metodi di partizionamento ricorsivi, derivanti dalla disciplina della statistica
+\item Induzione di alberi decisionali, derivanti dal Machine Learning
+\item Costriuzione di alberi di classificazione, derivanti dal pattern recognition.
+\end{itemize}
+
+Un importante decision tree è quello definito come \textbf{C4.5}, che accetta una collezione di casi di training, ognuno dei quali ha una tupla di valori da un insieme di attributi prefissati o \textbf{variabili indipendenti} e una classe attributo o \textbf{variabile dipendente}. Un attributo $A_i$ è descritto come continuo o discreto in base se i suoi valori sono numerici o nominali.
+
+C4.5 utilizza test di tre tipi, ognuno dei quali implica un singolo attributo $A_i$. Se quest'ultimo è discreto, i possibili test sono:
+
+\begin{itemize}
+\item z risultati, uno per ogni valore di $A_i$
+\item $2 \leq w \leq z$ risultati, dove G = $\{ G_1,G_2,...,G_w\}$ è una porzione dei valori di $A_i$.
+\end{itemize}
+
+Se $A_i$ è continuo, viene suddiviso in corrispondenza di un valore di soglia derivato. Il test viene diviso nel momento $A_i \leq \theta$ (o a $A_i > \theta$) con risultati vero o falso. In questo caso per determinare quale attributo classifica meglio il dato, si utilizza l'entropia. Prendendo in considerazione:
+\begin{itemize}
+\item S come l'insieme degli esempi di training analizzati
+\item $C_j$ una classe label in $C_1,C_2,...,C_k$.
+\item RF($C_i$,S), i=1,...,k le relative frequenze di classi in S che appartengono alla classe $C_i$
+\end{itemize}
+
+possiamo considerare l'entropia E su S calcolata come segue: $E(S) = -\sum_{i=1...k} RF(C_i,S)log(RF(C_i,S))$. L'entropia misura il grado di incertezza contenuto in S.
+
+Da notare come questo valore assume il valore massimo quando gli eventi sono equiprobabili. Questa è una buona cosa poiché un insieme di eventi ugualmente probabili è quanto mai incerto. Mentre assume un valore minimo quando solo uno degli eventi ha una probabilità diversa da zero.
+
+Considerando due classi di problemi ($C_1$=positivo, $C_2$=negativo) dove:
+\begin{itemize}
+\item p è la porzione degli esempi positivi in S,
+\item n è la porzione negativa di esempi in S,
+\end{itemize}
+
+l'entropia di S è computata come: $E(S) = -p log_2 p - n log_2 n$.
+
+Un altro valore che può essere utilizzato per la selezione dei test è il cosiddetto \textbf{information gain}, che rappresenta la riduzione prevista dell'entropia a causa della distribuzione delle istanze su S in accordo con il test t. Considerando $S_1,...,S_z$ il partizionamento di S attraverso il test t sull'attributo $A_i$, l'information gain può essere ottenuto come: $G(S,t) = E(S) - \sum_i \frac{|S_i|}{|S|}E(S_i)$. In questo modo si sceglie il criterio che massimizza G(S,t).
+
+Un problema legato a questo parametro consiste nel favorire test con numerosi risultati. In questo caso l'information gain è massimizzato da un test su un attributo chiave che ogni $S_i$ contiene un solo caso. Una prima soluzione a questo problema consiste nel limitare i decision trees a test binari. Però sono possibili più test sullo stesso attributo. Ciò può portare a alberi decisionali che sono ancora più incomprensibili per gli esperti umani di quanto non avvenga normalmente. Inoltre questa soluzione è computazionalmente espansiva.
+
+Una seconda soluzione tiene conto delle potenziali informazioni dalla partizione stessa, senza considerare la classe, quindi in formula: $P(S,t) = - \sum_i \frac{|S_i|}{|S|} log(\frac{|S_i|}{|S|})$. La maggior parte possibile delle informazioni fornite determinando il valore di un attributo dovrebbe essere utile ai fini della classificazione o, equivalentemente, il meno possibile dovrebbe essere "sprecato". Perciò scegliamo il test t che massimizza la formula $\frac{G(S,t)}{P(S,t)}$, definendo così il \textbf{criterio del gain ratio}.
+
+Per trattare i continuous attributes all'interno dell'algoritmo C4.5 si può definire un nuovo attributo valorizzato con valori discreti per testare l'attributo continuo partizionando il valore continuo in un insieme di intervalli discreti e utilizzando $A_c$ = true se $A<c$. Il valore migliore di c è selezionato usando l'information gain.
+
+Però testare tutti i possibili valori di c è impossibile e non necessario, poichè non ci sarebbe nessuna differenza tra due valori c e c' quando non ci sono esempi di traning che assumono un valore intermedio per l'attributo A. Da questo possiamo estrapolare la seguente procedura:
+
+\begin{itemize}
+\item Ordinare gli esempi secondo il loro valore per A
+\item Per ogni coppia ordinata $X_i,X_{i+1}$ nella lista ordinata, se le classi di $X_i$ e $X_{i+1}$ sono differenti, utilizzo il punto intermedio tra i loro valori come un candidato soglia.
+\item Seleziono il miglior candidato in accordo con l'information gain
+\end{itemize}
+
+\subsection{Affrontare i valori mancanti (missing values)}
+
+Se incontriamo valori mancanti di A possiamo intraprendere diverse soluzioni:
+\begin{itemize}
+\item Off-line: affronto il problema durante lo step di data transformation del processo KDD,
+\item On-line: modifica il processo di induzione del decision tree per gestire mancanti.
+\end{itemize}
+
+Nell'approccio on-line vi sono diversi problemi. Un primo problema è la valutazione dei test. La selezione di un test su cui partizionare il training set viene effettuata sulla base di criteri euristici quali gain e gain ratio. In questo caso nno possiamo valutare la desiderabilità relativa di due test che utilizzano attributi con valori diversi.
+
+Un secondo problema relativo all'approccio online consiste nel partizionare il training set. Una volta che il test è stato selezionato, i casi di addestramento con valori sconosciuti dell'attributo rilevante non possono essere associati a un particolare risultato del test, e quindi non possono essere assegnati a un particolare sottoinsieme $T_i$.
+
+Un ulteriore problema consiste nel classificare un caso sconosciuto. In questo caso ci si chiede come si deve comportare il decision tree nel caso in cui il sistema ha un valore sconosciuto per l'attributo testato?
+
+Analizziamo nel dettaglio i tre problemi. Nel primo il test non fornisce informazioni circa la classe di appartenenza del caso in cui il valore dell'attributo di test è sconosciuto. Il gain ratio può essere alterato considerando i casi con valori sconosciuti come un gruppo aggiuntivo.
+
+Per il problema del partizionamento del dataset, possiamo utilizzare un approccio probabilistico. Supponiamo di avere il test t con z esiti $v_1,v_2,...,v_z$, che partiziona S i z sotto insiemi $S_1,S_2,...,S_z$, l'idea è quella di associare ogni caso in ogni sotto insieme $S_i$ con un peso rappresentante la probabilità che il caso appartenga al dataset:
+
+\begin{itemize}
+\item se il caso ha un esito conosciuto con peso 1
+\item altrimenti il peso è la probabilità del risultato $v_i$ in quel punto.
+\end{itemize}
+
+Per quanto riguarda il terzo problema, se si incontra un nodo decisionale in cui il valore dell'attributo rilevante è sconosciuto, il sistema esplora tutti i possibili risultati e combina aritmeticamente le classificazioni risultanti. Una classificazione è una distribuzione di classi piuttosto che una singola classe. La classe con la probabilità più alta viene assegnata come classe prevista.
+
+\subsection{Svantaggi}
+
+La tecnica di induzione del decision tree è molto efficiente in termini di tempo di elaborazione e fornisce un metodo molto intuitivo per analizzare i risultati. Questa intuitività, soprattutto se confrontata con l'output meno accessibile delle reti neurali, spiega perché gli alberi decisionali sono ancora attraenti. Nonostante tutto hanno degli svantaggi.
+
+Gli attuali metodi di induzione dell'albero decisionale non sono ottimali. Durante la formazione di un albero decisionale, una volta che l'algoritmo prende una decisione sulla base su cui dividere il nodo, tale decisione non viene mai rivista. I metodi per la costruzione di un albero decisionale ottimo hanno una complessità esponenziale.
+
+Gli alberi decisionali soffrono di un problema di errori che si propagano in un albero, un problema molto serio con l'aumentare del numero di classi. Poichè i regression tree funzionano in base a una serie di decisioni locali, se una di queste è sbagliata ogni decisione da quel punto in poi potrebbe essere sbagliata, inoltre non avremmo mai un percorso corretto.
+
+Gli alberi decisionali sono limitati ai problemi che possono essere risolti dividendo lo spazio della soluzione in rettangoli successivamente più piccoli.
+
+
+In generale, gli alberi decisionali soffrono di frammentazione. Quando l'albero ha molti strati di nodi, la quantità di dati che passa attraverso le foglie inferiori è così piccola che è difficile prendere una decisione precisa sulla classe associata a ciascuna foglia. Per ridurre al minimo la frammentazione, l'analista può potare o tagliare alcune delle foglie e dei nodi inferiori per far collassare efficacemente parte dell'albero. Il risultato è un modello migliorato in cui vengono rivelati i modelli reali piuttosto che il rumore (evitamento dell'overfitting) ed è più semplice da capire.
+
+Generalmente si sceglie ipotesi brevi rispetto a ipotesi lunghe, per svariati motivi. Definiamo H come uno spazio di ipotesi, considerando un errore  nell'ipotesi $h \in H$ questo si ripercuote sui:
+\begin{itemize}
+\item Training data, e per calcolare l'errore si può definire la funzione $error_{training}(h)$
+\item sull'intera distribuzione D di dati, il cui errore si può calcolare definendo la funzione $error_D(h)$.
+\end{itemize} 
+
+L'ipotesi $h \in H$ overfitta i dati di traning se c'è un ipotesi alternativa $h' \in H$ tale che $error_{training}(h)<error_{traning}(h')$ e se $error_D(h)>error_D(h')$ Si dice che un'ipotesi, h, superi l'insieme di addestramento, D, quando esiste un'ipotesi, h', che supera h sulla distribuzione totale delle istanze in cui D è un sottoinsieme.
+
+Questo può accadere se c'è rumore all'interno dei dati che crea un albero grande per l'ipotesi h e l'ipotesi h' non fitta    
+
 \end{document}
+
 
 
 
