@@ -1,0 +1,55 @@
+\contentsline {section}{\numberline {1}Introduzione}{5}{section.1}%
+\contentsline {subsection}{\numberline {1.1}Che cos'è l'AI?}{5}{subsection.1.1}%
+\contentsline {subsection}{\numberline {1.2}I fondamentali dell' Intelligenza Artificiale}{5}{subsection.1.2}%
+\contentsline {subsection}{\numberline {1.3}La storia dell'Intelligenza Artificiale}{5}{subsection.1.3}%
+\contentsline {subsection}{\numberline {1.4}Lo stato dell'arte}{5}{subsection.1.4}%
+\contentsline {subsection}{\numberline {1.5}Rischi e benefici dell'AI}{5}{subsection.1.5}%
+\contentsline {section}{\numberline {2}Agenti intelligenti}{6}{section.2}%
+\contentsline {subsection}{\numberline {2.1}Gli agenti e gli ambienti}{6}{subsection.2.1}%
+\contentsline {subsection}{\numberline {2.2}Un buon comportamento: il concetto di razionalità}{6}{subsection.2.2}%
+\contentsline {subsection}{\numberline {2.3}La natura degli ambienti}{6}{subsection.2.3}%
+\contentsline {subsection}{\numberline {2.4}La struttura degli agenti}{6}{subsection.2.4}%
+\contentsline {section}{\numberline {3}Risoluzione di problemi attraverso la ricerca}{7}{section.3}%
+\contentsline {subsection}{\numberline {3.1}La risoluzione dei problemi degli agenti}{7}{subsection.3.1}%
+\contentsline {subsection}{\numberline {3.2}Esempi di problemi}{7}{subsection.3.2}%
+\contentsline {subsection}{\numberline {3.3}Algoritmi di ricerca}{7}{subsection.3.3}%
+\contentsline {subsection}{\numberline {3.4}Strategie di ricerca non informate}{7}{subsection.3.4}%
+\contentsline {subsection}{\numberline {3.5}Strategie di ricerca informate (euristisca)}{7}{subsection.3.5}%
+\contentsline {subsection}{\numberline {3.6}Funzioni euristiche}{7}{subsection.3.6}%
+\contentsline {section}{\numberline {4}Ricerca in ambienti complessi}{8}{section.4}%
+\contentsline {subsection}{\numberline {4.1}Ricerca locale e ottimizzazione dei problemi}{8}{subsection.4.1}%
+\contentsline {subsection}{\numberline {4.2}Ricerca locale in spazi continui}{8}{subsection.4.2}%
+\contentsline {subsection}{\numberline {4.3}Ricerca con azioni non deterministiche}{8}{subsection.4.3}%
+\contentsline {subsection}{\numberline {4.4}Ricerca in ambienti parzialmente osservabili}{8}{subsection.4.4}%
+\contentsline {section}{\numberline {5}CSP: problemi di soddisfazione dei vincoli}{9}{section.5}%
+\contentsline {subsection}{\numberline {5.1}Definizione dei CSP}{9}{subsection.5.1}%
+\contentsline {subsection}{\numberline {5.2}Propagazione dei vincoli: Interfacce all'interno dei CSP}{9}{subsection.5.2}%
+\contentsline {subsection}{\numberline {5.3}Ricerca backtracking per i CSP}{9}{subsection.5.3}%
+\contentsline {subsection}{\numberline {5.4}Ricerca locale per CSP}{9}{subsection.5.4}%
+\contentsline {subsection}{\numberline {5.5}La struttura dei problemi}{9}{subsection.5.5}%
+\contentsline {section}{\numberline {6}Ricerca e giochi contraddittori}{10}{section.6}%
+\contentsline {subsection}{\numberline {6.1}Teoria dei giochi}{10}{subsection.6.1}%
+\contentsline {subsection}{\numberline {6.2}Decisioni ottimali nei giochi}{10}{subsection.6.2}%
+\contentsline {subsection}{\numberline {6.3}Albero di ricerca Alpha-Beta euristico}{10}{subsection.6.3}%
+\contentsline {subsection}{\numberline {6.4}Albero di ricerca Monte Carlo}{10}{subsection.6.4}%
+\contentsline {subsection}{\numberline {6.5}Giochi stocastici}{10}{subsection.6.5}%
+\contentsline {subsection}{\numberline {6.6}Giochi parzialmente osservabili}{10}{subsection.6.6}%
+\contentsline {subsection}{\numberline {6.7}Limitazioni di algoritmi di ricerca dei giochi}{10}{subsection.6.7}%
+\contentsline {section}{\numberline {7}Agenti logici}{11}{section.7}%
+\contentsline {subsection}{\numberline {7.1}Knowledge Base degli agenti}{11}{subsection.7.1}%
+\contentsline {subsection}{\numberline {7.2}Il mondo Wumpus}{11}{subsection.7.2}%
+\contentsline {subsection}{\numberline {7.3}Logica}{11}{subsection.7.3}%
+\contentsline {subsection}{\numberline {7.4}Proposizioni logiche: Una logica veramente semplice}{11}{subsection.7.4}%
+\contentsline {subsection}{\numberline {7.5}Dimostrazione di proposizione logiche}{11}{subsection.7.5}%
+\contentsline {subsection}{\numberline {7.6}Efficace controllo del modello proposizionale}{11}{subsection.7.6}%
+\contentsline {subsection}{\numberline {7.7}Agenti basati su logica proposizionale}{11}{subsection.7.7}%
+\contentsline {section}{\numberline {8}Logica del primo ordine}{12}{section.8}%
+\contentsline {subsection}{\numberline {8.1}Rappresentazione rivisitata}{12}{subsection.8.1}%
+\contentsline {subsection}{\numberline {8.2}Sintassi e semantica della logica del primo ordine}{12}{subsection.8.2}%
+\contentsline {subsection}{\numberline {8.3}Usi della logica del primo ordine}{12}{subsection.8.3}%
+\contentsline {subsection}{\numberline {8.4}Ingegneria della conoscenza nella logica del primo ordine}{12}{subsection.8.4}%
+\contentsline {section}{\numberline {9}Inferenza nella logica del primo ordine}{13}{section.9}%
+\contentsline {subsection}{\numberline {9.1}Inferenza proposizionale vs Inferenza del primo ordine}{13}{subsection.9.1}%
+\contentsline {subsection}{\numberline {9.2}Unificazione e inferenza del primo ordine}{13}{subsection.9.2}%
+\contentsline {subsection}{\numberline {9.3}Concatenamento in avanti (Forward Chaining)}{13}{subsection.9.3}%
+\contentsline {subsection}{\numberline {9.4}Concatenamento all'indietro (Backward Chaining)}{13}{subsection.9.4}%
