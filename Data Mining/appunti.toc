@@ -12,3 +12,8 @@
 \contentsline {section}{\numberline {4}Decision Trees}{32}{section.4}%
 \contentsline {subsection}{\numberline {4.1}Affrontare i valori mancanti (missing values)}{33}{subsection.4.1}%
 \contentsline {subsection}{\numberline {4.2}Svantaggi}{34}{subsection.4.2}%
+\contentsline {subsection}{\numberline {4.3}Training set vs. Validation set}{35}{subsection.4.3}%
+\contentsline {subsection}{\numberline {4.4}Metodi di selezione dei cicli}{35}{subsection.4.4}%
+\contentsline {subsubsection}{\numberline {4.4.1}Reduced error pruning (REP)}{35}{subsubsection.4.4.1}%
+\contentsline {subsubsection}{\numberline {4.4.2}Minimal Error Pruning (MEP)}{35}{subsubsection.4.4.2}%
+\contentsline {subsubsection}{\numberline {4.4.3}Pessimistic Error Pruning (PEP)}{35}{subsubsection.4.4.3}%
