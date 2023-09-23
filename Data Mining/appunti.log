@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.25 (MiKTeX 23.4) (preloaded format=pdflatex 2023.9.4)  20 SEP 2023 23:35
+This is pdfTeX, Version 3.141592653-2.6-1.40.25 (MiKTeX 23.4) (preloaded format=pdflatex 2023.9.4)  23 SEP 2023 10:00
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -486,13 +486,13 @@ File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 \openout4 = `appunti.toc'.
 
  [2] [3]
-<kdd-process.png, id=112, 853.1875pt x 482.80376pt>
+<kdd-process.png, id=122, 853.1875pt x 482.80376pt>
 File: kdd-process.png Graphic file (type png)
 <use kdd-process.png>
 Package pdftex.def Info: kdd-process.png  used on input line 117.
 (pdftex.def)             Requested size: 341.43306pt x 193.21385pt.
  [4 <./kdd-process.png>]
-<crisp-dm-model.jpg, id=120, 637.38126pt x 603.25375pt>
+<crisp-dm-model.jpg, id=130, 637.38126pt x 603.25375pt>
 File: crisp-dm-model.jpg Graphic file (type jpg)
 <use crisp-dm-model.jpg>
 Package pdftex.def Info: crisp-dm-model.jpg  used on input line 132.
@@ -508,14 +508,14 @@ LaTeX Font Info:    Font shape `OMS/cmr/m/n' in size <10> not available
 (Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 395.
  [16] [17] [18]
 [19] [20] [21]
-<compact-representation-vs.png, id=204, 806.01125pt x 538.01pt>
+<compact-representation-vs.png, id=214, 806.01125pt x 538.01pt>
 File: compact-representation-vs.png Graphic file (type png)
 <use compact-representation-vs.png>
 Package pdftex.def Info: compact-representation-vs.png  used on input line 526.
 
 (pdftex.def)             Requested size: 216.23619pt x 144.33698pt.
  [22 <./compact-representation-vs.png>]
-<compact-representation-error.png, id=211, 523.9575pt x 372.39125pt>
+<compact-representation-error.png, id=221, 523.9575pt x 372.39125pt>
 File: compact-representation-error.png Graphic file (type png)
 <use compact-representation-error.png>
 Package pdftex.def Info: compact-representation-error.png  used on input line 5
@@ -529,21 +529,21 @@ on
  []
 
 [24]
-<seperate-and-conquer-allgoritmo.png, id=221, 782.17218pt x 421.575pt>
+<seperate-and-conquer-allgoritmo.png, id=231, 782.17218pt x 421.575pt>
 File: seperate-and-conquer-allgoritmo.png Graphic file (type png)
 <use seperate-and-conquer-allgoritmo.png>
 Package pdftex.def Info: seperate-and-conquer-allgoritmo.png  used on input lin
 e 613.
 (pdftex.def)             Requested size: 432.48755pt x 233.10204pt.
  [25]
-<seperate-and-conquer-allgoritmo2.png, id=227, 582.67688pt x 292.84406pt>
+<seperate-and-conquer-allgoritmo2.png, id=237, 582.67688pt x 292.84406pt>
 File: seperate-and-conquer-allgoritmo2.png Graphic file (type png)
 <use seperate-and-conquer-allgoritmo2.png>
 Package pdftex.def Info: seperate-and-conquer-allgoritmo2.png  used on input li
 ne 627.
 (pdftex.def)             Requested size: 432.49pt x 217.36253pt.
  [26 <./seperate-and-conquer-allgoritmo.png>]
-<seperate-and-conquer-allgoritmo3.png, id=233, 779.16093pt x 491.58656pt>
+<seperate-and-conquer-allgoritmo3.png, id=243, 779.16093pt x 491.58656pt>
 File: seperate-and-conquer-allgoritmo3.png Graphic file (type png)
 <use seperate-and-conquer-allgoritmo3.png>
 Package pdftex.def Info: seperate-and-conquer-allgoritmo3.png  used on input li
@@ -551,7 +551,7 @@ ne 635.
 (pdftex.def)             Requested size: 432.4751pt x 272.85626pt.
  [27 <./seperate-and-conquer-allgoritmo2.png> <./seperate-and-conquer-allgoritm
 o3.png>] [28] [29]
-[30] [31] [32] [33] [34] [35]
+[30] [31] [32] [33] [34] [35] [36]
 
 enddocument/afterlastpage: lastpage setting LastPage.
 (appunti.aux)
@@ -561,14 +561,14 @@ Package rerunfilecheck Warning: File `appunti.out' has changed.
 (rerunfilecheck)                or use package `bookmark'.
 
 Package rerunfilecheck Info: Checksums for `appunti.out':
-(rerunfilecheck)             Before: 09DF0CF932E2CDF7A2850B87F9E49EA6;2710
-(rerunfilecheck)             After:  5B732F322A83306228AFB0C5326CDFB4;3166.
+(rerunfilecheck)             Before: 5B732F322A83306228AFB0C5326CDFB4;3166
+(rerunfilecheck)             After:  252346053F24348611B6BC00961E9CD6;3371.
  ) 
 Here is how much of TeX's memory you used:
- 12683 strings out of 476331
- 209893 string characters out of 5797581
+ 12687 strings out of 476331
+ 209961 string characters out of 5797581
  1861660 words of memory out of 5000000
- 32881 multiletter control sequences out of 15000+600000
+ 32883 multiletter control sequences out of 15000+600000
  521190 words of font info for 66 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  75i,13n,76p,1366b,550s stack positions out of 10000i,1000n,20000p,200000b,200000s
@@ -577,17 +577,20 @@ Here is how much of TeX's memory you used:
 Program Files/MiKTeX/fonts/type1/public/amsfonts/cm/cmbx12.pfb><C:/Program File
 s/MiKTeX/fonts/type1/public/amsfonts/cm/cmbxti10.pfb><C:/Program Files/MiKTeX/f
 onts/type1/public/amsfonts/cm/cmex10.pfb><C:/Program Files/MiKTeX/fonts/type1/p
-ublic/amsfonts/cm/cmmi10.pfb><C:/Program Files/MiKTeX/fonts/type1/public/amsfon
-ts/cm/cmmi5.pfb><C:/Program Files/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi7.p
-fb><C:/Program Files/MiKTeX/fonts/type1/public/amsfonts/cm/cmr10.pfb><C:/Progra
-m Files/MiKTeX/fonts/type1/public/amsfonts/cm/cmr12.pfb><C:/Program Files/MiKTe
-X/fonts/type1/public/amsfonts/cm/cmr17.pfb><C:/Program Files/MiKTeX/fonts/type1
-/public/amsfonts/cm/cmr7.pfb><C:/Program Files/MiKTeX/fonts/type1/public/amsfon
-ts/cm/cmsy10.pfb><C:/Program Files/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy7.
-pfb><C:/Program Files/MiKTeX/fonts/type1/public/amsfonts/cm/cmti10.pfb>
-Output written on appunti.pdf (35 pages, 785676 bytes).
+ublic/amsfonts/cmextra/cmex7.pfb><C:/Program Files/MiKTeX/fonts/type1/public/am
+sfonts/cm/cmmi10.pfb><C:/Program Files/MiKTeX/fonts/type1/public/amsfonts/cm/cm
+mi5.pfb><C:/Program Files/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi7.pfb><C:/P
+rogram Files/MiKTeX/fonts/type1/public/amsfonts/cm/cmr10.pfb><C:/Program Files/
+MiKTeX/fonts/type1/public/amsfonts/cm/cmr12.pfb><C:/Program Files/MiKTeX/fonts/
+type1/public/amsfonts/cm/cmr17.pfb><C:/Program Files/MiKTeX/fonts/type1/public/
+amsfonts/cm/cmr5.pfb><C:/Program Files/MiKTeX/fonts/type1/public/amsfonts/cm/cm
+r7.pfb><C:/Program Files/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy10.pfb><C:/P
+rogram Files/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy5.pfb><C:/Program Files/
+MiKTeX/fonts/type1/public/amsfonts/cm/cmsy7.pfb><C:/Program Files/MiKTeX/fonts/
+type1/public/amsfonts/cm/cmti10.pfb>
+Output written on appunti.pdf (36 pages, 818303 bytes).
 PDF statistics:
- 354 PDF objects out of 1000 (max. 8388607)
- 65 named destinations out of 1000 (max. 500000)
- 172 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 383 PDF objects out of 1000 (max. 8388607)
+ 67 named destinations out of 1000 (max. 500000)
+ 188 words of extra memory for PDF output out of 10000 (max. 10000000)
 

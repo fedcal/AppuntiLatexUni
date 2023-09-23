@@ -854,11 +854,54 @@ In questo caso si utilizza un set di potatura per stimare l'accuratezza dei sott
 
 \subsubsection{Minimal Error Pruning (MEP)}
 
-Questo algoritmo non richiede un set di potatura per la stima dell'errore, la quale avviene sui nuovi dati direttamente dall'insieme di crescita. Si effettua una stima probabilistica attraverso la formula di Bayes. Si pota in maniera bottom-up e si pota la sezione di albero con la stima dell'errore di classificazione minima. Come stima si potrebbe prendere l'errore minimo, la stima di Laplace, la m-estimate.
+Questo algoritmo prende in considerazione per potare i rami se l'errore statistico è minore o uguale all'errore di backed-up, e l'errore del sotto albero di .
+
+\begin{center}
+$ E(T) = min(e(v), \sum\limits_{i} p_iE(T_i))$
+\end{center}
+
+Per stimare l'errore e(v) si usa Laplace o la stima m di probabilità.
+
+La \textbf{stima di Laplace} al nodo v, con N esempi, con $n_c$ il numero di esempi della classe di maggioranza e con k il numero di classi, si ha:
+
+\begin{center}
+$p_c = \frac{n_c+1}{N+k}$
+\end{center}
+
+Questa formula assume che tutte le classi hanno la stessa probabilità e il grado di potatura dipende dal numero di classi.
+
+Per risolvere questi problemi si utilizza la stima m, che prende in considerazione $p_{ca}$ ovvero la probabilità della classe C e m, un parametro non negativo.
+
+\begin{center}
+$p_C = \frac{p_{Ca}\times m + n_C}{N+m}$
+\end{center}
+Questo metodo da importanza agli account con probabilità priori, non risente del numero delle classi, si può variare il valore di m ottenendo una serie di alberi potati differenti. La scelta di m dipende dalla confidenza con i dati
 
 \subsubsection{Pessimistic Error Pruning (PEP)}
 
-Questo algoritmo non richiede un set di potatura per la stima dell'errore, la quale avviene sui nuovi dati direttamente dall'insieme di crescita. Si effettua una stima 
+Questo algoritmo non richiede un set di potatura per la stima dell'errore, la quale avviene sui nuovi dati direttamente dall'insieme di crescita. Si effettua una stima sulla frequenza relativa con una correzione, considerando la probabilità d'errore.
+
+\begin{center}
+$ q = \frac{N-n_c+0.5}{N}$
+\end{center}
+
+dove N rappresenta il numero di esempi e $n_c$ il numero di esempi nella classe maggiore. Inoltre si può calcolare l'errore di un nodo se potato:
+
+\begin{center}
+$q(v) = \frac{N_v - n_{C,v} +0.5}{N_v}$
+\end{center}
+
+Mentre l'errore di un sotto albero può essere calcolato come:
+\begin{center}
+$q(T) = \frac{\sum\limits_{l \in leaf(T)} N_l - N_{C,l} + 0.5}{\sum\limits_{l \in leaf(T)} N_l} $
+\end{center}
+
+\subsubsection{Error-Based Pruning (EBP)}
+
+In questo caso si decide di potare un sotto albero T se $q(v) \leq q(T) + SE(q(T))$, dove SE è l'errore standard di una statistica X sopra un numero di esempi n:
+\begin{center}
+$SE(X) = \sqrt{\frac{X(1-X)}{n}}$
+\end{center}
 
 \end{document}
 
