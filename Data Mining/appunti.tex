@@ -9,6 +9,7 @@
 \usepackage{longtable}
 \usepackage{caption}
 \usepackage{lastpage}
+\usepackage{amsmath}
 \usepackage{tabto}
 
 \setlength{\parindent}{0em}%indentazione paragrafo
@@ -317,7 +318,7 @@ Una regola di valutazione delle caratteristiche derivata dal concetto di guadagn
 La \underline{divergenza Kullback-Leibler} è una misura della distanza tra distribuzioni probabili, P e Q su un dominio V. Questa divergnza è definita come:
 
 \begin{equation}
-m_{KL}(P,Q)= \sum_{v\in V} q(v)log(\frac {q(v)}{p(v)})
+m_{KL}(P,Q)= \sum_{v\in V} q(v)log(\dfrac {q(v)}{p(v)})
 \end{equation}
 
 Questa divergenza misura in quale misura la distribuzione P è un'approssimazione della distribuzione Q o, più precisamente, la perdita dell'informazione se noi prendessimo P invece di Q. In sintesi si misura quanto P diverge da Q. LE proprietà di questa misura sono:
@@ -332,7 +333,7 @@ Questa divergenza misura in quale misura la distribuzione P è un'approssimazion
 La divergenza del $\chi ^2$ è definita come:
 
 \begin{equation}
-m \chi ^2(P,Q) = \sum_{y \in Y} \frac{|p(y)-q(y)|^2}{p(y)}
+m \chi ^2(P,Q) = \sum_{y \in Y} \dfrac{|p(y)-q(y)|^2}{p(y)}
 \end{equation}
 
 è rigorosamente topologicamente più forte della divergenza KL data la disuguaglianza $m_{KL}(P,Q) \leq m \chi ^2 (P,Q)$, la convergenza nella funzione di divergenza $\chi ^2$ implica la convergenza nella divergenza KL, ma non il contrario. Inoltre è assimetrica e non definita quando p(y)=0.
@@ -379,7 +380,7 @@ Esempi sono la conversione delle variabili di tipo data dal formato US a quello 
 
 Un altro tipo di normalizzazione è la normalizzazione min-max che performa una transformazione lineare sui dati originali. Supponendo che $ min_A$ e $max_A$ sono i valori di minimo e di massimo di un attributo A, questa normalizzazione mappa un valore v di A in v' nel range $[newMin_A; newMax_A]$ attraverso la formula:
 \begin{equation}
-v'= \frac{v-min_A}{max_A-min_A}(newMax_A - newMin_A)+newMin_A
+v'= \dfrac{v-min_A}{max_A-min_A}(newMax_A - newMin_A)+newMin_A
 \end{equation}
 
 Le relazioni tra i valori dei dati originali vengono preservate. Se un caso di input futuro per la normalizzazione non rientra nell'intervallo di dati originale per A, si verifica un errore "out of bounds" (fuori dal limite).
@@ -387,7 +388,7 @@ Le relazioni tra i valori dei dati originali vengono preservate. Se un caso di i
 Nella normalizzazione definita z-score, anche chiamata a media zero, i valori per un attributo A sono normalizzati sulla base della media o della deviazione standard di A. Un valore v di A è normalizzato in v' attraverso la formula:
 
 \begin{equation}
-v'=\frac{v-mean_A}{standDev_A}
+v'=\dfrac{v-mean_A}{standDev_A}
 \end{equation}
 
 dove $mean_A$ e $standDev_A$ sono la media e la deviazione standard dell'attributo A. Questo metodo di normalizzazione è utile quando il minmo e il massimo dell'attributo A sono sconosciuti, o quando ci sono gli outliers che dominano la normalizzazione min-max.
@@ -395,7 +396,7 @@ dove $mean_A$ e $standDev_A$ sono la media e la deviazione standard dell'attribu
 La normalizzazione attraverso il decimal scaling transforma i valori dell'attributo A in punti decimali, per assicurarsi che il range dell'intervallo i cui essi sono compresi sia \{-1,+1\}. Il numero di punti decimali dipende dal massimo valore assoluto di A. Un valore v di A è normalizzato in v' attraverso la funzione:
 
 \begin{equation}
-v'= \frac{v}{10^j}
+v'= \dfrac{v}{10^j}
 \end{equation}
 
 dove j è il più piccolo intero tale che $max(|v'|)<1$
@@ -405,7 +406,7 @@ Si parla di \textbf{discretizzazione delle variabili} quando convertiamo variabi
 Il partizionamento attraverso l'equal width divide il range in N intervalli di uguale lunghezza, se A e B sono il più piccolo e il più grande valore all'interno dell'attributo, l'intervallo di width sarà:
 
 \begin{equation}
-W=\frac{B-A}{N}
+W=\dfrac{B-A}{N}
 \end{equation}
 
 Questo metodo è il più diretto, però ha anche degli aspetti negativi perchè non gestisce bene i dati distorti ed è sensibile ai valori anomali.
@@ -415,7 +416,7 @@ Il partizionamento attraverso l'equal-depth divide il range in N intervalli, ogn
 In entrambi i casi il numero di elementi tralasciati è definito dall'utente. Nel caso di classificazione dei dati, è buona pratica che questo numero non sia minore del numero di classi che vogliamo riconoscere, oppure determinarlo attraverso la formula:
 
 \begin{equation}
-N_{bins} = \frac{M}{3*C}
+N_{bins} = \dfrac{M}{3*C}
 \end{equation}
 
 dove M è il numero di esempi di training e C il numero di classi.
@@ -713,13 +714,13 @@ Non sempre l'algoritmo K-means identifica un raggruppamento perfetto, infatti in
 
 Ci sono due metodi principali per scegliere il numero k di cluster. Attraverso il metodo \textbf{elbow method}, nel quale si minimizza la distanza tra i punti di un singolo cluster e si massimizza la distanza tra i cluster. Per calcolare la distanza tra due cluster si utilizza la formula del WCSS, ovvero la somma dei quadrati delle differenze tra i vari punti dei cluster.
 
-Mentre se si decide di scegliere il metodo \textbf{silhouette}, per ogni istanza i calcola la distanza media tra i e ogni altra osservazione j all'interno del cluster in cui i è stata raggruppata. In formula: $a(i) = \frac{1}{|C|-1} \sum_{j \in C_I, i \not = j} d(i,j)$. Per ogni istanza i calcola la distanza media tra i e ogni altra osservazione j all’interno degli altri cluster (cluster-wise) diversi da quello in cui risiede i e salva tale media soltanto per il cluster più vicino al cluster di i. Chiama questo valore b(i). In formula: $b(i) = min_{J \not = I} \frac{1}{|C_J|} \sum_{j\in C_J} d(i,j)$.
+Mentre se si decide di scegliere il metodo \textbf{silhouette}, per ogni istanza i calcola la distanza media tra i e ogni altra osservazione j all'interno del cluster in cui i è stata raggruppata. In formula: $a(i) = \dfrac{1}{|C|-1} \sum_{j \in C_I, i \not = j} d(i,j)$. Per ogni istanza i calcola la distanza media tra i e ogni altra osservazione j all’interno degli altri cluster (cluster-wise) diversi da quello in cui risiede i e salva tale media soltanto per il cluster più vicino al cluster di i. Chiama questo valore b(i). In formula: $b(i) = min_{J \not = I} \dfrac{1}{|C_J|} \sum_{j\in C_J} d(i,j)$.
 
 Infine si definisce lo score Silhouette s(i) per i come segue:
 \begin{itemize}
-\item $1 - \frac{a(i)}{b(i)}$ se a(i)$<$b(i)
+\item $1 - \dfrac{a(i)}{b(i)}$ se a(i)$<$b(i)
 \item 0 se a(i) $=$ b(i)
-\item $\frac{b(i)}{a(i)} - 1$ se a(i) $>$ b(i)
+\item $\dfrac{b(i)}{a(i)} - 1$ se a(i) $>$ b(i)
 \end{itemize}
 
 Inoltre il valore s(i) sarà sempre compreso tra -1 e 1.
@@ -776,11 +777,11 @@ Considerando due classi di problemi ($C_1$=positivo, $C_2$=negativo) dove:
 
 l'entropia di S è computata come: $E(S) = -p log_2 p - n log_2 n$.
 
-Un altro valore che può essere utilizzato per la selezione dei test è il cosiddetto \textbf{information gain}, che rappresenta la riduzione prevista dell'entropia a causa della distribuzione delle istanze su S in accordo con il test t. Considerando $S_1,...,S_z$ il partizionamento di S attraverso il test t sull'attributo $A_i$, l'information gain può essere ottenuto come: $G(S,t) = E(S) - \sum_i \frac{|S_i|}{|S|}E(S_i)$. In questo modo si sceglie il criterio che massimizza G(S,t).
+Un altro valore che può essere utilizzato per la selezione dei test è il cosiddetto \textbf{information gain}, che rappresenta la riduzione prevista dell'entropia a causa della distribuzione delle istanze su S in accordo con il test t. Considerando $S_1,...,S_z$ il partizionamento di S attraverso il test t sull'attributo $A_i$, l'information gain può essere ottenuto come: $G(S,t) = E(S) - \sum_i \dfrac{|S_i|}{|S|}E(S_i)$. In questo modo si sceglie il criterio che massimizza G(S,t).
 
 Un problema legato a questo parametro consiste nel favorire test con numerosi risultati. In questo caso l'information gain è massimizzato da un test su un attributo chiave che ogni $S_i$ contiene un solo caso. Una prima soluzione a questo problema consiste nel limitare i decision trees a test binari. Però sono possibili più test sullo stesso attributo. Ciò può portare a alberi decisionali che sono ancora più incomprensibili per gli esperti umani di quanto non avvenga normalmente. Inoltre questa soluzione è computazionalmente espansiva.
 
-Una seconda soluzione tiene conto delle potenziali informazioni dalla partizione stessa, senza considerare la classe, quindi in formula: $P(S,t) = - \sum_i \frac{|S_i|}{|S|} log(\frac{|S_i|}{|S|})$. La maggior parte possibile delle informazioni fornite determinando il valore di un attributo dovrebbe essere utile ai fini della classificazione o, equivalentemente, il meno possibile dovrebbe essere "sprecato". Perciò scegliamo il test t che massimizza la formula $\frac{G(S,t)}{P(S,t)}$, definendo così il \textbf{criterio del gain ratio}.
+Una seconda soluzione tiene conto delle potenziali informazioni dalla partizione stessa, senza considerare la classe, quindi in formula: $P(S,t) = - \sum_i \dfrac{|S_i|}{|S|} log(\dfrac{|S_i|}{|S|})$. La maggior parte possibile delle informazioni fornite determinando il valore di un attributo dovrebbe essere utile ai fini della classificazione o, equivalentemente, il meno possibile dovrebbe essere "sprecato". Perciò scegliamo il test t che massimizza la formula $\dfrac{G(S,t)}{P(S,t)}$, definendo così il \textbf{criterio del gain ratio}.
 
 Per trattare i continuous attributes all'interno dell'algoritmo C4.5 si può definire un nuovo attributo valorizzato con valori discreti per testare l'attributo continuo partizionando il valore continuo in un insieme di intervalli discreti e utilizzando $A_c$ = true se $A<c$. Il valore migliore di c è selezionato usando l'information gain.
 
@@ -856,52 +857,143 @@ In questo caso si utilizza un set di potatura per stimare l'accuratezza dei sott
 
 Questo algoritmo prende in considerazione per potare i rami se l'errore statistico è minore o uguale all'errore di backed-up, e l'errore del sotto albero di .
 
-\begin{center}
-$ E(T) = min(e(v), \sum\limits_{i} p_iE(T_i))$
-\end{center}
+\begin{equation*}
+E(T) = min(e(v), \sum\limits_{i} p_iE(T_i))
+\end{equation*}
 
 Per stimare l'errore e(v) si usa Laplace o la stima m di probabilità.
 
 La \textbf{stima di Laplace} al nodo v, con N esempi, con $n_c$ il numero di esempi della classe di maggioranza e con k il numero di classi, si ha:
 
-\begin{center}
-$p_c = \frac{n_c+1}{N+k}$
-\end{center}
+\begin{equation*}
+p_c = \dfrac{n_c+1}{N+k}
+\end{equation*}
 
 Questa formula assume che tutte le classi hanno la stessa probabilità e il grado di potatura dipende dal numero di classi.
 
 Per risolvere questi problemi si utilizza la stima m, che prende in considerazione $p_{ca}$ ovvero la probabilità della classe C e m, un parametro non negativo.
 
-\begin{center}
-$p_C = \frac{p_{Ca}\times m + n_C}{N+m}$
-\end{center}
+\begin{equation*}
+p_C = \dfrac{p_{Ca}\times m + n_C}{N+m}
+\end{equation*}
 Questo metodo da importanza agli account con probabilità priori, non risente del numero delle classi, si può variare il valore di m ottenendo una serie di alberi potati differenti. La scelta di m dipende dalla confidenza con i dati
 
 \subsubsection{Pessimistic Error Pruning (PEP)}
 
 Questo algoritmo non richiede un set di potatura per la stima dell'errore, la quale avviene sui nuovi dati direttamente dall'insieme di crescita. Si effettua una stima sulla frequenza relativa con una correzione, considerando la probabilità d'errore.
 
-\begin{center}
-$ q = \frac{N-n_c+0.5}{N}$
-\end{center}
+\begin{equation*}
+ q = \dfrac{N-n_c+0.5}{N}
+\end{equation*}
 
 dove N rappresenta il numero di esempi e $n_c$ il numero di esempi nella classe maggiore. Inoltre si può calcolare l'errore di un nodo se potato:
 
-\begin{center}
-$q(v) = \frac{N_v - n_{C,v} +0.5}{N_v}$
-\end{center}
+\begin{equation*}
+q(v) = \dfrac{N_v - n_{C,v} +0.5}{N_v}
+\end{equation*}
 
 Mentre l'errore di un sotto albero può essere calcolato come:
-\begin{center}
-$q(T) = \frac{\sum\limits_{l \in leaf(T)} N_l - N_{C,l} + 0.5}{\sum\limits_{l \in leaf(T)} N_l} $
-\end{center}
+\begin{equation*}
+q(T) = \dfrac{\sum\limits_{l \in leaf(T)} N_l - N_{C,l} + 0.5}{\sum\limits_{l \in leaf(T)} N_l} 
+\end{equation*}
 
 \subsubsection{Error-Based Pruning (EBP)}
 
 In questo caso si decide di potare un sotto albero T se $q(v) \leq q(T) + SE(q(T))$, dove SE è l'errore standard di una statistica X sopra un numero di esempi n:
+\begin{equation*}
+SE(X) = \sqrt{\dfrac{X(1-X)}{n}}
+\end{equation*}
+
+\section{Naive Bayes Classidier - Classificatore Bayesiano}
+
+Il \textbf{Bayesian Framework} è composto da un insieme di dati osservati D ai quali siamo interessati nel determinare le migliori ipotesi da qualche spazio H. Per un task di classificazione, le ipotesi è un classificatore. Il \textit{teorema di Bayes} è un metodo per calcolare la probabilità di un ipotesi basata sulle probabilità a priori e sui dati osservati.
+
+Definiamo:
+\begin{itemize}
+\item con \textbf{h} le ipotesi
+
+\item con \textbf{P(h)} la probabilità a priori di h, cioè, la probabilità iniziale che valga l'ipotesi h, prima di aver osservato i dati di addestramento. Riflette alcune conoscenze di base che abbiamo sulla possibilità che h sia un'ipotesi corretta.
+
+\item con \textbf{P(D)} la probabilità a priori di D, cioè, la probabilità che i dati di addestramento D vengano osservati non sapendo quale ipotesi sia valida.
+
+\item con \textbf{P(D$|$h)} denotala probabilità di osservare i dati D dato un mondo in cui vale l'ipotesi h.
+
+\item con \textbf{P(h$|$D)} probabilità a posteriori di h, ovvero la probabilità che h sia valida dopo aver visto i dati di addestramento D.
+\end{itemize}
+
+Nella formula:
+\begin{equation*}
+P(h|D) = \dfrac{P(D|h)P(h)}{P(D)}
+\end{equation*}
+
+\begin{itemize}
+\item $P(h|D)$ cresce con P(h) e con $P(D|h)$
+\item $P(h|D)$ diminuisce all'aumentare di P(D), perché quanto più è probabile che D venga osservato indipendentemente da h, tanto meno prove D fornisce a sostegno di h.
+\end{itemize}
+
+L'ipotesi $h\in H$ con la massima probabilità è l'ipotesi con \textbf{massimo a posteriori (MAP)}, ovvero:
+\begin{equation*}
+h_{MAP} = arg  max_{h \in H} P (h|D) = arg  max_{h \in H} \dfrac{P(D|h)P(h)}{P(D)}
+\end{equation*} 
+
+Il termine P(D) può essere eliminato dalla formula perchè è una costante indipendente di h. Assumendo che tutte le ipotesi sono altrettanto probabili, le equazioni possono essere ulteriormente semplificate. L'ipotesi che massimizza $P(D|h)$ è le più probabile. $P((D|h)$ è chiamata la probabilità dei dati D data h. Questa ipotesi è chiamata ipotesi di probabilità massima (ML), ovvero:
 \begin{center}
-$SE(X) = \sqrt{\frac{X(1-X)}{n}}$
-\end{center}
+$h_{ML} = arg max_{h \in H} P(D|h)$
+\end{center} 
+
+A differenza di una ipotesi ML, una ipotesi MAP incorpora la conoscenza a priori.
+
+Per applicare il teorema di Bayes ai problemi di classificazione, definiamo:
+\begin{itemize}
+\item uno spazio di istanze X
+\item $c: X \rightarrow \{0,1\}$, una funzione di classificazione che deve essere appresa
+\item uno spazio delle ipotesi H
+\item una funzione booleana definita su X tale che $h \in H$: $h : X \rightarrow \{0,1\}$
+\end{itemize}
+
+L'obiettivo è di trovare h tale che h(x)=c(x) per tutte le istanze x $\in$ X. L'informazione disponibile è una sequenza di esempi di training $<<x_1,d_1>\dots <x_m,d_m>>$, dove $x_i$ è un'istanza di X e $d_i$ è il valore targe di $x_i$, ovvero $d_i = c(x_i)$.
+
+Se si volesse implementare un \textbf{algoritmo di apprendimento MAP per forza bruta}, basterebbe calcolare per ogni $h \in H$ la probabilità a posteriori:
+\begin{equation*}
+P(h|D) = \dfrac{P(D|h)P(h)}{P(D)}
+\end{equation*} 
+
+L'output dell'ipotesi $h_{MAP}$ con la più alta probabilità a posteriori:
+\begin{equation*}
+h_{MAP} = arg max_{h \in H} P(h|D)
+\end{equation*}
+
+In questo algoritmo si assume che l'insieme dei dati di training D è senza rumore, ovvero $d_i = c(x_i)$. Il concetto target c è contenuto nello spazio dell'ipotesi H. Inoltre si presume che non abbiamo nessuna ragione a priori di credere che un'ipotesi è più probabile di un'altra.
+
+Per stimare P(h), si assume che $P(h_i)$ è uguale per ogni $h_i \in H$, inoltre si assume che la somma di $P(h_i)$ è uguale a uno. Perciò $P(h) = \dfrac{1}{|H|}$ per tutte $h\in H$.
+
+Per stimare $P(D|H)$ si assume:
+
+\begin{equation*}
+	P(D|h) = 
+	\begin{cases}
+		1 \text{ if }  d_i = h(x_i) \; \forall x_i \in D \\
+		0 \text{ otherwise}
+	\end{cases}
+\end{equation*}
+
+La probabilità dei dati D, data l'ipotesi h, è 1 se D è consistente con h, 0 altrimenti.
+
+Per stimare P(D) basta utilizzare il teorema della probabilità e la mutua esclusione delle ipotesi.
+
+\begin{equation*}
+P(D) = \sum\limits_{h_i \in H} P(D|h_i)P(h_i) = \sum\limits_{h_i \in VS_{H,D}} 1 \times \dfrac{1}{|H|}+ \sum \limits_{h_i \not \in VS_{H,D}} 0\times \dfrac{1}{|H|} = \dfrac{|VS_{H,D}}{|H|}
+\end{equation*}
+
+dove $VS_{H,D}$ è un sotto insieme di ipotesi da H che sono consistenti in D.
+
+Perciò quando h è inconsistente con l'insieme dei dati D, $P(h|D) = 0 \times \dfrac{P(h)}{P(D)} = 0$, altrimenti:
+
+\begin{equation*}
+P(h|D) = \dfrac{1 \times \dfrac{1}{|H|}}{\dfrac{|VS_{H,D}|}{|H|}}
+\end{equation*}
+
+
 
 \end{document}
 
