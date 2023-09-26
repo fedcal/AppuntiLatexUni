@@ -993,7 +993,67 @@ Perciò quando h è inconsistente con l'insieme dei dati D, $P(h|D) = 0 \times \
 P(h|D) = \dfrac{1 \times \dfrac{1}{|H|}}{\dfrac{|VS_{H,D}|}{|H|}}
 \end{equation*}
 
+Sotto le scelte di P(h) e $P(D|h)$, ogni ipotesi consistente ha una probabilità a posteriori di $\dfrac{1}{|VS_{H,D}}$ e ogni ipotesi inconsistente ha una probabilità a posteriori di 0. Perciò possiamo assumere che \textit{ogni ipotesi consistente è un'ipotesi MAP.}
 
+Una classe di leaners consistenti è una classe di algoritmi di apprendimento che produce un ipotesi che commette zero errori sugli esempi di training. Ogni leaner consistente produce un ipotesii MAP, se assumiamo una distribuzione di probabilità uniforme a priori su H e assumiamo che questa sia deterministica, su un insieme di dati di training senza rumore.
+
+Il framework bayesiano consente un modo per caratterizzare il comportamento degli algoritmi di apprendimento (ad esempio, FIND-S), anche quando l'algoritmo di apprendimento non manipola esplicitamente le probabilità. Questa caratterizzazione degli algoritmi di apprendimento è simile nello spirito alla caratterizzazione del pregiudizio induttivo del learner. Invece di modellare il metodo di inferenza induttiva con un sistema deduttivo equivalente, lo modelliamo con un sistema di ragionamento probabilistico equivalente basato sul teorema di Bayes.
+
+\begin{center}
+
+\fbox{\includegraphics[width=.8\textwidth, height=.5\textheight, keepaspectratio]{different-probabilistic-method}}
+\end{center}
+
+Riconsideriamo la definizione di $h_{MAP}$: $h_{MAP} = argmax_{h\in H} P(D|h)P(h)$, potremmo riscriverla cercando di massimizzarla/minimizzarla in termini di $\log_2$:
+
+\begin{equation*}
+\begin{split}
+h_{MAP} = argmax_{h \in H}(\log_2(P(D|h) + \log_2(P(h))) \\
+h_{MAP} = argmin_{h \in H}(- \log_2(P(D|h) - \log_2(P(h)))
+\end{split}
+\end{equation*}
+
+Nella teoria dell'informazione vi è un problema per decodificare un algoritmo per trasmetter messaggi estratti a caso. La probabilità del messaggio i è $p_i$. Qual è il codice che minimizza il numero previsto di bit che dobbiamo trasmettere per codificare un messaggio estratto a caso? Ci viene in aiuto il teorema di Shannon, il cui codice ottimale assegna $-\log_2(p_i)$ bits per codificare il messaggio i. La lunghezza del messaggio aspettato è: $\sum\limits_i -p_i \log_2 p_i$ 
+
+La lunghezza della descrizione del messaggio i rispetto al codice C, $L_C (i)$, è il numero di bits richiesto per codificare il messaggio i usando il codice C.
+
+In formule:
+\begin{equation*}
+h_{MAP} = argmin_{h \in H} (- \log_2 P(D|h) - \log_2 P(h))
+\end{equation*} 
+
+Che possiamo interpretare alla luce del teorema dii Shannon come:
+\begin{itemize}
+\item $-\log_2 P(h)$ è la descrizione della lunghezza di h sotto la condizione ottimale per l'ipotesi di spazio H. $\rightarrow L_{C_H}(h) = - \log_2P(h)$ dove $C_H$ è il codice ottimale per lo spazio dell'ipotesi H.
+\item  $-\log_2 P(D|h)$ è la lunghezza della descrizione di D data h sotto la sua codifica ottimale $\rightarrow L_{C_{D|h}} = - \log_2 P(D|h)$ dove $C_{D|h}$ è il codice ottimale per descrivere i dati D assumendo che sia chi li via sia il ricevente conoscono l'ipotesi h.
+\end{itemize}
+
+Perciò l'ipotesi $h_MAP$ è l'ipotesi h che minimizza la somma: $h_{MAP} = argmin_{h \in H} (L_{C_H}(h) + L_{C_{D|h}}(D|h))$
+
+Il \textbf{principio della lunghezza minima della descrizione } raccomanda di scegliere l'ipotesi che minimizza la somma delle due lunghezze relative alle descrizioni, una che rappresenta l'ipotesi e l'altra che rappresenta i dati data l'ipotesi: $h_{MDL} = argmin_{h \in H} L_{C_1}(h) + L_{C_2} (D|h)$. 
+
+$L_{C_2}(D|h)$ è zero quando l'ipotesi non sbaglia a classificare i dati di traning. Il principio MDL è un bias induttivo che consiglia, analogamente al rasoio di Occam, di scegliere l’ipotesi più semplice (più breve) che spieghi i dati di addestramento. Fornisce un modo per bilanciare la complessità dell'ipotesi con il numero di errori commessi dall'ipotesi. Potrebbe selezionare un'ipotesi più breve che commette alcuni errori rispetto a un'ipotesi più lunga che classifica perfettamente i dati di addestramento. Fornisce un modo per gestire il sovradattamento.
+
+Se confrontassimo 
+\begin{equation*}
+h_{MDL} = argmin_{h\in H} L_{C_1} (h) + L_{C_2}(D|h)
+\end{equation*}
+con
+\begin{equation*}
+h_{MAP} = argmin_{h\in H} L_{C_H} (h) + L_{C_{D|h}}(D|h)
+\end{equation*}
+
+risulta chiaro che le ipotesi MAP e il principio MDL sono strettamente collegati. Quando $C_1 = C_H$ e $C_2=C{D|h}$ allora $h_{MDL} = h_{MAP}$.
+
+Invece per garantire che $C_1=C_H$ e $C_2=C_{D|h}$ dobbiamo conoscere tutte le probabilità a priori P(h) come anche tutte le $P(D|h)$. In pratica a volte è più semplice specificare una rappresentazione che cattura la conoscenza sulle probabilità relative delle ipotesi piuttosto che specificare completamente la probabilità di ciascuna ipotesi. Tipicamente, le applicazioni dell’MDL a problemi pratici di apprendimento spesso includono argomenti che forniscono una qualche forma di giustificazione per le codifiche scelte per $C_1$ e $C_2$.
+
+In generale, il classificatore più probabile per una nuova istanza è ottenuta combinando le predizioni delle ipotesi, pesate attraverso le loro probabilità a posteriori. Se l'eventuale classificazione del nuovo esempio può assumere qualsiasi valore $v_j$ dall'insieme V, allora la probabilità $P(v_j|D)$  che la classificazione corretta per la nuova istanza è $v_j$ è solo:
+
+\begin{equation*}
+P(v_j|D) = \sum\limits_{h_i \in H} P(v_j | h_i) P(h_i|D) 
+\end{equation*}
+
+Qualsiasi sistema che classifica nuove istanze in questo modo è chiamato classificatore ottimale di Bayes o studente ottimale di Bayes. Nessun altro metodo di classificazione che utilizza lo stesso spazio di ipotesi e la stessa conoscenza preliminare può in media superare questo metodo.
 
 \end{document}
 
