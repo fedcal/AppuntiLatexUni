@@ -1055,6 +1055,74 @@ P(v_j|D) = \sum\limits_{h_i \in H} P(v_j | h_i) P(h_i|D)
 
 Qualsiasi sistema che classifica nuove istanze in questo modo è chiamato classificatore ottimale di Bayes o studente ottimale di Bayes. Nessun altro metodo di classificazione che utilizza lo stesso spazio di ipotesi e la stessa conoscenza preliminare può in media superare questo metodo.
 
+Una curiosità del \textbf{classificatore bayesiano ottimale} è che le predizioni possono corrispondere a un ipotesi non in H. Questo perchè lo spazio di ricerca non è H, ma H', il quale include ipotesi che performano confronti tra combinazioni lineari delle predizioni da ipotesi multiple in H.
+
+Il classificatore bayesiano ottimale è piuttosto costoso da applicare, in quanto calcola la probabilità per ogni ipotesi in H e dopo combina le predizioni per ogni ipotesi da classificare per ogni nuova istanza. Potremmo approssimare la formula $P(V_j | D) = \sum\limits_{h_i \in H} P(v_j | h_i)P(h_i|D)$ a $P(V_j | D) = P(v_j | h_{MAP})P(h_{MAP}|D)$. Da $P(h_{MAP}|D)$ non dipende una nuova istanza, la decisione è attualmente basata sul massimo valore di $P(v_j|h_{MAP})$.
+
+Un'approssimazione alternativa è data da una scelta randomica delle ipotesi. Consideriamo l'\textbf{algoritmo Gibbs}, il quale sceglie un'ipotesi $h\in H$ casualmente in accordo con la distribuzione a posteriori della probabilità su H, e usa h per predire la classificazione sulla istanza successiva a x.
+
+Supponiamo che le ipotesi utilizzate per la classificazione siano estratte casualmente da H secondo la distribuzione di probabilità a priori su H. Allora l'errore di classificazione errata atteso per l'algoritmo di Gibbs è al massimo il doppio dell'errore atteso del classificatore ottimo di Bayes.
+
+\begin{equation*}
+E[error_{Gibbs}] \leq 2E[error_{BayesOptimall}]
+\end{equation*}
+
+In generale, le prestazioni dell'algoritmo di Bayes forniscono uno standard naturale rispetto al quale è possibile confrontare altri algoritmi.
+
+Il \textbf{naive Bayes classifier} è un'istanza del metodo di apprendimento derivato secondo il  framework bayesiano. Si applica all'apprendimento di tasks dove ogni istanza è descritta da una tupla di di attributi valori $<a_1,\dots,a_n>$ e dove l'attributo target può assumere qualsiasi valore da un insieme finito V.
+
+Una nuova istanza viene assegnata al valore target più probabile $v_{MAP}$, dati i valori degli attributi $<a_1, \dots, a_n>$:\\ $v_{MAP} = argmax_{v_j \in V} P(v_j | a_1,a_2,\dots,a_n)$
+
+Secondo il teorema di  Bayes:
+\begin{equation*}
+v_{MAP} = argmax_{v_j\in V} \dfrac{P(a_1,a_2,\dots,a_n | v_j)P(v_j)}{P(a_1,a_2,\dots,a_n)} = argmax_{v_j \in V} P(a_1, a_2,\dots,a_n | v_j)P(v_j)
+\end{equation*}
+
+In questo caso possiamo stimare $P(v_j)$ attraverso la frequenza relativa del valore targe $v_j$ all'interno del training set. Questo approccio non è praticabile per $P(a_1,\dots,a_n|v_j)$, in quanto vi sonno troppe probabilità da stimare, ma proporzionalmente pochi dati di training.
+
+Come ipotesi di semplificazione, possiamo attribuire valori che sono condizionatamente indipendenti dato il valore target:
+\begin{equation*}
+P(a_1,a_2,\dots,a_n|v_j) = \prod_{i=1}^n P(a_i|v_j)
+\end{equation*}
+Quindi si potrebbe utilizzare il \textbf{Naive (o Simple) Bayes Classifier}, all'interno del quale abbiamo:
+\begin{equation*}
+v_{NB} = argmax_{v_j \in V} P(v_j)\prod_{i=1}^n P(a_i|v_j)
+\end{equation*}
+
+In questo caso il numero di parametri distinti da stimare è uguale al numero di valori di attributo distinti moltiplicato per il numero di valori target distinti.
+
+Lo step di apprendimento consiste nella stima dei vari $P(v_j)$ e di $P(a_i|v_j)$ basati sulla frequenza dei dati di training. L'insieme di queste stime corrisponde all'ipotesi appresa. Successivamente l'ipotesi viene usata per classificare ogni nuova istanza applicando la regola:
+
+\begin{equation*}
+v_{NB} = argmax_{v_j \in V} P(v_j) \prod_{i=1}^n P(a_i|v_j)
+\end{equation*}
+
+Ogni volta che il presupposto dell naive Bayes dell'indipendenza condizionale è soddisfatto, questa classificazione di Bayes $v_{NB}$ è identica alla classificazione MAP $v_{MAP}$.
+
+Il classificatore naive Bayes approssima il classificatore ottimale Bayes:
+\begin{equation*}
+v_{OBC} = argmax_{v_j \in V} P(v_j | D) = argmax_{v_j \in V} \sum\limits_{h_i \in H} P(v_j | h_i) P(h_i|D)
+\end{equation*}
+
+attraverso: 
+
+\begin{equation*}
+v_{NB} = argmax_{v_j \in V} P(v_j | h_{NB})P(h_{NB} | D) = argmax_{v_j \in V} P(v_j | h_{NB}) = argmax_{v_j \in V} P(v_j)  \prod_{i=1}^n P(a_i | v_j)
+\end{equation*}
+
+Questo avviene solo  quando l'assunzione di indipendenza condizionale del classificatore Naive Bayes viene soddisfatta: $h_{NB} = h_{MAP}$. 
+
+\subsection{Underflow Prevention}
+Moltiplicare numerose probabilità, le quali sono comprese tra 0 e 1, può produrre un numero float molto grande. Poiché log è una funzione crescente strettamente monotona, vale la seguente equazione:
+
+\begin{equation*}
+v_{NB} = argmax_{v_j \in V} \hat P (v_j) \prod_{i=1}^n \hat P (A_k = a_{ki} | v_j) = argmax_{v_j \in V} (\log_22 \hat P(v_j) + \sum\limits_{i=1}^n \log_2 \hat P (A_k = a_{ki} | v_j))
+\end{equation*}
+È meglio eseguire tutti i calcoli sommando i logaritmi delle probabilità piuttosto che moltiplicando le probabilità. La classe con il punteggio finale di probabilità logaritmica non normalizzata più alto è ancora la più probabile.
+
+Una differenza interessante tra il metodo di apprendimento naive Bayes e gli altri metodi di apprendimento considerati finora è che non esiste una ricerca esplicita nello spazio delle ipotesi possibili. Lo spazio delle ipotesi possibili H è lo spazio delle possibili dipendenze tra attributi. 
+
+L’ipotesi dei classificatori naive Bayes è chiaramente falsa in molti casi. Per questo motivo, l'apprendimento del classificatore naive Bayes è stato considerato poco affidabile ed è stato inizialmente utilizzato come base per il confronto con algoritmi più sofisticati. Nonostante questo scetticismo, negli anni passati è stato dimostrato che in molti domini l’accuratezza della previsione del classificatore naive Bayes si confronta bene con quella di altri algoritmi di apprendimento più complessi tra cui l’apprendimento dell’albero decisionale, l’apprendimento delle regole e gli algoritmi di apprendimento basati su istanze.
 \end{document}
 
 
