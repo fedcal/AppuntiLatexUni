@@ -973,7 +973,7 @@ Per stimare $P(D|H)$ si assume:
 	P(D|h) = 
 	\begin{cases}
 		1 \text{ if }  d_i = h(x_i) \; \forall x_i \in D \\
-		0 \text{ otherwise}
+		0 \text{ altrimenti}
 	\end{cases}
 \end{equation*}
 
@@ -1122,7 +1122,187 @@ v_{NB} = argmax_{v_j \in V} \hat P (v_j) \prod_{i=1}^n \hat P (A_k = a_{ki} | v_
 
 Una differenza interessante tra il metodo di apprendimento naive Bayes e gli altri metodi di apprendimento considerati finora è che non esiste una ricerca esplicita nello spazio delle ipotesi possibili. Lo spazio delle ipotesi possibili H è lo spazio delle possibili dipendenze tra attributi. 
 
-L’ipotesi dei classificatori naive Bayes è chiaramente falsa in molti casi. Per questo motivo, l'apprendimento del classificatore naive Bayes è stato considerato poco affidabile ed è stato inizialmente utilizzato come base per il confronto con algoritmi più sofisticati. Nonostante questo scetticismo, negli anni passati è stato dimostrato che in molti domini l’accuratezza della previsione del classificatore ingenuo di Bayes si confronta bene con quella di altri algoritmi di apprendimento più complessi tra cui l’apprendimento dell’albero decisionale, l’apprendimento delle regole e gli algoritmi di apprendimento basati su istanze.
+L’ipotesi dei classificatori naive Bayes è chiaramente falsa in molti casi. Per questo motivo, l'apprendimento del classificatore naive Bayes è stato considerato poco affidabile ed è stato inizialmente utilizzato come base per il confronto con algoritmi più sofisticati. Nonostante questo scetticismo, negli anni passati è stato dimostrato che in molti domini l’accuratezza della previsione del classificatore naive Bayes si confronta bene con quella di altri algoritmi di apprendimento più complessi tra cui l’apprendimento dell’albero decisionale, l’apprendimento delle regole e gli algoritmi di apprendimento basati su istanze.
+
+Per calcolare un classificatore Naive Bayes è necessario stimare due insiemi di parametri:
+\begin{itemize}
+\item $\theta_{ijk} = \hat P (A_k = a_{ki} | v_j)$
+\item $\pi_j = \hat P ^(v_j)$
+\end{itemize}
+
+Se ciascun attributo può assumere I possibili valori discreti, e $|V| = J$, allora il numero di parametri da stimare è:
+
+\begin{itemize}
+\item nIH parametri di tiipo $\theta_{ijk}$, dove sono n(I-1)J sono indipendenti, poichè devono soddisfare l'equazione $1=\sum\limits_i \theta_{ijk}$
+\item J parametri di tipo $\pi_j $, dove solamente J-1 sono indipendenti, poichè devono soddisfare l'equazione $1=\sum\limits_j \pi_j $
+\end{itemize}
+
+Possiamo stimare questi parametri utilizzando la stima di massima verosimiglianza (ML), la quale è basata sulle frequenze relative dei differenti eventi all'interno dei dati. Tuttavia, per piccoli set di dati di training:
+
+\begin{itemize}
+\item La stima ML è basata su una sottostima della probabilità
+\item Quando una stima di probabilità è zero, questo termine di probabilità dominerà il classificatore di Bayes a causa della moltiplicazione dei termini nella formulazione del naive Bayes
+\end{itemize}
+
+Una stima alternativa è la \textbf{m-estimate di probabilità}: $\dfrac{N_c + mp}{N+m}$ dove:
+
+\begin{itemize}
+\item $\dfrac{N_c}{N}$ è la frequenza relativa corrispondente alla probabilità che noi desideriamo stimare
+\item p è la stima a priori della probabilità che vogliamo stimare
+\item m è una costante che determina quanto pesare p in relazione ai dati osservati
+\end{itemize}
+
+Tipicamente, $p=(\dfrac{1}{k}$ se un attributo ha k possibili valori. Il parametro m è chiamato dimensione equivalente del campione, poiché può essere interpretato come un aumento delle n osservazioni effettive con ulteriori m campioni virtuali distribuiti secondo p. La stima m della probabilità è “più fluida” della stima ML. Quando m=k e $p=(\dfrac{1}{k})$, possiamo ricavare la stima di Laplace:
+
+\begin{equation*}
+\dfrac{N_c+1}{N+k}
+\end{equation*}
+
+La \textbf{distribuzione multidimensionale} è una distribuzione discreta  che da la probabilità di scegliere una data raccolta di N elementi da un insieme di k elementi con ripetizioni e le probabilità di ciascuna scelta data da $p_1, \dots,p_k$.  Questi parametri sono i parametri della distribuzione multinomiale.
+
+La funzione di massa di probabilità della distribuzione multinomiale è:
+\begin{equation*}
+f(x_1,\dots,x_k;n,p_1,\dots,p_k) = Pr(X_1 = x_1 e \dots e X_k =x_k) =
+\begin{cases}
+		\dfrac{n!}{x_1!\dots x_k!} p_1^{x_1}\dots p_k^{x_k} \text{ quando }  \sum\limits_{i=1}^k x_i = n \\
+		0 \text{ altrimenti}
+	\end{cases}
+\end{equation*}
+per interi non negativi $x_1,\dots,x_k$.
+
+La \textbf{distribuzione Dirichllet} è il coniugato a priori dei parametri della distribuzione multinomiale. E' definita come:
+
+\begin{equation*}
+D(p| \alpha) = \dfrac{1}{B(\alpha)}\prod_{h=1}^k p_h^{a_h-1}
+\end{equation*}
+
+dove:
+
+\begin{itemize}
+\item $p = <p_1,\dots,p_k>$ rappresentano le variabili casuali, con $p_i \geq 0, \sum p_i =1$
+\item $\alpha = <\alpha_1, \dots, \alpha_k>$ rappresentano i parametri della distribuzione (tanti parametri quante le probabilità in p), con $\alpha_i>0$
+\end{itemize}
+
+$B(\alpha)$ è una costante normalizzata come: $\int_p D(p| \alpha) =1$. I parametri $\alpha_i-1$ possono essere interpretati come "peso dell'osservazione a priori" per gli eventi disciplinati da $p_i$, ovvero l'i-esimo elemento sarà osservato $\alpha_i-1$ volte. Dopo aver disegnato N elementi, se si ottengono $N_h$ elementi di tipo h, la posteriore bayesiana è una distribuzione di Dirichlet con parametri: $(m_1 + \alpha_1, \dots, m_k+a_k$. La stima MAP è:
+
+\begin{equation*}
+p_h = \dfrac{N_h + \alpha_h - 1}{N + \sum\limits_{h=1}^k \alpha_h - k}
+\end{equation*}
+
+Nel caso di attributi continui $A_k$, la distribuzione di probabilità si presume essere Gaussiana per ogni possibile valore target $v_j$. Pertanto, per addestrare una NBC dobbiamo stimare la media e la deviazione standard di ciascuna di queste gaussiane:
+
+\begin{itemize}
+\item $\mu_{kj} = E[A_k|v_i] $
+\item $\sigma_{k_j}^2 = E[(A_k - \mu_{kj})^2|v_j]$
+\end{itemize}
+
+Dobbiamo stimare tutti questi parametri in maniera indipendente. Si deve anche stimare i valori target a priori: $\pi_j = \hat P(v_j)$. Per questi parametri possiamo utilizzare la stima ML o la stima MAP. 
+
+Lo stimatore ML per $u_kj$ è:
+
+\begin{equation*}
+\hat \mu_{kj} = \dfrac{1}{\sum\limits_i \delta(v_j^i)} \sum\limits_i A_k^i \delta(v_j^i)
+\end{equation*} 
+
+dove l'apice i si riferisce all'i-esimo esempio di addestramento, e dove
+
+\begin{equation*}
+\delta(v_j^i) = 
+\begin{cases}
+		1 \text{ se il valore target dell'i-esimo esempio di training è } v_j \\
+		0 \text{ altrimenti}
+	\end{cases}
+\end{equation*}
+
+Lo stimatore ML per $\sigma_{kj}^2$ è:
+
+\begin{equation*}
+\sigma_{kj}^2 = \dfrac{1}{\sum\limits_i \delta(v_j^i)} (A_k^i - \hat \mu_{kj})^2 \delta(v_j^i)
+\end{equation*}
+
+Questo stimatore ML è distorto, quindi a volte viene utilizzato lo stimatore imparziale della varianza minima.
+
+\begin{equation*}
+\sigma_{kj}^2 = \dfrac{1}{(\sum\limits_i \delta(v_j^i))-1} (A_k^i - \hat \mu_{kj})^2 \delta(v_j^i)
+\end{equation*}
+
+Alcune proprietà del classificatore naivise bayessiano sono:
+\begin{itemize}
+\item \textbf{Incrementalità}: con ogni esempio di training, la priorità e la probabilità possono essere aggiornate dinamicamente: flessibile e resistente agli errori.
+\item \textbf{Combina conoscenza precedente e dati osservati}: probabilità a priori di un'ipotesi moltiplicata per la probabilità dell'ipotesi dati i dati di addestramento.
+\item \textbf{Ipotesi probabilistiche}: produce non solo una classificazione, ma una distribuzione di probabilità su tutte le classi.
+\item \textbf{Meta-classificazione}: i risultati di diversi classificatori possono essere combinati, ad esempio, moltiplicando le probabilità che tutti i classificatori prevedono per una determinata classe
+\end{itemize}
+
+Un classificatore naive bayes può essere utilizzato anche per la text categoriztion, all'interno del quale può essere effettuata una classificazione manaule (molto accurata se fatta da esperti e utilizzata per problemi di piccole dimensioni), oppure attraverso una classificazione automatica attraverso un documento. Quest'ultima viene utilizzata attraverso sistemi basati su regole codificate manualmente per sistemi commerciali che hanno dei complessi linguaggi di qeury, inoltre la precisione può essere elevata se una regola è stata attentamente perfezionata nel tempo da un esperto in materia anche esperto del linguaggio di query.
+
+Per classificare si utilizzano metodi dii apprendimento attraverso funzioni di assegnazione di documenti etichettati, i quali richiedono dati di traning classificati manualmente, ma i dati possono essere accumulati (e perfezionati) da dilettanti.
+
+Gli attributi sono posizioni di testo, i valori sono parole, quindi usando un Naive Bayes Classifiers per classificare testi si ha:
+
+\begin{equation*}
+c_{NB} = argmax_{c_j\in C} P(c_j) \prod_i P(x_i|c_j)
+\end{equation*}
+
+Assumendo che la classificazione è indipendente dalle posizioni delle parole, si potrebbero utilizzare gli stessi parametri per le stesse posizioni e ottenere quindi un modello bag of words.
+
+\newpage
+
+\section{I modelli di regressione}
+
+Con un modello di regressione si esprime la relazione funzionale esistente tra variabili.
+In particolare, tale relazione funzionale lega una variabile aleatoria quantitativa (variabile dipendente o risposta) a una (o più) variabili aleatorie quantitative e/o discrete (variabili indipendenti o regressori). Si dispone di n osservazioni per ognuna delle quali si conoscono i valori assunti dai regressori e dalla risposta (training set supervisionato).
+
+Nei \textbf{modelli di regressione con errore additivo} si ha una variabile Y dipendente, un insieme di variabili indipendenti o regressori $X_1,\dots,X_p$ e una funzione $Y = f(X_1,\dots,X_p)+\epsilon$, composta da una componente deterministica osservabile $f(X_1,\dots,X_p)$ e $\epsilon$ la componente stocastica non osservabile. 
+
+Nei modelli di regressione è fondamentale l'indipendenza dei regressori: $\epsilon_i \bot X_l,\dots,X_p$, inoltre indicando con:
+\begin{itemize}
+\item $E(\epsilon_i) = 0$ il valore atteso nullo (effetto non sistematico)
+\item $Var(\epsilon_i) = \delta^2$ omoschedasticità
+\item $Cov(\epsilon_i,\epsilon_j)=0$ incorrelazione tra gli errori
+\end{itemize}
+
+si ottiene un'ipotesi del secondo ordine: $E(Y_i | X_{li}, \dots, X_{pi}) = f(X_{li},\dots,X_{pi})$ e $Var(Y_i |  X_{li}, \dots, X_{pi}) = \sigma^2$
+
+La funzione f esprime la forma del legame funzionale tra Y e $X_1,\dots,X_p$. All'interno dei modelli parametrici, tale forma è nota, ma dipende da un numero finito di parametri. Mentre nei modelli non parametrici tale forma non è nota.
+
+Si definiscono modelli di regressione semplice quando si prende in considerazione una sola variabile indipendente, ad esempio: $ Y = f(X; \beta) +\epsilon$. In questo caso il regressore può essere quantitativo o qualitativo. Quando si prende in considerazione una sola variabile indipendente e f assume la forma di una retta con $\beta = (\beta_0,\beta_1)$, i modelli di regressione prendono il nome di modelli di regressione lineare semplice e assumono una forma: $Y = \beta_0 + \beta_1 X + \epsilon$.
+
+All'interno dei modelli di regressione lineare semplice si assume che:
+\begin{itemize}
+\item $E(\epsilon_i) = 0$ il valore atteso nullo (effetto non sistematico)
+\item $Var(\epsilon_i) = \delta^2$ omoschedasticità
+\item $Cov(\epsilon_i,\epsilon_j)=0$ incorrelazione tra gli errori 
+\item La variabile X è nota senza errore (non stocastica) ed è osservata per almeno due valori distinti.
+\end{itemize}
+
+quindi abbiamo: $E(Y_i | X_{li},\dots,X_{pi}) = \beta_0 + \beta_l X_{li}$.
+
+Il parametro $\beta_1$ esprimere la variazione nel valore atteso condizionato di Y indotta da una variazione unitaria nel regressore. $\beta_11$ dice quanto varia in media Y per variazione unitaria della X. Il modello è detto lineare in X perchè l'entità dii questa variazione non dipende dal particolare valore assunto da X.
+
+Per stimare i parametri si può usare il metodo dei minimi quadrati: $D(\beta_0,\beta_1) = \sum\limits_i (y_i - \beta_0 - \beta_1x_1)^2$. Questa è una funzione quadratica che ammette  un solo punto di minimo, ottenuto derivando rispetto $\beta_0$ e a $\beta_1$ e ponendo tali derivate pari a zero. Si ottiene quindi il seguente sistema di equazioni normali:
+\begin{equation*}
+\begin{cases}
+		\sum\limits_i(y_i-\beta_0 - \beta_1x_1) = 0\\
+		\sum\limits_i(y_i-\beta_0 - \beta_1x_1)x_i = 0
+	\end{cases}
+\end{equation*}
+
+La cui soluzione non è altro che una coppia di punti:
+
+\begin{equation*}
+\begin{cases}
+		\hat \beta_1 = \dfrac{\sum\limits_i(x_i-\bar x)(y_i - \bar y)}{\sum\limits_i(x_i-\bar x)^2}\\
+		\hat \beta_0 = \bar y - \hat \beta_1 \bar x
+	\end{cases}
+\end{equation*}
+
+La retta dei minimi quadrati ha svariate proprietà:
+\begin{itemize}
+\item E' unica poichè è unico il minimo della funzione $D(\beta_0,\beta_1)$
+\item Passa per il punto di coordinate medie $(\bar x, \bar y)$, ottenute tramite $\hat \beta_0 = \bar y - \hat \beta_1 \bar x$ 
+\end{itemize} 
+
 \end{document}
 
 
