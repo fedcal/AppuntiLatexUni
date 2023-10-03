@@ -1300,8 +1300,100 @@ La cui soluzione non è altro che una coppia di punti:
 La retta dei minimi quadrati ha svariate proprietà:
 \begin{itemize}
 \item E' unica poichè è unico il minimo della funzione $D(\beta_0,\beta_1)$
-\item Passa per il punto di coordinate medie $(\bar x, \bar y)$, ottenute tramite $\hat \beta_0 = \bar y - \hat \beta_1 \bar x$ 
+\item Passa per il punto di coordinate medie $(\bar x, \bar y)$, ottenute tramite $\hat \beta_0 = \bar y - \hat \beta_1 \bar x$
+\item la media dei valori di y previsti coincide con la media dei valori di y osservati
+\item i residui $\hat \epsilon_i = y_i - \hat y_i = y_i - \hat \beta_0 - \hat \beta_1 x_i$ hanno media nulla e non sono correlati coi valori del regressore
 \end{itemize} 
+
+Sotto le ipotesi classiche del modello di regressione lineare semplice, gli stimatori dei minimi quadrati $\hat \beta_0$ e $\hat \beta_1$ sono lineari e non distorti e a varianza uniformemente minima nella classe degli stimatori lineari e non distorti. Per il teorema di GGauss-Markov si ha quindi:
+\begin{itemize}
+\item $E(\hat \beta_0) = \beta_0$
+\item $E(\hat \beta_1) = \beta_1$ 
+\item $Var(\hat \beta_0) =  \dfrac{\sigma^2}{n}\Bigl(1+\dfrac{n \bar x^2}{\sum\limits_i(x_i-\bar x)^2}\Bigr)$ 
+\item $Var(\hat \beta_1) = \dfrac{\sigma^2}{\sum\limits_i (x_i- \bar x)^2}$ 
+\end{itemize}
+
+Si scompone la devianza :
+
+\begin{equation*}
+\sum\limits_i (y_i - \bar y)^2 = \sum\limits_i(y_i - \hat y_i)^2 + \sum\limits_i(\hat y_i - \bar y)^2
+\end{equation*}
+
+ nelle due componenti:
+ 
+ \begin{itemize}
+ \item $\sum\limits_i(y_i - \hat y_i)^2$ che corrisponde alla devianza di dispersione
+ \item $ \sum\limits_i(\hat y_i - \bar y)^2$ che corrisponde alla devianza di regressione
+ \end{itemize}
+ 
+ da qui si ottiene quindi:
+ 
+ \begin{equation*}
+R^2 = 1 - \dfrac{\sum\limits_i(y_i - \hat y_i)^2}{\sum\limits_i (y_i - \bar y)^2} 
+\end{equation*}
+
+Se alle ipotesi classiche si affianca anche l'ipotesi di normalità distributiva del termine di errore, è possibile costruire intervalli di confidenza e sottoporre a verifica ipotesi sul valore dei parametri. L'ipotesi interessante è $H_0: \beta_1 = 0$, la quale esprime l'assenza di una relazione lineare tra Y e X. Questa ipotesi può essere valutata ricorrendo a due test equivalenti.
+
+Il \textbf{T-test}:
+
+\begin{equation*}
+t = \dfrac{\hat \beta_1}{\sqrt{\dfrac{s^2}{\sum\limits_i(x_i - \bar x)^2}}}
+\end{equation*}
+
+In questo test, sotto $H0$ la statistica si distribuisce come una t di Student con n - 2 gradi di libertà.
+
+Il \textbf{Test F}:
+
+\begin{equation*}
+F = (n-2) \dfrac{R^2}{1-R^2}
+\end{equation*}
+
+Attraverso tale test l'ipotesi $H_0$ si distribuisce come una F di Snedecor-Fisher con 1 e n-2 gradi di libertà.
+
+Ulteriori indicazioni sull'inadeguatezza del modello lineare semplice sono fornite dalle cosiddette \textbf{diagnostiche grafiche}. Queste sono molteplici e si riconducono tutte più o meno esplicitamente all'esame all'esame del comportamento dei residui $\hat \epsilon_i = y_i -\hat y_i$  che ci servono come surrogato degli errori $\epsilon_i$ che non sono osservabili.
+
+In questi casi si potrebbe utilizzare il \textbf{diagramma dii Anscombe}, ovvero il diagramma dei residui rispetto ai valori interpolati, che idealmente dovrebbe presentare una disposizione del tutto casuale dei punti, se il modello selezionato è in effetti valido.
+
+Un altro diagramma è il cosiddetto \textbf{diagramma quantile-quantile}, il quale verifica l'assunto di normalità per la distribuzione degli $\epsilon_i$.  Sull'asse delle ordinate sono riportati i valori di $\hat \epsilon_i$, opportunamente standardizzati e ordinati in senso crescente, mentre sull'asse delle ascisse troviamo i corrispondenti valori attesi sotto l'ipotesi di normalità, eventualmente approssimati per semplicità di calcolo. Se l'ipotesi di normalità è valida, ci aspettiamo che i punti osservati si dispongano lungo la bisettrice del primo e terzo quadrante.
+
+Quando ci troviamo ad utilizzare modelli di regressione lineare semplici con un regressore qualitativo, possiamo ricodificare la variabile qualitativa (non numerica) usando una o più variabili indicatrici (dummies). 
+
+Una \textbf{variabile indicatrice $I_E$} è una variabile che assume i valori 1 o 0, a seconda che una certa condizione E sia o non sia verificata. In particolare:
+
+\begin{itemize}
+\item $I_E = 0$ se la condizione E non è verificata
+\item $I_E = 1$ se la condizione E è verificata
+\end{itemize}
+
+Prendiamo in esame una variabile X qualitativa dicotomica $X \in {A,B}$. Si consideri la condizione X = A. La variabile indicatrice $I_A$ sarà uguale a 1 se X=A altrimenti sarà uguale a 0. Con una variabile indicatrice è possibile codificare numericamente una variabile dicotomica. In questo caso il modello di regressione lineare diventa semplice:
+
+\begin{equation*}
+Y = \beta_0 + \beta_1 I_A +\epsilon
+\end{equation*}
+
+Da questa equazione si ottiene:
+
+\begin{itemize}
+\item $ Y = \beta_0 + \epsilon$ se $X \not = A$ allora $E(Y_i|X_i = B) = \beta_0$
+\item $ Y = \beta_0 + \beta_1 + \epsilon$ se $X  = A$ allora $E(Y_i|X_i = B) = \beta_0 + \beta_1$
+\end{itemize}
+
+Il parametro $\beta_1$ esprime la differenza tra valore atteso condizionato di Y quando X = A e il valore atteso di Y quando X = B. Quindi $\beta_1$ ci dice quanto varia in media Y al variare di X.
+
+I parametri possono essere stimati attraverso il metodo dei minimi quadrati:
+
+\begin{equation*}
+D(\beta_0,\beta_1) = \sum\limits_i(y_i - \beta_0 - \beta_1 I_{Ai})^2
+\end{equation*}
+
+derivando rispetto a $\beta_0$ e a $\beta_1$ si ottiene il sistema di equazioni normali
+
+\begin{equation*}
+\begin{cases}
+		\sum\limits_i(y_i-\beta_0 - \beta_1I_{Ai}) = 0\\
+		\sum\limits_i(y_i-\beta_0 - \beta_1I_{Ai})I_{Ai} = 0
+	\end{cases}
+\end{equation*}
 
 \end{document}
 

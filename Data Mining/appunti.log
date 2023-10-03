@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.25 (MiKTeX 23.4) (preloaded format=pdflatex 2023.9.4)  2 OCT 2023 18:24
+This is pdfTeX, Version 3.141592653-2.6-1.40.25 (MiKTeX 23.4) (preloaded format=pdflatex 2023.9.4)  3 OCT 2023 21:33
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -627,7 +627,7 @@ Package pdftex.def Info: different-probabilistic-method.png  used on input line
  1004.
 (pdftex.def)             Requested size: 432.48672pt x 254.137pt.
  [39 <./different-probabilistic-method.png>] [40] [41] [42] [43] [44] [45] [46]
- [47]
+ [47] [48] [49]
 
 enddocument/afterlastpage: lastpage setting LastPage.
 (appunti.aux)
@@ -635,9 +635,9 @@ Package rerunfilecheck Info: File `appunti.out' has not changed.
 (rerunfilecheck)             Checksum: C46E3C94D9A8E9A7E599236A79044AAC;4009.
  ) 
 Here is how much of TeX's memory you used:
- 13405 strings out of 476331
- 219674 string characters out of 5797581
- 1863660 words of memory out of 5000000
+ 13407 strings out of 476331
+ 219688 string characters out of 5797581
+ 1864660 words of memory out of 5000000
  33571 multiletter control sequences out of 15000+600000
  521190 words of font info for 66 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
@@ -657,9 +657,9 @@ ts/cm/cmr7.pfb><C:/Program Files/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy10.p
 fb><C:/Program Files/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy5.pfb><C:/Progra
 m Files/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy7.pfb><C:/Program Files/MiKTe
 X/fonts/type1/public/amsfonts/cm/cmti10.pfb>
-Output written on appunti.pdf (47 pages, 942837 bytes).
+Output written on appunti.pdf (49 pages, 950805 bytes).
 PDF statistics:
- 450 PDF objects out of 1000 (max. 8388607)
- 81 named destinations out of 1000 (max. 500000)
+ 459 PDF objects out of 1000 (max. 8388607)
+ 83 named destinations out of 1000 (max. 500000)
  225 words of extra memory for PDF output out of 10000 (max. 10000000)
 
