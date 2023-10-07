@@ -1395,6 +1395,148 @@ derivando rispetto a $\beta_0$ e a $\beta_1$ si ottiene il sistema di equazioni 
 	\end{cases}
 \end{equation*}
 
+Possiamo riscrivere la seconda equazione come:
+\begin{equation*}
+\sum\limits_{x_i=A} (y_i - \beta_0 - \beta_1 *1)*1 + \sum\limits_{x_i=B} (y_i - \beta_0 - \beta_1 *0)*0 = \sum\limits_{x_i=A} (y_i - \beta_0 - \beta_1 )
+\end{equation*}
+
+Indicando con $n_A$ il numero di unità statistiche per le quali $x_i = A$, possiamo ricavare:
+
+\begin{equation*}
+\beta_1 = \dfrac{\sum\limits_{x_i = A}y_i}{n_A} - \beta_0
+\end{equation*}
+
+Sostituendo nella prima equazione normale l'espressione per $\beta_1$ appena trovata e procedendo in modo analogo si ottiene:
+
+\begin{equation*}
+\sum_f [ y_i - \beta_0 - (\bar y_A - \beta_0)I_{Ai}] = \sum\limits_{x_i=A}(y_i - \bar y_A)+ \sum\limits_{x_i=B}(y_i - \beta_0)
+\end{equation*}
+
+da qui si ricava $\hat \beta_0 = \dfrac{\sum\limits_{x_i=B}y_i}{n_B} = \bar y_B$  e quindi $\hat \beta_1 = \bar y_A - \bar y_B$. Il valore previsto dal modello è dunque pari a $\hat y_i = \bar y_B + (\bar y_A - \bar y_B)I{Ai}$, ovvero:
+
+\begin{itemize}
+\item $X_i = A \rightarrow \hat y_i = \bar y_A$
+\item $X_i = B \rightarrow \hat y_i = \bar y_B$
+\end{itemize}
+
+Anche in questo caso vali il teorema di Gauss-Markov. Sotto le ipotesi classiche del modello di regressione lineare semplice, gli stimatori ottenuti sono lineari, non distorti e a varianza uniformemente minima nella classe degli stimatori lineari e non distorti. Si ha quindi:
+
+\begin{itemize}
+\item $E(\hat \beta_0) = \beta_0$
+\item $E(\hat \beta_1) = \beta_1$
+\item $Var(\hat \beta_0)= \dfrac{\sigma^2}{n_{\beta}}$
+\item $Var(\hat \beta_1) = \sigma^2 \biggr [ \dfrac{1}{n_A} + \dfrac{1}{n_{B}}\biggl]$
+\end{itemize}
+
+Inoltre $E(Y_i - \hat Y_i) = 0$ quindi $Var(Y_i - \hat Y_i =  \sigma^2 \Biggr( 1- \dfrac{1}{n} - \dfrac{n \biggr( I_{Ai}-\dfrac{n_A}{n} \biggl)^2}{n_A n_B} \Biggl )$
+
+Possiamo scomporre la va devianza :$\sum\limits_i(y_i - \bar y)^2 = \sum\limits_i(y_i - \hat y_i)^2$ in:
+\begin{itemize}
+\item Devianza entro $ \sum\limits_{i} (y_i - \hat y_i)^2 = \sum\limits_{x_i = A} (y_i - \bar y_A)^2 + \sum\limits_{x_i=B} ( y_i - \bar y_B)^2 $
+\item Devianza tra $\sum\limits_i(\hat y_i - \bar y)^2 = n_A ( \bar y_A - \bar y)^2 + n_B(\bar y_B - \bar y)^2$
+\end{itemize} 
+
+Da qui otteniamo quindi $R^2 = 1 - \dfrac{\sum\limits_i (y_i - \hat y_i)^2}{\sum\limits_i (y_i - \bar y)^2} = \eta^2$
+
+Per valutare la bontà di adattamento possiamo utilizzare il coefficiente di correlazione di Fisher per due gruppi $\eta^2 = \dfrac{n_A ( \bar y_A - \bar y)^2 + n_B ( \bar y_B - \bar y)^2}{\sum\limits_{j=1}^n(y_i- \bar y)^2}$. In questo caso il numeratore calcola devianza fra due gruppi, mentre il denominatore calcola devianza totale.
+
+Qualora iniziassimo a considerare gli aspetti inferenziali, accanto alle ipotesi classiche si affianca l'ipotesi di normalità distributiva del termine di errore. Anche in questo caso si possono costruire intervalli di confidenza e sottoporre a verifica ipotesi sul valore dei parametri. In particolare si considera l'ipotesi $H_0: \beta_1 =0$ che esprime l'assenza di dipendenza in media tra Y e X.
+
+Questa ipotesi può essere testata attraverso due test equivalenti. Il primo è il T-test per il confronto fra due medie:
+
+\begin{equation*}
+t = \dfrac{\hat \beta_1}{\sqrt{S^2 \Biggr [  \dfrac{1}{n_A} + \dfrac{1}{n_B}  \Biggl ]}} =  \dfrac{\bar y_A - \bar y_B}{\sqrt{S^2 \Biggr [  \dfrac{1}{n_A} + \dfrac{1}{n_B}  \Biggl ]}} 
+\end{equation*}
+
+Sotto l'ipotesi $H_0$ tale statistica si distribuisce come una t di Student con n-2 gradi di libertà.
+
+Un altro tipo di te è il test F di Anova:
+
+\begin{equation*}
+F = (n-2) \dfrac{R^2}{1-R^2} = \dfrac{n_A (\bar y_A - \bar y)^2 + n_B (\bar y_B - \bar y)^2}{\dfrac{(n_A - 1)s_A^2 + (n_B - 1)s_B^2}{n_A +n_B - 2}}
+\end{equation*}
+
+Sotto $H_0$ il test si distribuisce come una F di Snedecor-Fisher con 1 e n-2 gradi di libertà. 
+
+Il modello di regressione lineare semplice può essere esteso in due modi attraverso:
+
+\begin{itemize}
+\item una regressione polinomiale 
+\item una regressione lineare multipla
+\end{itemize}
+
+Nella prima si prende in considerazione una sola variabile indipendente e f assume la forma di un polinomio di grado p con $\beta = (\beta_0, \beta_1, \beta_2,\dots, \beta_p)$ e quindi $Y= \beta_0 + \beta_1 X + \beta_2 X^2 + \dots + \beta_p X^p + \epsilon$. Questo modello è lineare nei parametri ma non lineare nella variabile.  Nel secondo si prendono in considerazione p variabili indipendenti $X_1,X_2,\dots, X_p$ e f assume la forma di una equazione lineare con $\beta = (\beta_0, \beta_1,\beta_2,\dots, \beta_p)$, avremo $Y = \beta_0 + \beta_1X_1 + \beta_2 X_2+ \dots + \beta_p X_p + \epsilon$. Questo modello è lineare nei parametri, additivo e lineare nei regressori.
+
+Per quanto riguardo le ipotesi classiche per il modello di regressione polinomiale sono:
+
+\begin{itemize}
+\item $E( \varepsilon_i)=0$ valore atteso nullo (effetto non sistematico dell'errore).
+\item $Var(\varepsilon_i) = \sigma^2$ omoschedasticità
+\item  $Cov(\varepsilon_i,\varepsilon_j) = 0$ incorrelazione tra gli errori
+\item La variabile X è nota senza errore (non stocastica) ed è osservata per almeno p+1 valori distinti
+\end{itemize}
+
+quindi ricaviamo che: $E(Y_i|X_i) = \beta_0 + \beta_1 X_i + \beta_2 X_i^2 + \dots + \beta_pX_i^p$. I parametri $\beta_i$ esprimono la variazione nel valore atteso condizionato di Y (espressa nella stessa unità di misura della X) indotta da una variazione unitaria nel regressore. Poichè questo modello non è più lineare in X, tale variazione dipenderà dal particolare valore di X in corrispondenza del quale viene calcolata.
+
+Per quanto riguarda il modello di regressione multipla le ipotesi classiche estese sono:
+
+\begin{itemize}
+\item $E( \varepsilon_i)=0$ valore atteso nullo (effetto non sistematico dell'errore).
+\item $Var(\varepsilon_i) = \sigma^2$ omoschedasticità
+\item  $Cov(\varepsilon_i,\varepsilon_j) = 0$ incorrelazione tra gli errori
+\item La variabile X è nota senza errore (non stocastica) ed è osservata per almeno p+1 valori distinti
+\end{itemize}
+
+Il j-esimo parametro $\beta_j$ esprime la variazione nel valore atteso condizionato di Y indotta da una variazione unitaria nel j-esimo regressore, fermo restando il valore degli altri regressori. $\beta_j$ esprime quanto varia in media Y per variazione unitaria della $X_j$ a parità degli altri regressori. Il modello è detto lineare nei regressori perchè l'entità di questa variazione non dipende dal particolare valore assunto dal generico regressore $X_j$. Il modello è detto adattivo nei regressori perchè l'entità della variazione indotta dal generico regressore $X_j$ non dipende dai particolari valori assunti dagli altri regressori.
+
+Un caso particolare del modello di regressione multipla consiste nel regressore qualitativo poliatomico, nel quale le variabili indicatrici possono essere decodificate numericamente. Generalmente una variabile qualitativa a k modalità può essere codificata numericamente con k-1 variabili indicatrici.
+
+\subsection{Notazione matriciale}
+
+Tutti i modelli di regressione lineare semplice, i modelli di regressione polinomiale e i modelli di regressione lineare multipla sono lineari nei parametri. Pertanto, ricorrendo alla notazione matriciale è possibile esprimere i tre tipi di modelli usando una formulazione comune: $Y = X^T \beta + \varepsilon$, dove:
+
+\begin{itemize}
+\item X è il vettore della colonna dei regressori
+\item $\beta$ è il vettore della colonna dei coefficienti
+\end{itemize}
+
+Quindi avremo:
+
+\begin{itemize}
+\item Per la regressione lineare semplice: $X^T = [1,X]$ e $\beta^T = [ \beta_0, \beta_1 ]$
+\item Per la regressione polinomiale: $X^T = [1,X,X^2,\dots,X^p]$ e $\beta^T = [\beta_0,\beta_1,\dots,\beta_p]$
+\item Per la regressione lineare multipla: $X^T = [1,X_1,X_2,\dots,X_p]$ e $\beta^T = [\beta_0,\beta_1,\dots, \beta_p]$ 
+\end{itemize}
+
+\subsection{Regressione con funzioni a gradini}
+
+Il modo più semplice per approssimare una qualunque funzione y=f(x), con $x \in \Re$ è quello di usare una funzione approssimante a gradini, cioè una funzione costante a tratti su intervalli. Per farlo è necessario:
+\begin{itemize}
+\item una \textbf{partizione} di $\Re$ composta da J elementi ${R_1, \dots, R_j,\dots, R_J}$
+\item Un insieme di J valori reali ${c_1,\dots,c_j,\dots,c_J}$ ognuno dei quali associato a un elemento della partizione ${R_1, \dots, R_j,\dots, R_J}$.
+\end{itemize}
+
+Data la partizione ${R_1, \dots, R_j,\dots, R_J}$ e i valori ${c_1,\dots,c_j,\dots,c_J}$ , ricorrendo a opportune funzioni indicatrici, una generica funzione a gradini può essere rappresentata analiticamente come:
+
+\begin{equation*}
+\hat f(x) = c_1 I(x \in R_1) + \dots + c_j I(x \in R_j) + \dots + c_J I (x \in R_J) = \sum\limits_{j=1}^J c_j I (x \in R_j) 
+\end{equation*}
+
+dove
+
+\begin{equation*}
+I(x \in R_j) = 
+\begin{cases}
+		1 \text{ se } x \in R_j \\
+		0 \text{ altrimenti}
+	\end{cases}
+\end{equation*}
+
+Il numero e le dimensioni degli intervalli ${R_1, \dots, R_j,\dots, R_J}$ determinano la complessità della funzione costante a tratti e la qualità con cui essa approssima f(x). La qualità dell'approssimazione aumenta se, a parità di numero di intervalli, si posizionano intervalli più piccoli la dove f(x) presenta valori della derivata prima più elevati in valore assoluto. Inoltre la qualità dell'approssimazione aumenta se aumenta il numero di intervalli.
+
+\subsubsection{Funzioni costanti a tratti per la regressione semplice}
+
+In questo caso si ha una variabile dipendente continua Y e una variabile indipendente a valori in $\Re$ X. La funzione che sivuole approssimare è rappresentata dal valore atteso condizionato: $f^*(x) = E[Y | X = x] \; \forall x \in \Re$
 \end{document}
 
 

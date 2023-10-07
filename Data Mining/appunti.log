@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.25 (MiKTeX 23.4) (preloaded format=pdflatex 2023.9.4)  3 OCT 2023 21:33
+This is pdfTeX, Version 3.141592653-2.6-1.40.25 (MiKTeX 23.4) (preloaded format=pdflatex 2023.9.4)  7 OCT 2023 21:32
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -549,24 +549,24 @@ File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 ) [1
 
 {C:/Users/fedca/AppData/Local/MiKTeX/fonts/map/pdftex/pdftex.map}] (appunti.toc
-)
+ [2])
 \tf@toc=\write4
 \openout4 = `appunti.toc'.
 
- [2] [3]
-<kdd-process.png, id=142, 853.1875pt x 482.80376pt>
+ [3] [4]
+<kdd-process.png, id=161, 853.1875pt x 482.80376pt>
 File: kdd-process.png Graphic file (type png)
 <use kdd-process.png>
 Package pdftex.def Info: kdd-process.png  used on input line 118.
 (pdftex.def)             Requested size: 341.43306pt x 193.21385pt.
- [4 <./kdd-process.png>]
-<crisp-dm-model.jpg, id=150, 637.38126pt x 603.25375pt>
+ [5 <./kdd-process.png>]
+<crisp-dm-model.jpg, id=169, 637.38126pt x 603.25375pt>
 File: crisp-dm-model.jpg Graphic file (type jpg)
 <use crisp-dm-model.jpg>
 Package pdftex.def Info: crisp-dm-model.jpg  used on input line 133.
 (pdftex.def)             Requested size: 216.2302pt x 204.65251pt.
- [5] [6 <./crisp-dm-model.jpg>] [7] [8] [9] [10] [11] [12] [13]
-[14] [15]
+ [6] [7 <./crisp-dm-model.jpg>] [8] [9] [10] [11] [12] [13]
+[14] [15] [16]
 LaTeX Font Info:    Trying to load font information for OMS+cmr on input line 3
 96.
  (C:\Program Files\MiKTeX\tex/latex/base\omscmr.fd
@@ -574,71 +574,71 @@ File: omscmr.fd 2022/07/10 v2.5l Standard LaTeX font definitions
 )
 LaTeX Font Info:    Font shape `OMS/cmr/m/n' in size <10> not available
 (Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 396.
- [16] [17] [18]
-[19] [20] [21]
-<compact-representation-vs.png, id=234, 806.01125pt x 538.01pt>
+ [17] [18]
+[19] [20] [21] [22]
+<compact-representation-vs.png, id=253, 806.01125pt x 538.01pt>
 File: compact-representation-vs.png Graphic file (type png)
 <use compact-representation-vs.png>
 Package pdftex.def Info: compact-representation-vs.png  used on input line 527.
 
 (pdftex.def)             Requested size: 216.23619pt x 144.33698pt.
- [22 <./compact-representation-vs.png>]
-<compact-representation-error.png, id=241, 523.9575pt x 372.39125pt>
+ [23 <./compact-representation-vs.png>]
+<compact-representation-error.png, id=260, 523.9575pt x 372.39125pt>
 File: compact-representation-error.png Graphic file (type png)
 <use compact-representation-error.png>
 Package pdftex.def Info: compact-representation-error.png  used on input line 5
 58.
 (pdftex.def)             Requested size: 216.23106pt x 153.68147pt.
- [23 <./compact-representation-error.png>]
+ [24 <./compact-representation-error.png>]
 Overfull \hbox (5.62093pt too wide) in paragraph at lines 585--586
 []\OT1/cmr/m/n/10 Vi sono in-oltre par-ti-co-lari al-go-ritmi di cop-er-tura se
 -quen-ziale che per-for-mano ripetu-ta-mente l'algoritmo di candidate-elimintai
 on
  []
 
-[24]
-<seperate-and-conquer-allgoritmo.png, id=251, 782.17218pt x 421.575pt>
+[25]
+<seperate-and-conquer-allgoritmo.png, id=271, 782.17218pt x 421.575pt>
 File: seperate-and-conquer-allgoritmo.png Graphic file (type png)
 <use seperate-and-conquer-allgoritmo.png>
 Package pdftex.def Info: seperate-and-conquer-allgoritmo.png  used on input lin
 e 614.
 (pdftex.def)             Requested size: 432.48755pt x 233.10204pt.
- [25]
-<seperate-and-conquer-allgoritmo2.png, id=257, 582.67688pt x 292.84406pt>
+ [26]
+<seperate-and-conquer-allgoritmo2.png, id=276, 582.67688pt x 292.84406pt>
 File: seperate-and-conquer-allgoritmo2.png Graphic file (type png)
 <use seperate-and-conquer-allgoritmo2.png>
 Package pdftex.def Info: seperate-and-conquer-allgoritmo2.png  used on input li
 ne 628.
 (pdftex.def)             Requested size: 432.49pt x 217.36253pt.
- [26 <./seperate-and-conquer-allgoritmo.png>]
-<seperate-and-conquer-allgoritmo3.png, id=263, 779.16093pt x 491.58656pt>
+ [27 <./seperate-and-conquer-allgoritmo.png>]
+<seperate-and-conquer-allgoritmo3.png, id=282, 779.16093pt x 491.58656pt>
 File: seperate-and-conquer-allgoritmo3.png Graphic file (type png)
 <use seperate-and-conquer-allgoritmo3.png>
 Package pdftex.def Info: seperate-and-conquer-allgoritmo3.png  used on input li
 ne 636.
 (pdftex.def)             Requested size: 432.4751pt x 272.85626pt.
- [27 <./seperate-and-conquer-allgoritmo2.png> <./seperate-and-conquer-allgoritm
-o3.png>] [28] [29]
-[30] [31] [32] [33] [34] [35] [36] [37] [38]
-<different-probabilistic-method.png, id=317, 717.43031pt x 421.575pt>
+ [28 <./seperate-and-conquer-allgoritmo2.png> <./seperate-and-conquer-allgoritm
+o3.png>] [29] [30]
+[31] [32] [33] [34] [35] [36] [37] [38] [39]
+<different-probabilistic-method.png, id=336, 717.43031pt x 421.575pt>
 File: different-probabilistic-method.png Graphic file (type png)
 <use different-probabilistic-method.png>
 Package pdftex.def Info: different-probabilistic-method.png  used on input line
  1004.
 (pdftex.def)             Requested size: 432.48672pt x 254.137pt.
- [39 <./different-probabilistic-method.png>] [40] [41] [42] [43] [44] [45] [46]
- [47] [48] [49]
-
+ [40 <./different-probabilistic-method.png>] [41] [42] [43] [44] [45] [46] [47]
+ [48] [49] [50] [51] [52] [53]
+[54] 
 enddocument/afterlastpage: lastpage setting LastPage.
 (appunti.aux)
 Package rerunfilecheck Info: File `appunti.out' has not changed.
-(rerunfilecheck)             Checksum: C46E3C94D9A8E9A7E599236A79044AAC;4009.
+(rerunfilecheck)             Checksum: 9301F403B46D10167B7F8FE4E068D02C;4769.
  ) 
 Here is how much of TeX's memory you used:
- 13407 strings out of 476331
- 219688 string characters out of 5797581
- 1864660 words of memory out of 5000000
- 33571 multiletter control sequences out of 15000+600000
+ 13418 strings out of 476331
+ 219823 string characters out of 5797581
+ 1867660 words of memory out of 5000000
+ 33574 multiletter control sequences out of 15000+600000
  521190 words of font info for 66 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  75i,15n,76p,1366b,555s stack positions out of 10000i,1000n,20000p,200000b,200000s
@@ -657,9 +657,9 @@ ts/cm/cmr7.pfb><C:/Program Files/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy10.p
 fb><C:/Program Files/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy5.pfb><C:/Progra
 m Files/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy7.pfb><C:/Program Files/MiKTe
 X/fonts/type1/public/amsfonts/cm/cmti10.pfb>
-Output written on appunti.pdf (49 pages, 950805 bytes).
+Output written on appunti.pdf (54 pages, 970115 bytes).
 PDF statistics:
- 459 PDF objects out of 1000 (max. 8388607)
- 83 named destinations out of 1000 (max. 500000)
- 225 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 496 PDF objects out of 1000 (max. 8388607)
+ 91 named destinations out of 1000 (max. 500000)
+ 249 words of extra memory for PDF output out of 10000 (max. 10000000)
 
