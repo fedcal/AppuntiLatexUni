@@ -1545,9 +1545,59 @@ Per minimizzare l'errore empirico di previsione mediante una funzione costante a
 \item i valori ottimali per i parametri $c_j$ associati agli elementi di tale partizione
 \end{itemize}
 
-Quando la partizione di $\Re$ è nota, $EEP_T(f)$ deve essere minimizzato solo rispetto ai J parametri $c_j$. Si può dimostrare che se $f(x) =  \sum\limits_{j=1}^J c_jI (x \iin R_j)$. allora indipendentemente dalla forma degli elementi della partizione in cui ciascuna sommatoria si riferisce alle sole unità che presentano valore di x appartenente al corrispondente intervallo della partizione.
+Quando la partizione di $\Re$ è nota, $EEP_T(f)$ deve essere minimizzato solo rispetto ai J parametri $c_j$. Si può dimostrare che se $f(x) =  \sum\limits_{j=1}^J c_jI (x \in R_j)$. allora indipendentemente dalla forma degli elementi della partizione in cui ciascuna sommatoria si riferisce alle sole unità che presentano valore di x appartenente al corrispondente intervallo della partizione.
 
 Quando invece la partizione di $\Re$ non è nota $EEP_T(f)$ deve essere minimizzato congiuntamente sia rispetto alla partizione che ai parametri. In questo caso non esiste una soluzione analitica e una ricerca esaustiva tra tutte le possibili partizioni risulterebbe computazionalmente troppo complessa.
+
+\subsubsection{Alberi di regressione}
+
+$EEP_T(f)$ può essere minimizzato ricorrendo a una procedura ricorsiva per approssimazioni successive:
+\begin{itemize}
+\item Passo 1: si considera la partizione degenere composta da un solo elemento, che coincide con l'intero insieme $\Re$.
+\item Passo 2: si individua una nuova partizione composta da J elementi, suddividendo in due parti uno degli elementi della partizione ottenuta al passo precedente in modo che: $EEP_T(f^{(J-1)})>EEP_T(f^{(J)})$
+\end{itemize}
+
+Le funzioni costanti a tratti ottenute ricorrendo a questo tipo di suddivisioni possono essere rappresentate mediante un \textbf{albero binario}, i cui \textbf{nodi} sono affermazioni di tipo logico relative ai valori di X, ognuno associata a una suddivisione. Partendo dalla \textbf{radice}, si esamina ciascuna di queste affermazioni: se è vera si segue il ramo di sinistra, altrimenti si segue quello di destra. Ogni nodo \textbf{foglia} è associato a uno degli elementi $R_j$ e fornisce il corrispondente valore $c_j$.
+
+\subsubsection{Individuazione della sequenza di suddivisioni ottimali (crescita dell'albero)}
+
+Al passo J si considera la formula: $\hat f_T^{(J)}(x) = \sum\limits_{j=1}^J \hat c_j I(x \in R_l)$ con $EEP_T(\hat f_T^{(J)})= \dfrac{1}{n}\sum\limits_{j=1}^J \Bigr \{\sum\limits_{x_l \in R_l}^k (y_i - \hat c_j)^2 \Bigl \} $. 
+
+Al passo J+1 in prima fase si considera l'elemento $R_l$ sul quale si cicla suddividendolo secondo una regola logica in due parti $R_l'$ e $R_l ''$, ottenendo quindi una partizione a J+1 elementi. Vengono stimati i J+1 parametri della funzione associata a questa nuova partizione:
+
+\begin{equation*}
+\begin{cases}
+		\hat c_l' = \dfrac{\sum\limits_{x_l \in R_l'}}{n_l'} = \bar y_l ' \\
+		\hat c_l'' = \dfrac{\sum\limits_{x_l \in R_l''}}{n_l''} = \bar y_l '' 
+	\end{cases}
+\end{equation*}
+
+Successivamente si calcola l'errore empirico di previsione associato a questa nuova funzione pari a$\dfrac{1}{n} \Bigr \{ \sum\limits_{j \not = l} D_j + D_l^* \Bigl \}$ con $D_l^* = \sum\limits_{x_j \in R_J'}(y_i - \hat c_l')^2 + \sum\limits_{x_j \in R_J''}(y_i - \hat c_l'')^2$. $D_l^*$ rappresenta la devianza entro i due gruppi di unità definiti dai due insiemi $R_l'$ e $R_l''$. Infine si valuta il decremento nell'errore empirico associato alla suddivisione dell'elemento $R_l$: $\triangle (s, R_l) = D_l - D_l^* = \sum\limits_{x_l \in R_l} (y_i- \bar y_l)^2 - \Bigr [ \sum\limits_{x_l \in R_l'} (y_i - \bar y_l')^2 + \sum\limits_{x_l \in R_l''} (y_i - \bar y_l'')^2 \Bigl ]$. $\triangle (s,R_l) = D_l -D_l^*$ rappresenta la devianza tra i due gruppi di unità definiti dai due insiemi di $R_l'$ e $R_l''$. 
+
+Queste operazioni per tutte le possibili suddivisioni di $R_l$, per calcolare tutti i corrispondenti decrementi nell'errore empirico di previsione. Tra tutte le possibili suddivisioni di tutti gli elementi della partizione ottenuta al passo J si sceglie quella a cui è associato il maggior decremento nell'errore empirico di previsione.
+
+La strategia di crescita individuata è subottimale, in quanto il risultato ottenuto al passo J è condizionato da quanto avvenuto nei passi precedenti. Non è necessario che a ogni passo ci si limiti a suddividere un solo elemento della partizione. Ogni passo della procedura ricorsiva induce una riduzione nell'errore empirico di previsione (\textbf{riduzione della distorsione}). Ad ogni passo della procedura ricorsiva, si riduce il numero di unità all'interno degli elementi $R_j$ della partizione (\textbf{aumento della varianza}). La procedura può proseguire fino a quando J = n, ovvero fino a quando l'errore empirico di previsione si annulla (\textbf{overfittiing}).
+
+Per scegliere il numero ottimale di elementi della partizione è necessario stabilire dei criteri di arresto. Il primo potrebbe essere quello di individuare un numero minimo di osservazioni di ciascuna foglia, non considerando tutte le suddivisioni che generano almeno un elemento che contiene un numero di osservazioni inferiore a tale soglia. Un secondo è quello di individuare una soglia minima per il decremento nell'errore empirico di previsione, non considerando tutte le suddivisioni alle quali è associata una riduzione nell'errore empirico di previsione inferiore a tale soglia.
+
+Questi due tipi di criteri di arresto possono essere utili poichè limitano la complessità computazionale dell'algoritmo, ma non sono in grado di individuare la complessità ottimale, in quanto sono soggettivi e non tengono conto dell'andamento dell'errore di generalizzazione.
+
+\subsubsection{Estensione al caso di due o più regressori continui}
+
+Il generico elemento $R_j$ della partizione viene suddiviso in due parti ricorrendo a regole logiche del tipo "$X_h<s_h?$" dove $s_h$ è uno dei valori di $X_h$ osservati sulle unità del training set che appartengono a $R_j$. Il numero massimo di suddivisioni possibili per il generico $R_j$ risulta pari a $p(n_j-1)$. Nello spazio p-dimensionale, suddivisioni di questo tipo generano partizioni di composte da ipercubi con lati paralleli agli assi coordinati. 
+
+Ci sono diversi metodi per scegliere il miglior test per ogni nodo interno. Nel metodo CART la scelta del miglior test per ogni nodo interno si basa sulla minimizzazione la devianza tra due gruppi. Nella procedura di partizione ricorsiva implementata dal metodo, la natura dello spazio dei regressori influisce solo sulla definizione delle possibili suddivisioni del generico elemento della partizione $\{R_1,\dots,R_j,\dots,R_J\}$. Una volta stabiliti i criterri con cui suddividere gli insiemi, le procedure di crescita e di potatura dell'albero viste possono essere applicate anche nel caso di uno o più regressori categorici.
+
+\subsubsection{X ordinale}
+
+Quando abbiamo un X ordinale $\{m_1 < \dots < m_k < \dots <m_K \}$, il generico elemento $R_j$ della partizione viene suddiviso in due parti ricorrendo a regole logiche del tipo $X<m?$, dove m è una delle modalità di X osservate sulle unità del training set che appartengono a $R_j$. Il numero massimo di suddivisioni possibili per il generico $R_j$ risulta pari a K-1.
+
+\subsubsection{X nominale}
+
+Quando abbiamo un X nominale $\{m_1,\dots, m_k,\dots, m_K \}$, il generico elemento $R_j$ della partizione viene suddiviso in due parti ricorrendo a regole logiche del tipo $X \in M ?$, dove M è un sottoinsieme delle modalità di X osservate sulle unità del training set che appartengono a $R_j$ , quindi $M \in \{m_1,\dots, m_k,\dots, m_K \}$. Il numero massimo di suddivisioni possibili per il generico $R_j$ risulta pari a $2^{K-1}-1$.
+
+Sia gli \textbf{alberi di regressione}, sia gli \textbf{alberi di modelli} sono sempre basati sul partizionamento ricorsivo dello spazio definito dalle variabili indipendenti, ma alle foglie sono associate delle funzioni di regressione lineare. La differenza consiste nel fatto che gli alberi di regressione approssimano mediante una funzione costante a tratti, mentre gli alberi di modelli approssimano per mezzo di una funzione lineare a tratti.
+
 \end{document}
 
 

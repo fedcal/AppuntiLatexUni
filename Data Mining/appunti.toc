@@ -24,3 +24,8 @@
 \contentsline {subsection}{\numberline {6.1}Notazione matriciale}{53}{subsection.6.1}%
 \contentsline {subsection}{\numberline {6.2}Regressione con funzioni a gradini}{53}{subsection.6.2}%
 \contentsline {subsubsection}{\numberline {6.2.1}Funzioni costanti a tratti per la regressione semplice}{54}{subsubsection.6.2.1}%
+\contentsline {subsubsection}{\numberline {6.2.2}Alberi di regressione}{54}{subsubsection.6.2.2}%
+\contentsline {subsubsection}{\numberline {6.2.3}Individuazione della sequenza di suddivisioni ottimali (crescita dell'albero)}{55}{subsubsection.6.2.3}%
+\contentsline {subsubsection}{\numberline {6.2.4}Estensione al caso di due o più regressori continui}{56}{subsubsection.6.2.4}%
+\contentsline {subsubsection}{\numberline {6.2.5}X ordinale}{56}{subsubsection.6.2.5}%
+\contentsline {subsubsection}{\numberline {6.2.6}X nominale}{56}{subsubsection.6.2.6}%
