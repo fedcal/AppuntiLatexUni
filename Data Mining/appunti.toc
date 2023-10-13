@@ -29,3 +29,6 @@
 \contentsline {subsubsection}{\numberline {6.2.4}Estensione al caso di due o più regressori continui}{56}{subsubsection.6.2.4}%
 \contentsline {subsubsection}{\numberline {6.2.5}X ordinale}{56}{subsubsection.6.2.5}%
 \contentsline {subsubsection}{\numberline {6.2.6}X nominale}{56}{subsubsection.6.2.6}%
+\contentsline {section}{\numberline {7}Induzione dell'albero del modello graduale}{56}{section.7}%
+\contentsline {section}{\numberline {8}Associazioni tra variabili}{59}{section.8}%
+\contentsline {subsection}{\numberline {8.1}Data mining descrittivo - Trovare le diendeze tra variabili}{59}{subsection.8.1}%

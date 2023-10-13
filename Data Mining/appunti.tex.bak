@@ -1598,6 +1598,126 @@ Quando abbiamo un X nominale $\{m_1,\dots, m_k,\dots, m_K \}$, il generico eleme
 
 Sia gli \textbf{alberi di regressione}, sia gli \textbf{alberi di modelli} sono sempre basati sul partizionamento ricorsivo dello spazio definito dalle variabili indipendenti, ma alle foglie sono associate delle funzioni di regressione lineare. La differenza consiste nel fatto che gli alberi di regressione approssimano mediante una funzione costante a tratti, mentre gli alberi di modelli approssimano per mezzo di una funzione lineare a tratti.
 
+\section{Induzione dell'albero del modello graduale}
+
+Questo problema riguarda principalmente i problemi di regressione all'interno del classico data mining. Date:
+
+\begin{itemize}
+\item \textbf{m} variabili indipendenti $X_i$ o predittori (continui o discreti)
+\item \textbf{una variabile Y} dipendente continua da predire
+\item \textbf{un insieme} di n casi di training ($x_1,x_2,\dots,x_m,y$)
+\end{itemize}
+
+lo scopo è quello di apprendere una funzione $y=g(x)$ tale che predice correttamente il valore della variabile di risposta per ogni ,-tupla ($x_1,x_2,\dots,x_m$)
+
+Quindi quando abbiamo un partizionamento di osservazioni e un modello di regressione logica, potremmo avere un \textbf{regression trees} o un \textbf{model trees}.   Nel regression tree si ha un'approssimazione mediante una funzione costante a tratti. Mentre all'interno dei model tree si ha un'approssimazione mediante una funzione multipla a tratti (lineare).
+
+All'interno dei model tree, la struttura dell'albero è generata secondo una strategia top-down. In una prima fase si partiziona il training set, per poi passare in una seconda fase in cui si associano i modelli alle foglie. I modelli nelle foglie hanno validità solo “locale”, i cofficienti dei regressori sono stimati sulla base dei casi di training alla specifica foglia.
+
+Per definire un global model i coefficienti dei regressori potrebbero essere stimati sulla base dei casi di training al nodo interno. Poiché le partizioni dello spazio delle funzionalità nei nodi interni sono più grandi (ulteriori esempi di formazione). In questo caso è richiesta una differente struttura di albero nella quale i nodi interni possono o definire un'ulteriore partizione dello spazio delle funzionalità oppure introdurre alcune variabili di regressione nei modelli di regressione.
+
+I tipi di nodi che avremo sono:
+
+\begin{itemize}
+\item \textbf{splitting nodes}, o nodi di split, che performano un test booleano e si dividono per
+
+\begin{itemize}
+\item le variabili continue in $X_i \leq \alpha$
+
+\begin{equation}
+\begin{cases}
+		t_L Y=a+bX_u \\
+		t_R Y = c + dX_w
+	\end{cases}
+\end{equation}
+
+\item le variabili discrete $X_i \in \{x:{i1},\dots,x_{ih}\}$
+
+\begin{equation}
+\begin{cases}
+		t_L Y=a+bX_u \\
+		t_R Y = c + dX_w
+	\end{cases}
+\end{equation}
+
+\end{itemize}
+
+\item \textbf{Regression nodes}, overo nodi di regressioni che computano solo una regressione lineare. Hanno un solo figlio. t = $Y= a+ bX_i \rightarrow > t' =  X_j \leq \alpha$:
+
+\begin{equation}
+\begin{cases}
+		t_L' Y=c + dX_u \\
+		t_R' Y = e + fX_w
+	\end{cases}
+\end{equation}
+
+\end{itemize}
+
+Gli splitting nodes trasmettono a ciascun nodo figlio solo un sottogruppo di casi di training, senza alcuna modifica sulle variabili. I nodi di regressione trasmettono al loro nodo figlio univoco tutti i casi di addestramento. I valori delle variabili non incluse nel modello vengono trasformati per rimuovere l'effetto lineare della variabile coinvolta nella regressione lineare al nodo.
+
+All'interno di un model tree con due tipi di nodi, le foglie sono associate a funzioni di regressione lineare. Il modello di regressione multipla associato ad una foglia è la composizione delle funzioni di regressione lineare trovate lungo il percorso dalla radice alla foglia. Questo avviene grazie alla trasformazione delle variabili passate all'interno dei nodi di regressione.
+
+La costruzione di un modello a regressione multipla con due indipendenti variabili: $Y = a + bX_1 + cX_2$ attraversa una sequenza di regressioni lineari. La sequenza di passi è:
+
+\begin{enumerate}
+\item Costruisci: $Y = a_1 + b_1X_1$
+\item Costruisci: $X_2 = a_2 + b_2X_1$
+\item Si calcolano i residui su $X_2$: $X_2' = X_2 - (a_2 + b_2X_1)$
+\item Si calcolano i residui su $Y$: $Y' = Y - (a_1 + b_1X_1)$
+\item Si regredisce Y' su $X_2'$: $Y' = a_3 + b_3X_2'$
+\end{enumerate}
+
+Sottraendo l'equazione di $X_2'$ nell'ultima equazione otteniamo: $Y = a_3 + a_1 - a_2b_3 + b_3X_2 - (b_2b_3-b_1)X_1$. 
+
+Gli effetti globali dei nodi di regressione sono che i modelli di regressione associati alle foglie includono $X_i$, il contributo di $X_i$ a Y può essere differente per ogni foglia, ma può essere stimato attendibilmente su tutta la regione R.
+
+La struttura ad albero proposta ha dei vantaggi quali catturare sia gli effetti locali sia quelli globali delle variabili di regressione, inoltre i modelli di regressione multipla alle foglie possono essere costruiti in modo efficiente passo per passo. Infine il modello di regressione multipla a una foglia può essere facilmente calcolato, in quanto la funzione euristica per la selezione del nodo migliore (regressione/divisione) dovrebbe basarsi sui modelli di regressione multipla alle foglie.
+
+Per valutare gli splitting node si utilizza la seguente formula: $\sigma(X_i,Y) = \dfrac{N(t_L)}{N(t)}R(t_L) + \dfrac{N(t_R)}{N(t)}R(t_R)$. In questo caso $R(t_L)$ e $R(t_R)$ rappresentano la redistribuzione dell'errore associato al figlio sinistro/destro. Invece per valutare i regression node si utilizza in genere la formula $\rho(X_i,Y) = min \{ R(t), \sigma(X_j, Y= per \; tutte \; le \; possibili \: variabili \: di \; X_j\}$.
+
+Si possono avere diversi criteri di stop:
+
+\begin{enumerate}
+\item F-test parziale per valutare il contributo di una nuova variabile indipendente al modello.
+\item Il numero di casi in ciascun nodo deve essere maggiore di un valore minimo
+\item Tutte le variabili continue vengono utilizzate nelle fasi di regressione e non sono presenti variabili discrete
+\item L'errore nel nodo corrente è inferiore a una frazione dell'errore nel nodo radice
+\item Il coefficiente di determinazione ($R^2$) è maggiore di un valore minimo.
+\end{enumerate}
+
+In linea di principio, la suddivisione ottimale dovrebbe essere scelta sulla base dell’adattamento di ciascun modello di regressione ai dati. In alcuni sistemi (M5, M5’ e HTL) la funzione euristica non tiene conto del modello associato alle foglie dell’albero. La funzione di valutazione è incoerente rispetto all'albero del modello in costruzione. Alcuni semplici modelli di regressione non vengono scoperti correttamente.
+
+Il metodo Retis risolve un problema calcolando il miglior modello di regressione multipla alle foglie per ciascun nodo di suddivisione candidato. Teoricamente il problema è risolto, ma computazionalmente è un approccio espansivo, un modello di regressione multiplo per ogni possibile test, infatti la scelta del primo split è $O(m^3N^2)$. Inoltre tutte le variabili continue sono coinvolti in modelli lineari multipli associati alle foglie. però se qualche variabile indipendente è correlata linearmente, possono verificarsi diversi problemi di collinearità.
+
+TSIR induce alberi modello con nodi di regressione e nodi di suddivisione, ma l'effetto della variabile regredita in un nodo di regressione non viene rimosso quando i casi vengono trasmessi, inoltre il modello di regressione multipla associato a ciascuna foglia non può essere correttamente interpretato da un punto di vista statistico.
+
+Si può dimostrare che SMOTI ha una complessità nel caso peggiore di $O(m^3N^2)$ per la selezione di qualsiasi nodo (scissione o regressione). RETIS ha la stessa complessità per la selezione dei nodi, sebbene RETIS non selezioni un sottoinsieme di variabili per risolvere problemi di collinearità.
+
+SMOTI può adatta molto bene i dati ma fallisce ad estrarre il modello, quindi gli output sui nuovi dati sono incoerenti. Una possibile soluzione è quella di potare il modello ad albero. I metodi di pre-potatura controllano la crescita di un albero modello durante la sua costruzione. I metodi post-potatura riducono le dimensioni di un albero completamente espanso potando alcuni rami.
+
+Ci sono due metodi per potare modelli ad albero con regressione e splitting dei nodi:
+\begin{itemize}
+\item Reduced Error Pruning – REP
+\item Reduced Error Grafting – REG
+\end{itemize}
+
+Il \textbf{ Reduced Error Pruning – REP}, potatura per riduzione dell'errore, ha come operatore di potatura: $\pi_T: I(T) \rightarrow T$, che associa ogni nodo interno t all'albero $\pi_T(t)$ avente tutti i nodi di T tranne i discendenti di t. Utilizza un set di potatura per valutare l'efficacia dei sottoalberi di un albero modello T. L'albero viene valutato in base all'errore quadratico medio (MSE). Il set di potatura è indipendente dal set di osservazioni utilizzate per costruire l’albero T. Il REP viene ripetuto ricorsivamente sull'albero semplificato. I nodi da sfoltire vengono esaminati secondo una strategia di attraversamento bottom-up.
+
+Il \textbf{ Reduced Error Grafting – REG}, errore di innesto ridotto, ha come operatore di innesto: $\nu_T : I^S(T) \times I(T) \rightarrow T$, il quale associa ogni coppia di nodi interni $<t,t'>$, direttamente connesso da un ponte con l'albero $\nu_T (<t,t'>)$ avendo tutti i nodi di T ecetto quelli nel ramo tra t e t'. Se t è un nodo di T che dovrebbe essere tagliato secondo qualche criterio, mentre t' è un figlio di t che non dovrebbe essere tagliato secondo lo stesso criterio, tale strategia di potatura o pota e perde il ramo accurato o non pota affatto e mantiene il ramo impreciso $T_t$. L'algoritmo REG(T) funziona in modo ricorsivo. Analizza l'albero completo T. Per ogni nodo diviso t restituisce l'albero tra T e $\nu_T (t,t')$ in base all'errore quadratico medio calcolato su un set di potatura indipendente.
+
+Per il confronto a coppie con Retis e M5', che sono i sistemi di induzione dell'albero modello all'avanguardia, viene utilizzato il test dei ranghi con segno non parametrico Wilcoxon a due campioni accoppiati.
+
+\section{Associazioni tra variabili}
+\subsection{Data mining descrittivo - Trovare le diendeze tra variabili}
+
+In senso lato, la maggior parte delle statistiche si occupa di trovare le dipendenze tra le variabili. Pertanto, le statistiche forniscono diversi strumenti per questo compito descrittivo. I metodi possono essere distinti in base a:
+\begin{enumerate}
+\item il numero di variabili (due/molte)
+\item il tipo di variabili (quantitative/qualitative)
+\end{enumerate}
+
+Per due variabili numeriche X e Y, la misura di dipendenza più conosciuta è il \textbf{coefficiente di correlazione di Pearson}, $\rho_{XY}$, che misura la forza dell’associazione lineare tra due variabili. Definendo la varianza di X come $\sigma^2_X = E[(X - E[X])^2]$ e la varianza di Y, definita come $\sigma^2_Y = E[(Y - E[Y])^2]$, possiamo calcolare la covarianza di XY come $\sigma_{XY} = E[(X - E(X))(Y-E(Y))]$. Inoltre è molto importante definire la varianza di X+ Y come $Var( X + Y) = Var( X ) + Var( Y )+2Cov(X,Y)$.
+
 \end{document}
 
 
