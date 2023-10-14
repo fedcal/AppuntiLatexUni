@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.25 (MiKTeX 23.4) (preloaded format=pdflatex 2023.9.4)  13 OCT 2023 23:07
+This is pdfTeX, Version 3.141592653-2.6-1.40.25 (MiKTeX 23.4) (preloaded format=pdflatex 2023.9.4)  14 OCT 2023 18:58
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -426,6 +426,12 @@ Package: tabto 2018/12/28  v 1.4  Another tabbing mechanism
 \CurrentLineWidth=\dimen180
 \TabPrevPos=\dimen181
 )
+(C:\Program Files\MiKTeX\tex/latex/wasysym\wasysym.sty
+Package: wasysym 2020/01/19 v2.4 Wasy-2 symbol support package
+\symwasy=\mathgroup6
+LaTeX Font Info:    Overwriting symbol font `wasy' in version `bold'
+(Font)                  U/wasy/m/n --> U/wasy/b/n on input line 93.
+)
 (C:\Program Files\MiKTeX\tex/latex/enumitem\enumitem.sty
 Package: enumitem 2019/06/20 v3.9 Customized lists
 \labelindent=\skip86
@@ -435,7 +441,7 @@ Package: enumitem 2019/06/20 v3.9 Customized lists
 \enit@count@id=\count297
 \enitdp@description=\count298
 )
-Package hyperref Info: Option `colorlinks' set `true' on input line 37.
+Package hyperref Info: Option `colorlinks' set `true' on input line 38.
 
 (C:\Program Files\MiKTeX\tex/latex/l3backend\l3backend-pdftex.def
 File: l3backend-pdftex.def 2023-03-30 L3 backend support: PDF output (pdfTeX)
@@ -444,24 +450,24 @@ File: l3backend-pdftex.def 2023-03-30 L3 backend support: PDF output (pdfTeX)
 ) (appunti.aux)
 \openout1 = `appunti.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 50.
-LaTeX Font Info:    ... okay on input line 50.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 50.
-LaTeX Font Info:    ... okay on input line 50.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 50.
-LaTeX Font Info:    ... okay on input line 50.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 50.
-LaTeX Font Info:    ... okay on input line 50.
-LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 50.
-LaTeX Font Info:    ... okay on input line 50.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 50.
-LaTeX Font Info:    ... okay on input line 50.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 50.
-LaTeX Font Info:    ... okay on input line 50.
-LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 50.
-LaTeX Font Info:    ... okay on input line 50.
-LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 50.
-LaTeX Font Info:    ... okay on input line 50.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 51.
+LaTeX Font Info:    ... okay on input line 51.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 51.
+LaTeX Font Info:    ... okay on input line 51.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 51.
+LaTeX Font Info:    ... okay on input line 51.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 51.
+LaTeX Font Info:    ... okay on input line 51.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 51.
+LaTeX Font Info:    ... okay on input line 51.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 51.
+LaTeX Font Info:    ... okay on input line 51.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 51.
+LaTeX Font Info:    ... okay on input line 51.
+LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 51.
+LaTeX Font Info:    ... okay on input line 51.
+LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 51.
+LaTeX Font Info:    ... okay on input line 51.
  (C:\Program Files\MiKTeX\tex/latex/graphics\color.sty
 Package: color 2022/01/06 v1.3d Standard LaTeX Color (DPC)
 
@@ -471,7 +477,7 @@ File: color.cfg 2016/01/02 v1.6 sample color configuration
 Package color Info: Driver file: pdftex.def on input line 149.
 
 (C:\Program Files\MiKTeX\tex/latex/graphics\mathcolor.ltx))
-Package hyperref Info: Link coloring ON on input line 50.
+Package hyperref Info: Link coloring ON on input line 51.
  (appunti.out)
 (appunti.out)
 \@outlinefile=\write3
@@ -535,17 +541,23 @@ File: epstopdf-sys.cfg 2021/03/18 v2.0 Configuration of epstopdf for MiKTeX
 ))
 Package caption Info: Begin \AtBeginDocument code.
 Package caption Info: End \AtBeginDocument code.
-LaTeX Font Info:    Trying to load font information for U+msa on input line 52.
+LaTeX Font Info:    Trying to load font information for U+msa on input line 53.
 
 
 (C:\Program Files\MiKTeX\tex/latex/amsfonts\umsa.fd
 File: umsa.fd 2013/01/14 v3.01 AMS symbols A
 )
-LaTeX Font Info:    Trying to load font information for U+msb on input line 52.
+LaTeX Font Info:    Trying to load font information for U+msb on input line 53.
 
 
 (C:\Program Files\MiKTeX\tex/latex/amsfonts\umsb.fd
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
+)
+LaTeX Font Info:    Trying to load font information for U+wasy on input line 53
+.
+
+(C:\Program Files\MiKTeX\tex/latex/wasysym\uwasy.fd
+File: uwasy.fd 2020/01/19 v2.4 Wasy-2 symbol font definitions
 ) [1
 
 {C:/Users/fedca/AppData/Local/MiKTeX/fonts/map/pdftex/pdftex.map}] (appunti.toc
@@ -554,95 +566,95 @@ File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 \openout4 = `appunti.toc'.
 
  [3] [4]
-<kdd-process.png, id=201, 853.1875pt x 482.80376pt>
+<kdd-process.png, id=206, 853.1875pt x 482.80376pt>
 File: kdd-process.png Graphic file (type png)
 <use kdd-process.png>
-Package pdftex.def Info: kdd-process.png  used on input line 118.
+Package pdftex.def Info: kdd-process.png  used on input line 120.
 (pdftex.def)             Requested size: 341.43306pt x 193.21385pt.
- [5 <./kdd-process.png>]
-<crisp-dm-model.jpg, id=209, 637.38126pt x 603.25375pt>
+ [5 <./kdd-process.png>] [6]
+<crisp-dm-model.jpg, id=218, 637.38126pt x 603.25375pt>
 File: crisp-dm-model.jpg Graphic file (type jpg)
 <use crisp-dm-model.jpg>
-Package pdftex.def Info: crisp-dm-model.jpg  used on input line 133.
+Package pdftex.def Info: crisp-dm-model.jpg  used on input line 136.
 (pdftex.def)             Requested size: 216.2302pt x 204.65251pt.
- [6] [7 <./crisp-dm-model.jpg>] [8] [9] [10] [11] [12] [13]
+ [7 <./crisp-dm-model.jpg>] [8] [9] [10] [11] [12] [13]
 [14] [15] [16]
 LaTeX Font Info:    Trying to load font information for OMS+cmr on input line 3
-96.
+98.
  (C:\Program Files\MiKTeX\tex/latex/base\omscmr.fd
 File: omscmr.fd 2022/07/10 v2.5l Standard LaTeX font definitions
 )
 LaTeX Font Info:    Font shape `OMS/cmr/m/n' in size <10> not available
-(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 396.
+(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 398.
  [17] [18]
 [19] [20] [21] [22]
-<compact-representation-vs.png, id=293, 806.01125pt x 538.01pt>
+<compact-representation-vs.png, id=297, 806.01125pt x 538.01pt>
 File: compact-representation-vs.png Graphic file (type png)
 <use compact-representation-vs.png>
-Package pdftex.def Info: compact-representation-vs.png  used on input line 527.
+Package pdftex.def Info: compact-representation-vs.png  used on input line 529.
 
 (pdftex.def)             Requested size: 216.23619pt x 144.33698pt.
  [23 <./compact-representation-vs.png>]
-<compact-representation-error.png, id=300, 523.9575pt x 372.39125pt>
+<compact-representation-error.png, id=304, 523.9575pt x 372.39125pt>
 File: compact-representation-error.png Graphic file (type png)
 <use compact-representation-error.png>
 Package pdftex.def Info: compact-representation-error.png  used on input line 5
-58.
+60.
 (pdftex.def)             Requested size: 216.23106pt x 153.68147pt.
  [24 <./compact-representation-error.png>]
-Overfull \hbox (5.62093pt too wide) in paragraph at lines 585--586
+Overfull \hbox (5.62093pt too wide) in paragraph at lines 587--588
 []\OT1/cmr/m/n/10 Vi sono in-oltre par-ti-co-lari al-go-ritmi di cop-er-tura se
 -quen-ziale che per-for-mano ripetu-ta-mente l'algoritmo di candidate-elimintai
 on
  []
 
 [25]
-<seperate-and-conquer-allgoritmo.png, id=311, 782.17218pt x 421.575pt>
+<seperate-and-conquer-allgoritmo.png, id=315, 782.17218pt x 421.575pt>
 File: seperate-and-conquer-allgoritmo.png Graphic file (type png)
 <use seperate-and-conquer-allgoritmo.png>
 Package pdftex.def Info: seperate-and-conquer-allgoritmo.png  used on input lin
-e 614.
+e 616.
 (pdftex.def)             Requested size: 432.48755pt x 233.10204pt.
  [26]
-<seperate-and-conquer-allgoritmo2.png, id=316, 582.67688pt x 292.84406pt>
+<seperate-and-conquer-allgoritmo2.png, id=320, 582.67688pt x 292.84406pt>
 File: seperate-and-conquer-allgoritmo2.png Graphic file (type png)
 <use seperate-and-conquer-allgoritmo2.png>
 Package pdftex.def Info: seperate-and-conquer-allgoritmo2.png  used on input li
-ne 628.
+ne 630.
 (pdftex.def)             Requested size: 432.49pt x 217.36253pt.
  [27 <./seperate-and-conquer-allgoritmo.png>]
-<seperate-and-conquer-allgoritmo3.png, id=322, 779.16093pt x 491.58656pt>
+<seperate-and-conquer-allgoritmo3.png, id=326, 779.16093pt x 491.58656pt>
 File: seperate-and-conquer-allgoritmo3.png Graphic file (type png)
 <use seperate-and-conquer-allgoritmo3.png>
 Package pdftex.def Info: seperate-and-conquer-allgoritmo3.png  used on input li
-ne 636.
+ne 638.
 (pdftex.def)             Requested size: 432.4751pt x 272.85626pt.
  [28 <./seperate-and-conquer-allgoritmo2.png> <./seperate-and-conquer-allgoritm
 o3.png>] [29] [30]
 [31] [32] [33] [34] [35] [36] [37] [38] [39]
-<different-probabilistic-method.png, id=376, 717.43031pt x 421.575pt>
+<different-probabilistic-method.png, id=380, 717.43031pt x 421.575pt>
 File: different-probabilistic-method.png Graphic file (type png)
 <use different-probabilistic-method.png>
 Package pdftex.def Info: different-probabilistic-method.png  used on input line
- 1004.
+ 1006.
 (pdftex.def)             Requested size: 432.48672pt x 254.137pt.
  [40 <./different-probabilistic-method.png>] [41] [42] [43] [44] [45] [46] [47]
  [48] [49] [50] [51] [52] [53]
-[54] [55] [56] [57] [58] [59] [60]
+[54] [55] [56] [57] [58] [59] [60] [61] [62]
 
 enddocument/afterlastpage: lastpage setting LastPage.
 (appunti.aux)
 Package rerunfilecheck Info: File `appunti.out' has not changed.
-(rerunfilecheck)             Checksum: 95E1677A2A1943079212DFCA54BE059C;6843.
+(rerunfilecheck)             Checksum: 8C248616F8A56BFBF7E47F5E5DB4B2C0;7042.
  ) 
 Here is how much of TeX's memory you used:
- 13457 strings out of 476331
- 220294 string characters out of 5797581
+ 13693 strings out of 476331
+ 222981 string characters out of 5797581
  1867660 words of memory out of 5000000
- 33584 multiletter control sequences out of 15000+600000
- 521190 words of font info for 66 fonts, out of 8000000 for 9000
+ 33806 multiletter control sequences out of 15000+600000
+ 522505 words of font info for 72 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 75i,15n,76p,1366b,574s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 75i,15n,76p,1367b,574s stack positions out of 10000i,1000n,20000p,200000b,200000s
  <C:\Users\fedca\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\tcrm
 1000.pk><C:/Program Files/MiKTeX/fonts/type1/public/amsfonts/cm/cmbx10.pfb><C:/
 Program Files/MiKTeX/fonts/type1/public/amsfonts/cm/cmbx12.pfb><C:/Program File
@@ -658,9 +670,9 @@ ts/cm/cmr7.pfb><C:/Program Files/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy10.p
 fb><C:/Program Files/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy5.pfb><C:/Progra
 m Files/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy7.pfb><C:/Program Files/MiKTe
 X/fonts/type1/public/amsfonts/cm/cmti10.pfb>
-Output written on appunti.pdf (60 pages, 1005975 bytes).
+Output written on appunti.pdf (62 pages, 1018249 bytes).
 PDF statistics:
- 581 PDF objects out of 1000 (max. 8388607)
- 120 named destinations out of 1000 (max. 500000)
- 313 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 595 PDF objects out of 1000 (max. 8388607)
+ 122 named destinations out of 1000 (max. 500000)
+ 321 words of extra memory for PDF output out of 10000 (max. 10000000)
 

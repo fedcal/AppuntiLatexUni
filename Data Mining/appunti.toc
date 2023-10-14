@@ -1,5 +1,5 @@
 \contentsline {section}{\numberline {1}KDD process}{4}{section.1}%
-\contentsline {subsection}{\numberline {1.1}Steps del KDD}{6}{subsection.1.1}%
+\contentsline {subsection}{\numberline {1.1}Steps del KDD}{7}{subsection.1.1}%
 \contentsline {subsubsection}{\numberline {1.1.1}Business Understanding}{7}{subsubsection.1.1.1}%
 \contentsline {subsubsection}{\numberline {1.1.2}Data Understanding}{9}{subsubsection.1.1.2}%
 \contentsline {subsubsection}{\numberline {1.1.3}Data Preparation}{10}{subsubsection.1.1.3}%
@@ -32,3 +32,4 @@
 \contentsline {section}{\numberline {7}Induzione dell'albero del modello graduale}{56}{section.7}%
 \contentsline {section}{\numberline {8}Associazioni tra variabili}{59}{section.8}%
 \contentsline {subsection}{\numberline {8.1}Data mining descrittivo - Trovare le diendeze tra variabili}{59}{subsection.8.1}%
+\contentsline {subsection}{\numberline {8.2}Association rules discovery}{62}{subsection.8.2}%
