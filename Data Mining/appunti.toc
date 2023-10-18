@@ -18,7 +18,7 @@
 \contentsline {subsubsection}{\numberline {4.4.2}Minimal Error Pruning (MEP)}{36}{subsubsection.4.4.2}%
 \contentsline {subsubsection}{\numberline {4.4.3}Pessimistic Error Pruning (PEP)}{37}{subsubsection.4.4.3}%
 \contentsline {subsubsection}{\numberline {4.4.4}Error-Based Pruning (EBP)}{37}{subsubsection.4.4.4}%
-\contentsline {section}{\numberline {5}Naive Bayes Classidier - Classificatore Bayesiano}{38}{section.5}%
+\contentsline {section}{\numberline {5}Naive Bayes Classifier - Classificatore Bayesiano}{38}{section.5}%
 \contentsline {subsection}{\numberline {5.1}Underflow Prevention}{43}{subsection.5.1}%
 \contentsline {section}{\numberline {6}I modelli di regressione}{47}{section.6}%
 \contentsline {subsection}{\numberline {6.1}Notazione matriciale}{53}{subsection.6.1}%
@@ -29,7 +29,7 @@
 \contentsline {subsubsection}{\numberline {6.2.4}Estensione al caso di due o più regressori continui}{56}{subsubsection.6.2.4}%
 \contentsline {subsubsection}{\numberline {6.2.5}X ordinale}{56}{subsubsection.6.2.5}%
 \contentsline {subsubsection}{\numberline {6.2.6}X nominale}{56}{subsubsection.6.2.6}%
-\contentsline {section}{\numberline {7}Induzione dell'albero del modello graduale}{56}{section.7}%
-\contentsline {section}{\numberline {8}Associazioni tra variabili}{59}{section.8}%
-\contentsline {subsection}{\numberline {8.1}Data mining descrittivo - Trovare le diendeze tra variabili}{59}{subsection.8.1}%
-\contentsline {subsection}{\numberline {8.2}Association rules discovery}{62}{subsection.8.2}%
+\contentsline {subsection}{\numberline {6.3}Induzione dell'albero del modello graduale}{56}{subsection.6.3}%
+\contentsline {section}{\numberline {7}Associazioni tra variabili}{60}{section.7}%
+\contentsline {subsection}{\numberline {7.1}Data mining descrittivo - Trovare le diendeze tra variabili}{60}{subsection.7.1}%
+\contentsline {subsection}{\numberline {7.2}Association rules discovery}{62}{subsection.7.2}%

@@ -315,32 +315,32 @@ IG(X)= \sum_{i} U(P(c_i))-E\Bigr[\sum_{i}U(P(c_i|X))\Bigl]
 
 Una regola di valutazione delle caratteristiche derivata dal concetto di guadagno di informazioni afferma che la caratteristica X è preferita alla caratteristica Y se $IG(X)>IG(Y)$. Cioè, una caratteristica dovrebbe essere selezionata se può ridurre l'incertezza. Se U(x)=$-x*log(x)$ allora $\sum_{i}U(P(c_i))$ è una misura di entropia.
 
-\textbf{\textit{Misure della distanza.}} Se l'obiettivo è la classificazione, una misura alternativa può essere la distanza tra le funzioni di densità classe-condizione. Se \textit{P($X|C$)} è la funzione di densità condizionata dalla classe della caratteristica X, nei due casi della clase (C=$c_1$ o C=$c_2$),P($X|C$) è definita da P($X|c_1$) e P($X|c_2$). Se D(X) è la distanza tra P($X|c_1$) e P($X|c_2$), una regola di valutazione basata su P afferma che X è preferito a Y se D(X)$>$D(Y). Questo perchè stiamo cercando una feature che può separare due classi il più possibile. Maggiore è la distanza, più facile separare le due classi.
+\textbf{\textit{Misure della distanza.}} Se l'obiettivo è la classificazione, una misura alternativa può essere la distanza tra le funzioni di densità classe-condizione. Se \textit{P($X|C$)} è la funzione di densità condizionata dalla classe della caratteristica X, nei due casi della clase (C=$c_1$ o C=$c_2$), P($X|C$) è definita da P($X|c_1$) e P($X|c_2$). Se D(X) è la distanza tra P($X|c_1$) e P($X|c_2$), una regola di valutazione basata su P afferma che X è preferito a Y se D(X)$>$D(Y). Questo perchè stiamo cercando una feature che può separare due classi il più possibile. Maggiore è la distanza, più facile risulta separare le due classi.
 
 La \underline{divergenza Kullback-Leibler} è una misura della distanza tra distribuzioni probabili, P e Q su un dominio V. Questa divergnza è definita come:
 
-\begin{equation}
-m_{KL}(P,Q)= \sum_{v\in V} q(v)log(\dfrac {q(v)}{p(v)})
-\end{equation}
+\begin{equation*}
+m_{KL}(P,Q)= \sum_{v\in V} q(v)log \Biggr(\dfrac {q(v)}{p(v)}\Biggl)
+\end{equation*}
 
-Questa divergenza misura in quale misura la distribuzione P è un'approssimazione della distribuzione Q o, più precisamente, la perdita dell'informazione se noi prendessimo P invece di Q. In sintesi si misura quanto P diverge da Q. LE proprietà di questa misura sono:
+Questa divergenza misura in quale misura la distribuzione P è un'approssimazione della distribuzione Q o, più precisamente, la perdita dell'informazione se noi prendessimo P invece di Q. In sintesi si misura quanto P diverge da Q. Le proprietà di questa misura sono:
 
 \begin{itemize}
-\item Assimetrica, ovvero $m_{KL}(P,Q) \not = m_{KL}(Q,P)$
+\item Asimmetrica, ovvero $m_{KL}(P,Q) \not = m_{KL}(Q,P)$
 \item non definita quando p(v)=0
-\item nel caso specifico di q(v)=0, q(v)log(q(v)/p(v))=0
+\item nel caso specifico di q(v)=0, $q(v)log\Biggr(\dfrac{q(v)}{p(v)}\Biggl)=0$
 \item il range dei valori non è limitato. Quindi, possiamo utilizzare questo valore per stabilire quale delle due distribuzioni Q e Q' è una migliore approssimazione di P, ma non ci permette di determinare in termini assoluti se Q è una buona approssimazione di P osservando $m_{KL}(P,Q)$
 \end{itemize} 
 
 La divergenza del $\chi ^2$ è definita come:
 
-\begin{equation}
+\begin{equation*}
 m \chi ^2(P,Q) = \sum_{y \in Y} \dfrac{|p(y)-q(y)|^2}{p(y)}
-\end{equation}
+\end{equation*}
 
-è rigorosamente topologicamente più forte della divergenza KL data la disuguaglianza $m_{KL}(P,Q) \leq m \chi ^2 (P,Q)$, la convergenza nella funzione di divergenza $\chi ^2$ implica la convergenza nella divergenza KL, ma non il contrario. Inoltre è assimetrica e non definita quando p(y)=0.
+è rigorosamente topologicamente più forte della divergenza KL data la disuguaglianza $m_{KL}(P,Q) \leq m \chi ^2 (P,Q)$, la convergenza nella funzione di divergenza $\chi ^2$ implica la convergenza nella divergenza KL, ma non il contrario. Inoltre è asimmetrica e non definita quando p(y)=0.
 
-Un ultimo tipo di misura della distanza eè la distanza di variazione, data dalla formula $m_1 (P,Q)= \sum_{y \in Y}|p(y)-q(y)|$, detta anche distanza di Manhattan per funzioni di probabilità p(y) e q(y) e coincide con la distanza di Hamming quando tutte le features sono binari. Similarmente si può utilizzare la distanza Euclidea data da $m_2 (P,Q)= \sum_{y \in Y} |p(y)-q(y)|^2$. Queste due metriche soddisfano la proprietà di simmetria e le proprietà metriche.
+Un ultimo tipo di misura della distanza è la distanza di variazione, data dalla formula $m_1 (P,Q)= \sum\limits_{y \in Y}|p(y)-q(y)|$, detta anche distanza di Manhattan per funzioni di probabilità p(y) e q(y) e coincide con la distanza di Hamming quando tutte le features sono binarie. Similarmente si può utilizzare la distanza Euclidea data da $m_2 (P,Q)= \sum\limits_{y \in Y} |p(y)-q(y)|^2$. Queste due metriche soddisfano la proprietà di simmetria e le proprietà metriche.
 
 \textbf{\textit{Dipendenza dalle misure}}. Si verifica con quanta forza una caratteristica è associata alla classe. Denotando attraverso R(X) una misura di dipendenza tra la feature X e la classe C, preferiamo la feature X alla feature Y se R(X)$>$R(Y). Un problema con le tre misure precedenti è che non possono rompere i legami tra due features ugualmente buone. Pertanto queste funzionalità non possono rilevare se una di esse è ridondante.
 
@@ -354,9 +354,9 @@ Per \textbf{selezionare le feature} ci sono 3 componenti necessari: un generator
 
 \textbf{\textit{Approcci non deterministici}}: \textbf{\textit{LVF}} (Las Vegas Filter) e \textbf{\textit{LVW}} (Las Vegas wrapper), generano subset di feature casualmente e li testano in maniera differente, LVF applica una misura inconsistente, LVW usa una stima accurata attraverso un classificatore; \textbf{\textit{algoritmi generici}} e \textbf{\textit{ricottura simulata}} sono anche usati nella selezione di feature. Il primo può produrre più sottoinsiemi, il secondo produce un singolo sottoinsieme.
 
-\textbf{\textit{Approcci basati sulle instanze}}: \textbf{\textit{Relief}}, molti piccoli campioni di dati sono campioni proveniente dai dati. Le funzionalità vengono ponderate in base ai loro ruoli nella differenziazione di istanze di classi diverse per un campione di dati. È possibile selezionare funzioni con pesi maggiori. 
+\textbf{\textit{Approcci basati sulle instanze}}: \textbf{\textit{Relief}}, molti piccoli campioni di dati. Le funzionalità vengono ponderate in base ai loro ruoli nella differenziazione di istanze di classi diverse per un campione di dati. È possibile selezionare funzioni con pesi maggiori. 
 
-Per le attività di data mining non di classificazione (nessuna etichetta di classe disponibile), dovrebbero essere presi in considerazione metodi alternativi. Ad esempio, una misura di entropia può essere introdotta per classificare in sequenza le caratteristiche. L'idea di base è che le caratteristiche sono rilevanti se possono descrivere le istanze in termini di cluster relativamente chiaramente definiti.
+Per le attività di data mining non di classificazione (nessuna etichetta di classe disponibile), dovrebbero essere presi in considerazione metodi alternativi. Ad esempio, una misura di entropia può essere introdotta per classificare in sequenza le caratteristiche. L'idea di base è che le caratteristiche sono rilevanti se possono descrivere le istanze in termini di cluster chiaramente definiti.
 
 La \textbf{scalabilità} è un altro problema. In LVS la parte più dispendiosa in termini di tempo di un processo di selezione delle funzionalità viene identificata e ritardata fino a quando non è necessario. LVS è un'estensione di LVF che utilizza una misura di incoerenza (IC) con una complessità di runtime di controllo O(n), dove n è il numero di istanze. Se n è enorme, è costoso calcolare IC molte volte. Si noti inoltre che il componente di generazione di sottoinsiemi di funzionalità genererà sempre più sottoinsiemi non validi che non soddisfano IC man mano che la cardinalità di un sottoinsieme valido diminuisce. 
 
@@ -364,7 +364,7 @@ Pertanto, ha senso separare il calcolo di IC come cardinalità per tutti i dati 
 
 I \textbf{wrapper models} cercano di risolvere uno specifico problema, quindi il criterio può realmente essere specificato. Invece consuma molto tempo se bisogna valutare uno schema a ogni iterata. I \textbf{filter models} sono molto più veloci  ma non incorporano algoritmi di data mining usati per la generazione di un modello o pattern, quindi il modello può essere subottimale.
 
-A differenza dei precedenti, nei \textbf{metodi embedded} la parte di selezione delle caratteristiche non può essere separata dall'algoritmo di data mining. È parte integrante dell'algoritmo. Per esempio, nell'algoritmo di decision tree, la selezioni delle caratteristiche che contribuiscono alla creazione dell'albero finale è parte della costruzione dell'algoritmo di decision tree. Poiché siamo interessati a selezionare le funzionalità nella fase di trasformazione dei dati, non consideriamo gli embedded methods.
+A differenza dei precedenti, nei \textbf{metodi embedded} la parte di selezione delle caratteristiche non può essere separata dall'algoritmo di data mining in quanto parte integrante dell'algoritmo. Per esempio, nell'algoritmo di decision tree, la selezioni delle caratteristiche che contribuiscono alla creazione dell'albero finale è parte della costruzione dell'algoritmo di decision tree. Poiché siamo interessati a selezionare le funzionalità nella fase di trasformazione dei dati, non consideriamo gli embedded methods.
 
 La \textbf{pulizia dei dati} aumenta la qualità dei dati al livello richiesto. Ciò comporta la selezione di sottoinsiemi di dati puliti, l'inserimento di impostazioni predefinite adeguate o tecniche più ambiziose come la stima della modellazione dei dati mancanti. Alla fine di questa fase vi è un rapporto sulla pulizia dei dati, che descrive le decisioni e le azioni per affrontare i problemi di qualità dei dati ed elenca le trasformazioni dei dati per la pulizia e i possibili impatti sull'analisi dei risultati. I due problemi più comuni sono la mancanza di valori e dati di rumore. 
 
@@ -378,38 +378,38 @@ Un'altra tecnica consiste nell'eliminazione della variabile dall'analisi se pres
 
 Successivamente si passa alla fase di \textbf{costruzione dei dati}, la quale include operazioni di preparazione dei dati, come la generazione di variabili derivate, inserimento di nuovi record o trasformazione di variabili esistenti. I dati possono essere trasformati in \textit{una singola variabile}, per essere ulteriormente perfezionati per soddisfare i requisiti del formato di input dei particolari algoritmi di data mining da utilizzare.
 
-Esempi sono la conversione delle variabili di tipo data dal formato US a quello Europeo, oppure il calcolo dell'età data la data di nascita, l'aggregazione dei valori all'interno di un conto corrente per gli ultimi 3,6,12 mesi. Inoltre si potrebbe effettuare un ridimensionamento o una normalizzazione dei dati. In questo caso si parla di normalizzazione dei dati quando colonne numeriche sono trasformate usando funzioni matematiche in dei range. Questo processo è importante perchè tutte le variabili all'interno di una colonna devono essere trattate in maniera uguale e non devono influenzarsi a vicenda, oppure perchè alcuni dati possono ricevere solo alcuni valori all'interno di un range.
+Esempi sono la conversione delle variabili di tipo data dal formato US a quello Europeo, oppure il calcolo dell'età data la data di nascita, l'aggregazione dei valori all'interno di un conto corrente per gli ultimi 3, 6 o 12 mesi. Inoltre si potrebbe effettuare un ridimensionamento o una normalizzazione dei dati. In questo caso si parla di normalizzazione dei dati quando colonne numeriche sono trasformate usando funzioni matematiche in dei range. Questo processo è importante perchè tutte le variabili all'interno di una colonna devono essere trattate in maniera uguale e non devono influenzarsi a vicenda, oppure perchè alcuni dati possono ricevere solo alcuni valori all'interno di un range.
 
 Un altro tipo di normalizzazione è la normalizzazione min-max che performa una transformazione lineare sui dati originali. Supponendo che $ min_A$ e $max_A$ sono i valori di minimo e di massimo di un attributo A, questa normalizzazione mappa un valore v di A in v' nel range $[newMin_A; newMax_A]$ attraverso la formula:
-\begin{equation}
+\begin{equation*}
 v'= \dfrac{v-min_A}{max_A-min_A}(newMax_A - newMin_A)+newMin_A
-\end{equation}
+\end{equation*}
 
 Le relazioni tra i valori dei dati originali vengono preservate. Se un caso di input futuro per la normalizzazione non rientra nell'intervallo di dati originale per A, si verifica un errore "out of bounds" (fuori dal limite).
 
 Nella normalizzazione definita z-score, anche chiamata a media zero, i valori per un attributo A sono normalizzati sulla base della media o della deviazione standard di A. Un valore v di A è normalizzato in v' attraverso la formula:
 
-\begin{equation}
+\begin{equation*}
 v'=\dfrac{v-mean_A}{standDev_A}
-\end{equation}
+\end{equation*}
 
 dove $mean_A$ e $standDev_A$ sono la media e la deviazione standard dell'attributo A. Questo metodo di normalizzazione è utile quando il minmo e il massimo dell'attributo A sono sconosciuti, o quando ci sono gli outliers che dominano la normalizzazione min-max.
 
 La normalizzazione attraverso il decimal scaling transforma i valori dell'attributo A in punti decimali, per assicurarsi che il range dell'intervallo i cui essi sono compresi sia \{-1,+1\}. Il numero di punti decimali dipende dal massimo valore assoluto di A. Un valore v di A è normalizzato in v' attraverso la funzione:
 
-\begin{equation}
+\begin{equation*}
 v'= \dfrac{v}{10^j}
-\end{equation}
+\end{equation*}
 
 dove j è il più piccolo intero tale che $max(|v'|)<1$
 
-Si parla di \textbf{discretizzazione delle variabili} quando convertiamo variabili quantitative in variabili categoriche dividendo il valore di input in intervalli. Due metodi di discretizzazione sono l'\textbf{Equale Width} e l'\textbf{Equal depth}. In entrambi questi metodi le informazioni sulla classe non vengono utilizzate nel caso in cui le osservazioni siano preclassificate, inoltre la discretizzazione viene applica a ogni attributo indipendentemente dagli altri. 
+Si parla di \textbf{discretizzazione delle variabili} quando convertiamo variabili quantitative in variabili categoriche dividendo il valore di input in intervalli. Due metodi di discretizzazione sono l'\textbf{Equale Width} e l'\textbf{Equal Depth}. In entrambi questi metodi le informazioni sulla classe non vengono utilizzate nel caso in cui le osservazioni siano preclassificate, inoltre la discretizzazione viene applica a ogni attributo indipendentemente dagli altri. 
 
 Il partizionamento attraverso l'equal width divide il range in N intervalli di uguale lunghezza, se A e B sono il più piccolo e il più grande valore all'interno dell'attributo, l'intervallo di width sarà:
 
-\begin{equation}
+\begin{equation*}
 W=\dfrac{B-A}{N}
-\end{equation}
+\end{equation*}
 
 Questo metodo è il più diretto, però ha anche degli aspetti negativi perchè non gestisce bene i dati distorti ed è sensibile ai valori anomali.
 
@@ -417,15 +417,15 @@ Il partizionamento attraverso l'equal-depth divide il range in N intervalli, ogn
 
 In entrambi i casi il numero di elementi tralasciati è definito dall'utente. Nel caso di classificazione dei dati, è buona pratica che questo numero non sia minore del numero di classi che vogliamo riconoscere, oppure determinarlo attraverso la formula:
 
-\begin{equation}
+\begin{equation*}
 N_{bins} = \dfrac{M}{3*C}
-\end{equation}
+\end{equation*}
 
 dove M è il numero di esempi di training e C il numero di classi.
 
 Procedure complesse di conversione di dati hanno l'obiettivo di costruire un piccolo insieme di indici da un vasto numero di variabili, in modo tale che solo alcune informazioni vengano perse e il numero totale di funzioni venga ridotto. \textbf{L'analisi fattoriale} e \textbf{l'analisi del componente principale} sono due tecniche di analisi multivariate per la riduzione dei dati. 
 
-\textit{L'analisi fattoriale} affronta il problema dell'analisi della struttura delle interrelazioni (correlazioni) tra un grande numero di variabili (ad es. punteggi dei test, elementi del test, risposte al questionario) definendo un insieme di dimensioni sottostanti comuni, note come fattori. Questa non è una tecnica che usa dipendenze, ovvero non vi è nessuna variabile considerata come criterio o variabile dipendente da cui tutte le altre dipendono e sono le variabili predittore o indipendenti. E' una tecnica interdipendente in cui ogni variabile è considerata simultaneamente e ognuna è in relazione alle altre.
+\textit{L'analisi fattoriale} affronta il problema dell'analisi della struttura delle interrelazioni (correlazioni) tra un grande numero di variabili (ad es. punteggi dei test, elementi del test, risposte al questionario) definendo un insieme di dimensioni sottostanti comuni, note come fattori. Questa non è una tecnica che usa dipendenze, ovvero non vi è nessuna variabile considerata come criterio o variabile dipendente da cui tutte le altre dipendono e sono le variabili predittore o indipendenti. E' una tecnica interdipendente in cui ogni variabile è considerata simultaneamente e ognuna è in relazione con le altre.
 
 Oltre alla costruzione dei dati, vi è l'integrazione dei dati, che ha come obiettivo la combinazione di informazioni provenienti da tabelle multiple o record per creare nuovi record o valori. L'output di questa fase è un insieme di dati uniti, che si riferisce all'unione di due o più tabelle unite che contengono differenti informazioni sugli stessi oggetti, o dati aggregati, sui quali verranno effettuate delle operazioni per produrre nuovi dati. Il risultato è il modello dei dati analitici, che rappresenta una ristrutturazione consolidata, integrata e dipendente dal tempo dei dati selezionati e pre-elaborati dalle varie fonti operative ed esterne. 
 
@@ -444,23 +444,23 @@ Si possono identificare tre componenti primari in qualsiasi algoritmo di data mi
 \item \textbf{ricerca}
 \end{itemize}
 
-Il \textit{modello di rappresentazione} consiste nel linguaggio L usato per descrivere patterns che possono essere scoperti. Dipende dal tipo di rappresentazione, la capacità descrittiva, l'adeguatezza per un dato utente. La conoscenza scoperta può essere categorizzata dal tipo di pattern dei dati. Una scoperta quantitativa mette in relazione valori di campi numerici usando equazioni matematiche, mentre una relazione qualitativa mette in relazione logica diversi campi. Spesso si possono trovare queste due relazioni combinate. Un altro aspetto che bisogna considerare nella creazione del modello è la sua rappresentazione che deve essere appropriata per l'utente previsto. 
+Il \textit{modello di rappresentazione} consiste nel linguaggio L usato per descrivere pattern che possono essere scoperti. Dipende dal tipo di rappresentazione, la capacità descrittiva, l'adeguatezza per un dato utente. La conoscenza scoperta può essere categorizzata dal tipo di pattern dei dati. Una scoperta quantitativa mette in relazione valori di campi numerici usando equazioni matematiche, mentre una relazione qualitativa mette in relazione logica diversi campi. Spesso si possono trovare queste due relazioni combinate. Un altro aspetto che bisogna considerare nella creazione del modello è la sua rappresentazione che deve essere appropriata per l'utente previsto. 
 
 La maggior parte degli utenti per i quali bisogna creare una rappresentazione sono gli umani, programmi per computer e sistemi di scoperta. Se si parla di utenti umani bisogna utilizzare un linguaggio naturale, molto utile ma non conveniente per la manipolazione da parte di algoritmi di scoperta, oppure si potrebbe utilizzare un linguaggio logico, molto più utile per la computazione e se necessario può essere anche traslato in un linguaggio normale. Le informazioni sulla forma e la densità dei gruppi di record sono un altro tipo di conoscenza che si presenta al meglio visivamente per mezzo di grafici bidimensionali o tridimesionali, quindi attraverso opportune rappresentazioni visive. 
 
-Nel caso in cui gli utenti finali siano dei programmi, la rappresentazione include linguaggi di programmazione e formalismi dichiarativi. Quando invece l'utente è un sistema il cui compito è scoprire conoscenza, le nuove scoperte vengono reinserite nel sistema come conoscenza di dominio, la conoscenza di dominio e la conoscenza scoperta devono condividere una rappresentazione comune. Se la rappresentazione è limitata, nessun addestramento o nessun tipo di esempio produrrà un modello accurato per i dati. È importante che un analista di dati comprenda appieno i presupposti rappresentativi che possono essere inerenti a un particolare metodo.
+Nel caso in cui gli utenti finali siano dei programmi, la rappresentazione include linguaggi di programmazione e formalismi dichiarativi. Quando invece l'utente è un sistema il cui compito è scoprire conoscenza, le nuove scoperte vengono reinserite nel sistema come conoscenza di dominio. La conoscenza di dominio e la conoscenza scoperta devono condividere una rappresentazione comune. Se la rappresentazione è limitata, nessun addestramento o nessun tipo di esempio produrrà un modello accurato per i dati. È importante che un analista di dati comprenda appieno i presupposti rappresentativi che possono essere inerenti a un particolare metodo.
 
 Alcuni patterns sono spesso associati a un grado di incertezza, rappresentata attraverso la probabilità, la deviazione standard, misure di credenza o fuzzy sets. In maniera visiva l'informazione incerta può essere convertita in dimensione, densità e ombreggiatura.
 
 Quando i database sono veramente grandi, con milioni di record, un'analisi completa di tutti i dati è infattibile. Gli algoritmi di rilevamento devono quindi basarsi su una qualche forma di campionamento, per cui viene considerata una parte dei dati. Le scoperte risultanti in questi casi sono necessariamente incerte. Le tecniche statistiche possono misurare il grado di incertezza. Possono anche essere utilizzati per determinare la quantità di campionamento aggiuntivo necessaria per ottenere il livello di fiducia desiderato nei risultati.
 
-Il modello di valutazione stima l'incertezza di un particolare pattern. Ci sono diversi metodi per valutare questa incertezza. La \textbf{cross validation} è una di queste procedure che consiste nel mescolare i dati del dataset, partizionarli in k sottoinsiemi di uguale lunghezza n, per ogni sottoinsieme chiama i-esimo subset di n oggetti come insieme test e lo mette da parte, addestra il sistema sui rimanenti sottoinsiemi e testa il sistema sull'insieme di test e memorizza le performances,  successivamente pulisce la memoria dimenticando ciò che ha imparato durate l'addestramento, calcola le performance medi di ogni insieme di test.
+Il modello di valutazione stima l'incertezza di un particolare pattern. Ci sono diversi metodi per valutare questa incertezza. La \textbf{cross validation} è una di queste procedure che consiste nel mescolare i dati del dataset, partizionarli in k sottoinsiemi di uguale lunghezza n, per ogni sottoinsieme chiama l'i-esimo subset di n oggetti come insieme test e lo mette da parte, addestra il sistema sui rimanenti sottoinsiemi e testa il sistema sull'insieme di test e memorizza le performances,  successivamente pulisce la memoria dimenticando ciò che ha imparato durate l'addestramento.
 
 La scelta dell'algoritmo di data mining è fondamentale per conoscere se la ricerca dovrebbe essere performata nello spazio dei parametri o nello spazio dei modelli o entrambi. Se non è possibile una soluzione, si possono utilizzare metodi iterativi greedy. 
 
 La ricerca del modello avviene come un ciclo sul metodo di ricerca dei parametri, la cui rappresentazione viene modificata in modo da considerare una famiglia di modelli. Per ogni rappresentazione specifica del modello viene istanziata la modalità di ricerca dei parametri per valutare la qualità di quel particolare modello. Le implementazioni dei metodi di ricerca del modello tendono a utilizzare tecniche di ricerca euristica poiché la dimensione dello spazio dei possibili modelli vieta la ricerca esauriente e le soluzioni in forma chiusa non sono facilmente ottenibili.
 
-Prima di costruire i modelli, è importante generare una procedura per testare la loro qualità. Successivamente la tecnica di modellazione è applicata ai dati e alla fine della quale vengono descritte le varie motivazioni delle scelte effettuate, le impostazioni dei parametri e l'output model con accuratezza aspettata, la robustezza e le possibili carenze.
+Prima di costruire i modelli, è importante generare una procedura per testare la loro qualità. Successivamente la tecnica di modellazione è applicata ai dati e alla fine della quale vengono descritte le varie motivazioni delle scelte effettuate, le impostazioni dei parametri e l'output model con l'accuratezza aspettata, la robustezza e le possibili carenze.
 
 L'output dell'algoritmo di data mining può essere espresso seguendo alcuni standard industriali. Il \textbf{Predictive Model Markup Language} (PMML) è uno standard basato su XML, il cui obiettivo è quello di definire e condividere modelli predittivi usando uno standard aperto. Un complesso mosaico di applicazioni software generano e consumano conoscenza, quindi si ha la necessità di una rappresentazione indipendente dal fornitore di output di data mining. 
 
@@ -478,13 +478,13 @@ Mentre la valutazione del modello si occupa di fattori quali l'accuratezza e la 
 
 Come output di questa operazione abbiamo una valutazione complessiva del data mining rispetto ai criteri di successo aziendale, inclusa una dichiarazione finale sul fatto che il progetto soddisfi già gli obiettivi aziendali iniziali. Questo passaggio rientra nel dominio dell'analista aziendale ed è focalizzato sullo sponsor esecutivo. L'analista aziendale esperto sarà in grado di formulare i risultati in un modo che si collega direttamente agli obiettivi aziendali che erano stati fissati per il progetto all'inizio. Inoltre, un analista di dati con una vasta conoscenza del settore e/o del settore può essere una grande risorsa in questa fase.
 
-Il più grande vantaggio del progetto potrebbe essere un riconoscimento o una rinnovata attenzione all'importanza del patrimonio di dati aziendali e alla potenza delle soluzioni basate sui dati. Questo a sua volta può generare una cultura all'interno dell'organizzazione in grado di promuovere iniziative più ampie, a lungo termine e orientate ai dati, come il data warehousing e il data marting.
+Il più grande vantaggio del progetto potrebbe essere un riconoscimento o una rinnovata attenzione all'importanza del patrimonio di dati aziendali e alla potenza delle soluzioni basate sui dati. Questo a sua volta può generare una cultura all'interno dell'organizzazione in grado di promuovere iniziative più ampie, a lungo termine e orientate ai dati, come il data warehousing e il data maning.
 
 Oltre alla valutazione del modello, viene effettuato un processo di revisione nel quale viene considerato l'intero processo al fine di determinare se vi è qualche fattore o compito importante che viene trascurato o per identificare una procedura generica per generare modelli simili in futuro.
 
 \subsubsection{Deployment}
 
-Per distribuire i risultati del data mining nell'azienda, questa attività sviluppa una strategia per il deployment.In questa fase si pianifica il piano per il deployment, considerando anche l'infrastruttura tecnica che deve essere impiegata per il corretto funzionamento dell'applicativo sviluppato. Successivamente a questa fase viene creato un piano per il monitoraggio e il mantenimento dell'applicazione. Viene redatto un report del prodotto finale e in fase di revisione si valut cosa è andato bene, cosa è andato male e cosa bisogna migliorare.
+Per distribuire i risultati del data mining nell'azienda, questa attività sviluppa una strategia per il deployment. In questa fase si pianifica il piano per il deployment, considerando anche l'infrastruttura tecnica che deve essere impiegata per il corretto funzionamento dell'applicativo sviluppato. Successivamente a questa fase viene creato un piano per il monitoraggio e il mantenimento dell'applicazione. Viene redatto un report del prodotto finale e in fase di revisione si valut cosa è andato bene, cosa è andato male e cosa bisogna migliorare.
 
 \newpage
 
@@ -496,13 +496,13 @@ Un classificatore è espresso in uno stile logico costituito da un insieme di re
 
 Nel \textbf{concept learning}, apprendimento dei concetti, si hanno due punti di vista opposti: \textit{estensionale}, quando si ha un insieme di oggetti fisici o astratti, o \textit{intenzionale}, quando si hanno un insieme di condizioni sufficienti e necessarie. In entrambi i casi abbiamo un insieme di condizioni sufficienti da un insieme di esempi di concetti positivi e negativi.
 
-Un ipotesi h è una congiunzione di vincoli sugli attributi di istanza. Ogni costrutto può essere uno specifico valore, senza un valore attribuito o non importante. Una definizione formale di ipotesi può essere:
+Un \textbf{ipotesi h} è una congiunzione di vincoli sugli attributi di istanza. Ogni costrutto può essere uno specifico valore, senza un valore attribuito o non importante. Una definizione formale di ipotesi può essere:
 
 \begin{center}
-Data un'istanza X, un insieme di esempi D $<x_i,c(x_i)>$, un concetto target c, delle ipotesi H espresse come congiunzione di costrutti sugli attributi, determina un ipotesi h in H come $h(x)=c(x)$ per ogni x in X. Il task di apprendimento è volto a determinare un ipotesi h identica al concetto di target c sull'intero insieme di istanze X.
+Data un'istanza X, un insieme di esempi D $<x_i,c(x_i)>$, un concetto target c, delle ipotesi H espresse come congiunzione di costrutti sugli attributi, possiamo definire un ipotesi h in H tale che $h(x)=c(x)$ per ogni x in X. Il task di apprendimento è volto a determinare un ipotesi h identifica al concetto di target c sull'intero insieme di istanze X.
 \end{center}
 
-Ogni ipotesi cerca di approssimare la funzione target su un insieme sufficientemente largo d esempi di training che sarà a sua volta l'approssimazione della funzione target sugli esempi non osservati. L'apprendimento di concetti può essere visto con un task i ricerca su un largo spazio di ipotesi H. L'obiettivo della ricerca è di trovare l'ipotesi che misura l'insieme di training. Lo spazio di ipotesi è implicitamente definito dalla rappresentazione dell'ipotesi.
+Ogni ipotesi cerca di approssimare la funzione target su un insieme sufficientemente largo di esempi di training che sarà a sua volta l'approssimazione della funzione target sugli esempi non osservati. L'apprendimento di concetti può essere visto come un task di ricerca su un largo spazio di ipotesi H. L'obiettivo della ricerca è di trovare l'ipotesi che misura l'insieme di training. Lo spazio di ipotesi è implicitamente definito dalla rappresentazione dell'ipotesi.
 
 Date due ipotesi $h_k$ e $h_j$, $h_j$ è più generale o uguale a $h_k$ quando $h_j \geq h_k$ se e solo se ogni istanza che soddisfa $h_k$ soddisfa anche $h_j$. Inoltre possiamo definire che $h_j$ è strettamente più generale rispetto a $h_k$ quando $h_j > h_k$ e se e solo se $h_j \geq h_k$ e $h_k \not \geq h_j$.
 
@@ -516,7 +516,7 @@ In questo algoritmo non vi è nessuna revisione in caso di esempio negativo perc
 
 L'algoritmo Find-S ha anche degli aspetti negativi. Non ci dice se l'apprendimento ha coperto il corretto target concept, se c'è solo un'ipotesi consistente in H con i dati o ci sono più di un'ipotesi. Inoltre non possiamo rilevare quando i dati di training sono inconsistenti, in quanto l'incoerenza negli esempi di addestramento può fuorviare Find-S, poiché ignora gli esempi negativi. Potrebbero esserci diverse ipotesi coerenti massimamente specifiche. L'algoritmo dovrebbe fare marcia indietro sulle sue scelte per esplorare un ramo diverso dell'ordinamento parziale rispetto al ramo che ha selezionato.
 
-Da qui nasce l'idea del \textbf{version space}. Si decide di restituire uno spazio delle versioni invece di una singola ipotesi. Definiamo formalmente questo version space $VD_{H,D}$ come uno spazio contenente le rispettive ipotesi dello spazio H a dei dati di esempio D. In questo mod esso risulta essere un sotto insieme di H consistente con gli esempi di traning in D. Ovvero: $VS_{H,D} \equiv \{ h \in H | Consistent(h,D)\}$
+Da qui nasce l'idea del \textbf{version space}. Si decide di restituire uno spazio delle versioni invece di una singola ipotesi. Definiamo formalmente questo version space $VD_{H,D}$ come uno spazio contenente le rispettive ipotesi dello spazio H e dei dati di training D. In questo modo esso risulta essere un sotto insieme di H consistente con gli esempi di traning in D. Ovvero: $VS_{H,D} \equiv \{ h \in H | Consistent(h,D)\}$
 
 Dalla definizione di questo spazio nasce l'algoritmo \textbf{List-Then-Eliminate}, nel quale in un primo passo si assume che $VS_{H,D}$ è una lista contenente ogni singola ipotesi in H. Successivamente per ogni esempio $<x,c(x)>$ rimuove da $VS_{H,D}$ ogni ipotesi h per la quale h(x)$\not =$c(x). Infine si restituisce lo spazio rimanente.
 
@@ -542,7 +542,7 @@ Si ritorna al \textbf{controllo1} e se questo risultasse negativo, si rimuove da
 
 L'algoritmo \textit{candidate-elimination} convergerà verso il target concept a condizione che non ci sono errori negli esempi di training ed è presente qualche ipotesi in HS che descrive correttamente il target concept. Infatti il target concept è appreso quando il confine di S e G converge a un'ipotesi singola e identica.
 
-L'algoritmo genera un un version space vuoto quando l'insieme dei dati di traning contiene errori e il target concept non può essere descritto attraverso ipotesi rappresentative (\textit{hypothesis representation}). Inoltre possiamo dire che l'algoritmo di Candidate-Elimination performa un ricerca bidirezionale, in quanto G e S possono crescere esponenzialmente nel numero di esempi di training.
+L'algoritmo genera un version space vuoto quando l'insieme dei dati di traning contiene errori e il target concept non può essere descritto attraverso ipotesi rappresentative (\textit{hypothesis representation}). Inoltre possiamo dire che l'algoritmo di Candidate-Elimination performa un ricerca bidirezionale, in quanto G e S possono crescere esponenzialmente nel numero di esempi di training.
 
 Quando ci troviamo difronte a concetti appresi parzialmente, abbiamo una minore confidenza nella classificazione in casi ambigui, ma potremmo attuare un approccio basato sul voto maggiore. In questo approccio assumiamo che tutte le ipotesi in H sono uguali a priori, successivamente potremmo decidere in base:
 
@@ -553,7 +553,7 @@ Quando ci troviamo difronte a concetti appresi parzialmente, abbiamo una minore 
 
 In questo ci viene in aiuto un algoritmo di \textit{interactive learning} che sceglie la nuova istanza (\textbf{query}) e restituisce la corretta classificazione mediante un oracolo esterno. Se l'algoritmo sceglie sempre una query che è soddisfatta solo da metà delle ipotesi in VS, allora il target concept può essere trovato in $log_2 |VS|$ steps.
 
-Un problema da affrontare in questi tipi di problemi consiste nella gestione del rumore nelle istanze. Per poterlo gestisce si potrebbero rendere più blande le condizioni che descrivono la coerenza dei concetti con tutte le istanze di addestramento. Inoltre se si hanno un numero limitato e predeterminato di esempi classificati in modo errato, si potrebbero mantenere diversi insiemi G e S di consistenza variabile.
+Un ostacolo da affrontare in questi tipi di problemi consiste nella gestione del rumore nelle istanze. Per poterlo superare si potrebbero rendere più blande le condizioni che descrivono la coerenza dei concetti con tutte le istanze di addestramento. Inoltre se si hanno un numero limitato e predeterminato di esempi classificati in modo errato, si potrebbero mantenere diversi insiemi G e S di consistenza variabile.
 
 \begin{center}
 
@@ -574,15 +574,15 @@ Una fondamentale proprietà dell'inferenza deduttiva afferma che: "un algoritmo 
 \item denotiamo con $L(x_i,D_c)$ la classificazione assegnata all'istanza $x_i$ da L dopo l'allenamento sui dati $D_c$
 \end{itemize}
 
-L'inductive bias di L è qualsiasi insieme minimo di asserzioni B tale che per qualsiasi target concept c e corrispondenti esempi di addestramento $D_c$: $(\forall x_i \in X) [( B \wedge D_c \wedge x_i ) \rightarrow L(x_i,D_c)]$ . Alcuni sistemi induttivi di modellazione possono essere espressi mediante sistemi deduttivi equivalenti. Il cosiddetto inductive bias è un input esplicito begli algoritmi dei sistemi deduttivi.
+L'inductive bias di L è qualsiasi insieme minimo di asserzioni B tale che per qualsiasi target concept c e corrispondenti esempi di addestramento $D_c$: $(\forall x_i \in X) [( B \wedge D_c \wedge x_i ) \rightarrow L(x_i,D_c)]$ . Alcuni sistemi induttivi di modellazione possono essere espressi mediante sistemi deduttivi equivalenti. Il cosiddetto inductive bias è un input esplicito degli algoritmi dei sistemi deduttivi.
 
 Analizziamo l'introduzione dell'inductive bias all'interno dell'algoritmo del candidate-elimination. Il target concept c è contenuto nello spazio delle ipotesi H. Da $c \in H$ segue deduttivamente $ c \in  VS_{H,D}$. In questo algoritmo L restituisce la classificazione $L(x_i,D_c)$ se e solo se ogni ipotesi in $VS_{H,D}$ produce anche questa classificazione, includendo anche le ipotesi $c \in VS_{H,D}$ (inductive bias). Quindi $c(x_i)=L(x_i,D_c)$.
 
 Il bias induttivo è un mezzo non procedurale per caratterizzare la politica degli algoritmi di apprendimento per generalizzare oltre i dati osservati. Confrontiamo diversi algoritmi di apprendimento in relazione all'inductive bias. 
 
-Nell'algoritmo \textbf{Rote learning}, si memorizzano gli esempi, viene classificato x se corrisponde a un esempio osservato in precedenza. In questo tipo di algoritmo non c'è nessun inductive bias. Per quanto riguarda l'algoritmo \textbf{candidate elimination}, l'inductive bias consiste nel target concept rappresentato dal suo spazio di ipotesi. Mentre per quanto riguarda l'algoritmo \textbf{Find-S}, l'inductive bias è il target concept rappresentato dal suo spazio di ipotesi e da tutte le istanze negative a meno che il contrario non sia implicato dalla sua altra conoscenza (una sorta di ragionamento predefinito o non monotono). 
+Nell'algoritmo \textbf{Rote learning} all'interno del quale si memorizzano gli esempi, viene classificato x se corrisponde a un esempio osservato in precedenza. In questo tipo di algoritmo non c'è nessun inductive bias. Per quanto riguarda l'algoritmo \textbf{candidate elimination}, l'inductive bias consiste nel target concept rappresentato dal suo spazio di ipotesi. Mentre per quanto riguarda l'algoritmo \textbf{Find-S}, l'inductive bias è il target concept rappresentato dal suo spazio di ipotesi e da tutte le istanze negative a meno che il contrario non sia implicato dalla sua altra conoscenza (una sorta di ragionamento predefinito o non monotono). 
 
-Per apprendere concetti disgiunti si può utilizzare l'algoritmo Candidate-Elimination, il quale è un algoritmo con il minimo impegno, che generalizza solo quando è forzato a farlo. Però la disgiunzione fornisce un modo per evitare qualsiasi generalizzazione, per uci l'algoritmo non è mai costretto a farlo. Per apprendere i concetti disgiuntivi, bisogna trovare un metodo per controllare l'introduzione di disgiunzioni, in modo da prevenire disgiunzioni banali. La copertura sequenziale, o \textbf{sequential covering}, è un approccio diffuso all'apprendimento di serie di regole.
+Per apprendere concetti disgiunti si può utilizzare l'algoritmo Candidate-Elimination, il quale è un algoritmo con il minimo impegno, generalizza solo quando è forzato a farlo. Però la disgiunzione fornisce un modo per evitare qualsiasi generalizzazione, per cui l'algoritmo non è mai costretto a farlo. Per apprendere i concetti disgiuntivi, bisogna trovare un metodo per controllare l'introduzione di disgiunzioni, in modo da prevenire disgiunzioni banali. La copertura sequenziale, o \textbf{sequential covering}, è un approccio diffuso all'apprendimento di serie di regole.
 
 Vi sono inoltre particolari algoritmi di copertura sequenziale che performano ripetutamente l'algoritmo di candidate-elimintaion per la ricerca di diverse descrizioni congiuntive che insieme coprono tutte le istanze di training. Ad ogni iterata, si trova un concetto congiuntivo che è coerente con alcuni degli esempi di training positivi e tutti gli esempi di training negativi. I casi positivi che sono stati presi in considerazione vengono rimossi da ulteriori considerazioni e il processo viene ripetuto finché tutti gli esempi positivi non sono stati coperti.
 
@@ -603,7 +603,7 @@ return Learned-rules
 
 All'interno dell'algoritmo di copertura sequenziale viene utilizzato un particolare algoritmo chiamato \textbf{LEARN-ONE-RULE}. Questo particolare algoritmo accetta un insieme di esempi di traning sia positivi che negativi e restituisce una singola regola che copre tutti gli esempi. Questo algoritmo ha il pregio di essere molto accurato, ma non ha un'alta copertura. Questo algoritmo viene implementato attraverso l'algoritmo Candidate-Elimination. 
 
-Si inizia inizializzando S, il quale conterrà un esempio positivo di training. Per ogni istanza di training negativa si applica la routine Update-G a G. Scegliere una descrizione g da G come una congiunzione per l'insieme delle soluzioni. Poiché Update-G è stato applicato utilizzando tutti gli esempi negativi, g non copre esempi negativi. Tuttavia, g può coprire molti degli esempi positivi. A questo punto si rimuove da ulteriori considerazioni tutti gli esmpi positivi coperti da g. Infine si ripete tutti questi procedimenti fino a quando tutti gli esempi sono coperti.
+Si inizia inizializzando S, il quale conterrà un esempio positivo di training. Per ogni istanza di training negativa si applica la routine Update-G a G. Scegliere una descrizione g da G come una congiunzione per l'insieme delle soluzioni. Poiché Update-G è stato applicato utilizzando tutti gli esempi negativi, g non copre esempi negativi. Tuttavia, g può coprire molti degli esempi positivi. A questo punto si rimuove da ulteriori considerazioni tutti gli esmpi positivi coperti da g. Infine si ripetono tutti questi procedimenti fino a quando tutti gli esempi sono coperti.
 
 Un approccio diverso per implementare l'algoritmo LEARN-ONE-RULE è l'\textbf{algoritmo di ricerca General-to-Specific}, mediante il quale si organizza lo spazio di ricerca mediante un ordinamento dal generico allo specifico e si esplora lo spazio attraverso una \textbf{greedy fashion}. Nello specifico si utilizza una ricerca greedy toop-down o general-to-specific. 
 
@@ -617,13 +617,13 @@ Un esempio di algoritmo separete and conquer è il seguente:
 
 \end{center}
 
-Tutti gli algoritmi di seperate and conquer condividono la struttura base. Mentre, molti task di apprendimento richiedono delle modifiche a questo procedimento. Per esempio, la procedura di overfittin se c'è un po' di noisy all'interno dei dati. Pertanto molti algoritmi allentano questo vincolo e utilizzano criteri di arresto o metodi di post-elaborazione per essere in grado di apprendere teorie più semplici che non sono complete e coerenti, ma sono più predittive su dati invisibili.
+Tutti gli algoritmi di seperate and conquer condividono la struttura base. Mentre, molti task di apprendimento richiedono delle modifiche a questo procedimento per esempio, la procedura di overfitting se c'è un po' di noisy all'interno dei dati. Pertanto molti algoritmi allentano questo vincolo e utilizzano criteri di arresto o metodi di post-elaborazione per essere in grado di apprendere teorie più semplici che non sono complete e coerenti, ma sono più predittive su dati invisibili.
 
-Altri algoritmi sostituiscono la ricerca dall'alto verso il basso del whileloop interno con una ricerca dal basso verso l'alto, in cui le regole vengono successivamente generalizzate a partire da una regola più specifica (ad esempio costituita da uno degli esempi positivi stessi). Tuttavia, altri algoritmi non utilizzano hillclimbing, ma impiegano algoritmi di ricerca meno miopi come la beam search o la bestfirst search.
+Altri algoritmi sostituiscono la ricerca dall'alto verso il basso del while-loop interno con una ricerca dal basso verso l'alto, in cui le regole vengono successivamente generalizzate a partire da una regola più specifica (ad esempio costituita da uno degli esempi positivi stessi). Tuttavia, altri algoritmi non utilizzano hill climbing, ma impiegano algoritmi di ricerca meno miopi come la beam search o la best first search.
 
 La \textbf{Beam Search} è una ricerca dal generale allo specifico viene implementata come una ricerca greedy depth-first senza backtracking. In questo algoritmo vi è il pericolo di una scelta subottimale in ogni fase. A volte per evitare questo rischio, l'algoritmo viene performato attraverso una lista di k candidati migliori a ogni step e successivamente viene scelto il migliore.
 
-Un altro problema che si incontra nell'algoritmo di separate and conquer è che il tipo delle condizioni usate nella formulazione delle ipotesi. Questo basilare algoritmo può formulare solo regole in logica proposizionale, ma la programmazione logica induttiva ha sviluppato algoritmi che possono imparare le regole nella logica del primo ordine. Un generico algoritmo di apprendimento delle regole separate and conquer che chiama varie subroutine che possono essere utilizzate per istanziare l'algoritmo generico in algoritmi specifici noti dalla letteratura.
+Un altro problema che si incontra nell'algoritmo di separate and conquer è il tipo delle condizioni usate nella formulazione delle ipotesi. Questo basilare algoritmo può formulare solo regole in logica proposizionale, ma la programmazione logica induttiva ha sviluppato algoritmi che possono imparare le regole nella logica del primo ordine. Un generico algoritmo di apprendimento delle regole separate and conquer che chiama varie subroutine che possono essere utilizzate per istanziare l'algoritmo generico in algoritmi specifici noti dalla letteratura.
 
 \begin{center}
 
@@ -647,9 +647,9 @@ Ad esempio, supponiamo di voler istanziare l'algoritmo generico nel semplice alg
 
 FilterRules lascerà passare solo il miglior perfezionamento per l'iterazione successiva, in modo che SelectCandidates abbia sempre una sola scelta. Insieme, queste due procedure implementano la ricerca in salita. A partire dall'elenco ordinato di tutti i perfezionamenti verrà utilizzato solo il primo (e migliore) elemento, questa parte del codice è equivalente alla parte corrispondente in SimpleSeparateAndConquer. Entrambi i criteri di arresto saranno sempre falsi e le regole apprese non verranno postelaborate.
 
-Consideriamo adesso gli algoritmi di simultaneous covering con gli algoritmi di sequential covering. Gli algoritmi di sequential covering sono i più lenti. Per imparare un set di n regole, ogniuna delle quali contiene k attribute-value test nelle loro precondizioni, gli algoritmi di sequentiial covering performeranno $n \times k$ step primitivi di ricerca, indipendentemente dalle scelte.
+Consideriamo adesso gli algoritmi di simultaneous covering con gli algoritmi di sequential covering. Gli algoritmi di sequential covering sono i più lenti. Per imparare un set di n regole, ognuna delle quali contiene k attribute-value test nelle loro precondizioni, gli algoritmi di sequential covering performeranno $n \times k$ step primitivi di ricerca, indipendentemente dalle scelte.
 
-Gli algoritmi di copertura simultanea sono generalmente veloci, poichè ogni test coon m possibili risultati contribuisce a scegliere le precondizioni per almeno m regole. Gli algoritmi di copertura sequenziale effettuano un gran numero di scelte indipendenti, mentre gli algoritmi di copertura simultanea effettuano un basso numero di scelte dipendenti.
+Gli algoritmi di copertura simultanea sono generalmente veloci, poichè ogni test con m possibili risultati contribuisce a scegliere le precondizioni per almeno m regole. Gli algoritmi di copertura sequenziale effettuano un gran numero di scelte indipendenti, mentre gli algoritmi di copertura simultanea effettuano un basso numero di scelte dipendenti.
 
 Alcune volte ci si chiede se conviene indurre le regole direttamente o convertire un decision tree in un insieme di regole. La risposta a questa domanda dipende in base a quanti i dati di traning sono disponibili. Se i dati sono abbondanti, possono supportare il maggior numero di decisioni indipendenti richieste dagli algoritmi di copertura sequenziale. Se i dati sono scarsi, la condivisione delle decisioni relative ai presupposti di regole diverse può essere più efficace.
 
@@ -689,7 +689,7 @@ Questo algoritmo prevede la definizione preventiva del numero di cluster, succes
 \item ripete i passaggi fino a quando non ci sono più cambiamenti significativi nella composizionne dei cluster.
 \end{itemize}
 
-Non sempre questo algoritmo identifica un raggruppamento perfetto, infatti il procedimento viene ripetuto scegliendo le distanze iniziali casualmente ed effettuando diversi raggruppamenti da cui scegliere alla fine. Tra i diversi raggruppamenti verrà scelto quello che minimizza le varianze complessivamente, ossia quello che minimizza la total variation within cluster.
+Non sempre questo algoritmo identifica un raggruppamento perfetto, infatti il procedimento viene ripetuto scegliendo le distanze iniziali casualmente ed effettuando diversi raggruppamenti da cui scegliere alla fine. Tra i diversi raggruppamenti verrà scelto quello che minimizza le varianze complessivamente, ossia quello che minimizza la total variation all'interno del cluster.
 
 Andando ad analizzare i vantaggi e gli svantaggi. Tra i vantaggi possiamo vedere come questo algoritmo sia semplice da implementare con un'efficienza pari a O(nkdi) dove:
 
@@ -700,7 +700,7 @@ Andando ad analizzare i vantaggi e gli svantaggi. Tra i vantaggi possiamo vedere
 \item i è il numero di iterazioni necessarie per convergere
 \end{itemize}
 
-Mentre tra gli svantaggi possiamo notare che è necessario fissare a priori il numero di cluster k, inoltre questo algoritmo è sensibile al rumore nei dati e alla presenza di outlier, il risultato finale dipende da partizionamento scelto inizialmente. Inoltre i cluster assumono forzatamente forme sferiche, finendo sempre l'iterazione trovando i minimi locali.
+Mentre tra gli svantaggi possiamo notare che è necessario fissare a priori il numero di cluster k, inoltre questo algoritmo è sensibile al rumore nei dati e alla presenza di outlier, il risultato finale dipende dal partizionamento scelto inizialmente. Inoltre i cluster assumono forzatamente forme sferiche, finendo sempre l'iterazione trovando i minimi locali.
 
 Se dovessimo dividere l'algoritmo in diversi step, possiamo definirne 6:
 \begin{itemize}
@@ -716,7 +716,7 @@ Non sempre l'algoritmo K-means identifica un raggruppamento perfetto, infatti in
 
 Ci sono due metodi principali per scegliere il numero k di cluster. Attraverso il metodo \textbf{elbow method}, nel quale si minimizza la distanza tra i punti di un singolo cluster e si massimizza la distanza tra i cluster. Per calcolare la distanza tra due cluster si utilizza la formula del WCSS, ovvero la somma dei quadrati delle differenze tra i vari punti dei cluster.
 
-Mentre se si decide di scegliere il metodo \textbf{silhouette}, per ogni istanza i calcola la distanza media tra i e ogni altra osservazione j all'interno del cluster in cui i è stata raggruppata. In formula: $a(i) = \dfrac{1}{|C|-1} \sum_{j \in C_I, i \not = j} d(i,j)$. Per ogni istanza i calcola la distanza media tra i e ogni altra osservazione j all’interno degli altri cluster (cluster-wise) diversi da quello in cui risiede i e salva tale media soltanto per il cluster più vicino al cluster di i. Chiama questo valore b(i). In formula: $b(i) = min_{J \not = I} \dfrac{1}{|C_J|} \sum_{j\in C_J} d(i,j)$.
+Mentre se si decide di scegliere il metodo \textbf{silhouette}, per ogni istanza si calcola la distanza media tra i e ogni altra osservazione j all'interno del cluster in cui i è stata raggruppata. In formula: $a(i) = \dfrac{1}{|C|-1} \sum_{j \in C_I, i \not = j} d(i,j)$. Per ogni istanza si calcola la distanza media tra i e ogni altra osservazione j all’interno degli altri cluster (cluster-wise) diversi da quello in cui risiede i e salva tale media soltanto per il cluster più vicino al cluster di i. Chiama questo valore b(i). In formula: $b(i) = min_{J \not = I} \dfrac{1}{|C_J|} \sum_{j\in C_J} d(i,j)$.
 
 Infine si definisce lo score Silhouette s(i) per i come segue:
 \begin{itemize}
@@ -727,7 +727,7 @@ Infine si definisce lo score Silhouette s(i) per i come segue:
 
 Inoltre il valore s(i) sarà sempre compreso tra -1 e 1.
 
-Per superare il problema di dover specificare i k cluster, possiamo utilizzare l'algoritmo \textbf{DBSCAN}, il quale è molto robusto in relazione agli outlier. Inoltre questo algoritmo analizza la densità locale alle osservazioni per individuare raggruppamenti anche in forma diversa da quella sferica. Questo è dovuto all'utilizzo del concetto di \textit{core-point} rispetto ad un numero minimo minPts, input utente, di punti vicini ad una determinata istanza e se tale istanza ha in un intorno almeno minPts istanze, allora è considerata core-point.
+Per superare il problema di dover specificare i k cluster, possiamo utilizzare l'algoritmo \textbf{DBSCAN}, il quale è molto robusto in relazione agli outlier. Inoltre questo algoritmo analizza la densità locale alle osservazioni per individuare raggruppamenti anche in forma diversa da quella sferica. Questo è dovuto all'utilizzo del concetto di \textit{core-point} rispetto ad un numero minimo minPts, inserito dall'utente, di punti vicini ad una determinata istanza e se tale istanza ha in un intorno almeno minPts istanze, allora è considerata core-point.
 
 Dopo aver identificato tutti i core-point, DBSCAN ne prende uno a caso e lo assegna al primo cluster. Quindi assegna allo stesso cluster tutti i core-point nell'intorno del core-point preso casualmente. DBSCAN fa questo per ogni core-point estendendo il cluster finché non raggiunge i punti che non sono core-point.
 
@@ -746,9 +746,9 @@ Gli alberi di decisione sono usati in task di classificazione, ovvero l'assegnaz
 
 Per costruire un decision tree, in letteratura ci sono diversi metodi tra i quali:
 \begin{itemize}
-\item Metodi di partizionamento ricorsivi, derivanti dalla disciplina della statistica
-\item Induzione di alberi decisionali, derivanti dal Machine Learning
-\item Costriuzione di alberi di classificazione, derivanti dal pattern recognition.
+\item \textbf{Metodi di partizionamento ricorsivi}, derivanti dalla disciplina della statistica
+\item \textbf{Induzione di alberi decisionali}, derivanti dal Machine Learning
+\item \textbf{Costriuzione di alberi di classificazione}, derivanti dal pattern recognition.
 \end{itemize}
 
 Un importante decision tree è quello definito come \textbf{C4.5}, che accetta una collezione di casi di training, ognuno dei quali ha una tupla di valori da un insieme di attributi prefissati o \textbf{variabili indipendenti} e una classe attributo o \textbf{variabile dipendente}. Un attributo $A_i$ è descritto come continuo o discreto in base se i suoi valori sono numerici o nominali.
@@ -769,7 +769,7 @@ Se $A_i$ è continuo, viene suddiviso in corrispondenza di un valore di soglia d
 
 possiamo considerare l'entropia E su S calcolata come segue: $E(S) = -\sum_{i=1...k} RF(C_i,S)log(RF(C_i,S))$. L'entropia misura il grado di incertezza contenuto in S.
 
-Da notare come questo valore assume il valore massimo quando gli eventi sono equiprobabili. Questa è una buona cosa poiché un insieme di eventi ugualmente probabili è quanto mai incerto. Mentre assume un valore minimo quando solo uno degli eventi ha una probabilità diversa da zero.
+Da notare come questo valore assume il valore massimo quando gli eventi sono equiprobabili. Questo è da considerarsi un aspetto positivo poiché un insieme di eventi ugualmente probabili è quanto mai incerto. Mentre assume un valore minimo quando solo uno degli eventi ha una probabilità diversa da zero.
 
 Considerando due classi di problemi ($C_1$=positivo, $C_2$=negativo) dove:
 \begin{itemize}
@@ -781,7 +781,7 @@ l'entropia di S è computata come: $E(S) = -p log_2 p - n log_2 n$.
 
 Un altro valore che può essere utilizzato per la selezione dei test è il cosiddetto \textbf{information gain}, che rappresenta la riduzione prevista dell'entropia a causa della distribuzione delle istanze su S in accordo con il test t. Considerando $S_1,...,S_z$ il partizionamento di S attraverso il test t sull'attributo $A_i$, l'information gain può essere ottenuto come: $G(S,t) = E(S) - \sum_i \dfrac{|S_i|}{|S|}E(S_i)$. In questo modo si sceglie il criterio che massimizza G(S,t).
 
-Un problema legato a questo parametro consiste nel favorire test con numerosi risultati. In questo caso l'information gain è massimizzato da un test su un attributo chiave che ogni $S_i$ contiene un solo caso. Una prima soluzione a questo problema consiste nel limitare i decision trees a test binari. Però sono possibili più test sullo stesso attributo. Ciò può portare a alberi decisionali che sono ancora più incomprensibili per gli esperti umani di quanto non avvenga normalmente. Inoltre questa soluzione è computazionalmente espansiva.
+Un problema legato a questo parametro consiste nel favorire test con numerosi risultati. In questo caso l'information gain è massimizzato da un test su un attributo chiave tale che ogni $S_i$ ne contiene un solo caso. Una prima soluzione a questo problema consiste nel limitare i decision trees a test binari. Però sono possibili più test sullo stesso attributo. Ciò può portare a alberi decisionali che sono ancora più incomprensibili per gli esperti umani di quanto non avvenga normalmente. Inoltre questa soluzione è computazionalmente espansiva.
 
 Una seconda soluzione tiene conto delle potenziali informazioni dalla partizione stessa, senza considerare la classe, quindi in formula: $P(S,t) = - \sum_i \dfrac{|S_i|}{|S|} log(\dfrac{|S_i|}{|S|})$. La maggior parte possibile delle informazioni fornite determinando il valore di un attributo dovrebbe essere utile ai fini della classificazione o, equivalentemente, il meno possibile dovrebbe essere "sprecato". Perciò scegliamo il test t che massimizza la formula $\dfrac{G(S,t)}{P(S,t)}$, definendo così il \textbf{criterio del gain ratio}.
 
@@ -803,15 +803,15 @@ Se incontriamo valori mancanti di A possiamo intraprendere diverse soluzioni:
 \item On-line: modifica il processo di induzione del decision tree per gestire mancanti.
 \end{itemize}
 
-Nell'approccio on-line vi sono diversi problemi. Un primo problema è la valutazione dei test. La selezione di un test su cui partizionare il training set viene effettuata sulla base di criteri euristici quali gain e gain ratio. In questo caso nno possiamo valutare la desiderabilità relativa di due test che utilizzano attributi con valori diversi.
+Nell'approccio on-line vi sono diversi problemi. Un primo problema è la valutazione dei test. La selezione di un test su cui partizionare il training set viene effettuata sulla base di criteri euristici quali gain e gain ratio. In questo caso non possiamo valutare la desiderabilità relativa di due test che utilizzano attributi con valori diversi.
 
 Un secondo problema relativo all'approccio online consiste nel partizionare il training set. Una volta che il test è stato selezionato, i casi di addestramento con valori sconosciuti dell'attributo rilevante non possono essere associati a un particolare risultato del test, e quindi non possono essere assegnati a un particolare sottoinsieme $T_i$.
 
 Un ulteriore problema consiste nel classificare un caso sconosciuto. In questo caso ci si chiede come si deve comportare il decision tree nel caso in cui il sistema ha un valore sconosciuto per l'attributo testato?
 
-Analizziamo nel dettaglio i tre problemi. Nel primo il test non fornisce informazioni circa la classe di appartenenza del caso in cui il valore dell'attributo di test è sconosciuto. Il gain ratio può essere alterato considerando i casi con valori sconosciuti come un gruppo aggiuntivo.
+Analizziamo nel dettaglio i tre problemi. Nel primo, il test non fornisce informazioni circa la classe di appartenenza del caso in cui il valore dell'attributo di test è sconosciuto. Il gain ratio può essere alterato considerando i casi con valori sconosciuti come un gruppo aggiuntivo.
 
-Per il problema del partizionamento del dataset, possiamo utilizzare un approccio probabilistico. Supponiamo di avere il test t con z esiti $v_1,v_2,...,v_z$, che partiziona S i z sotto insiemi $S_1,S_2,...,S_z$, l'idea è quella di associare ogni caso in ogni sotto insieme $S_i$ con un peso rappresentante la probabilità che il caso appartenga al dataset:
+Per il problema del partizionamento del dataset, possiamo utilizzare un approccio probabilistico. Supponiamo di avere il test t con z esiti $v_1,v_2,...,v_z$, che partiziona S in z sotto insiemi $S_1,S_2,...,S_z$, l'idea è quella di associare ogni caso in ogni sotto insieme $S_i$ con un peso rappresentante la probabilità che il caso appartenga al dataset:
 
 \begin{itemize}
 \item se il caso ha un esito conosciuto con peso 1
@@ -824,9 +824,9 @@ Per quanto riguarda il terzo problema, se si incontra un nodo decisionale in cui
 
 La tecnica di induzione del decision tree è molto efficiente in termini di tempo di elaborazione e fornisce un metodo molto intuitivo per analizzare i risultati. Questa intuitività, soprattutto se confrontata con l'output meno accessibile delle reti neurali, spiega perché gli alberi decisionali sono ancora attraenti. Nonostante tutto hanno degli svantaggi.
 
-Gli attuali metodi di induzione dell'albero decisionale non sono ottimali. Durante la formazione di un albero decisionale, una volta che l'algoritmo prende una decisione sulla base su cui dividere il nodo, tale decisione non viene mai rivista. I metodi per la costruzione di un albero decisionale ottimo hanno una complessità esponenziale.
+Gli attuali metodi di induzione dell'albero decisionale non sono ottimali. Durante la formazione di un albero decisionale, una volta che l'algoritmo prende una decisione sulla quale si basa per dividere il nodo, tale decisione non viene mai rivista. I metodi per la costruzione di un albero decisionale ottimo hanno una complessità esponenziale.
 
-Gli alberi decisionali soffrono di un problema di errori che si propagano in un albero, un problema molto serio con l'aumentare del numero di classi. Poichè i regression tree funzionano in base a una serie di decisioni locali, se una di queste è sbagliata ogni decisione da quel punto in poi potrebbe essere sbagliata, inoltre non avremmo mai un percorso corretto.
+Gli alberi decisionali soffrono di un problema di errori che si propagano all'interno dell'albero, un problema molto serio con l'aumentare del numero di classi. Poichè i regression tree funzionano in base a una serie di decisioni locali, se una di queste è sbagliata ogni decisione da quel punto in poi potrebbe essere sbagliata, inoltre non avremmo mai un percorso corretto.
 
 Gli alberi decisionali sono limitati ai problemi che possono essere risolti dividendo lo spazio della soluzione in rettangoli successivamente più piccoli.
 
@@ -906,7 +906,7 @@ In questo caso si decide di potare un sotto albero T se $q(v) \leq q(T) + SE(q(T
 SE(X) = \sqrt{\dfrac{X(1-X)}{n}}
 \end{equation*}
 
-\section{Naive Bayes Classidier - Classificatore Bayesiano}
+\section{Naive Bayes Classifier - Classificatore Bayesiano}
 
 Il \textbf{Bayesian Framework} è composto da un insieme di dati osservati D ai quali siamo interessati nel determinare le migliori ipotesi da qualche spazio H. Per un task di classificazione, le ipotesi è un classificatore. Il \textit{teorema di Bayes} è un metodo per calcolare la probabilità di un ipotesi basata sulle probabilità a priori e sui dati osservati.
 
@@ -935,12 +935,12 @@ P(h|D) = \dfrac{P(D|h)P(h)}{P(D)}
 
 L'ipotesi $h\in H$ con la massima probabilità è l'ipotesi con \textbf{massimo a posteriori (MAP)}, ovvero:
 \begin{equation*}
-h_{MAP} = arg  max_{h \in H} P (h|D) = arg  max_{h \in H} \dfrac{P(D|h)P(h)}{P(D)}
+h_{MAP} = arg  max_{h \in H} P (h|D) = arg  \underset{h \in H}{\max} \dfrac{P(D|h)P(h)}{P(D)}
 \end{equation*} 
 
 Il termine P(D) può essere eliminato dalla formula perchè è una costante indipendente di h. Assumendo che tutte le ipotesi sono altrettanto probabili, le equazioni possono essere ulteriormente semplificate. L'ipotesi che massimizza $P(D|h)$ è le più probabile. $P((D|h)$ è chiamata la probabilità dei dati D data h. Questa ipotesi è chiamata ipotesi di probabilità massima (ML), ovvero:
 \begin{center}
-$h_{ML} = arg max_{h \in H} P(D|h)$
+$h_{ML} = arg \underset{h \in H}{\max} P(D|h)$
 \end{center} 
 
 A differenza di una ipotesi ML, una ipotesi MAP incorpora la conoscenza a priori.
@@ -962,7 +962,7 @@ P(h|D) = \dfrac{P(D|h)P(h)}{P(D)}
 
 L'output dell'ipotesi $h_{MAP}$ con la più alta probabilità a posteriori:
 \begin{equation*}
-h_{MAP} = arg max_{h \in H} P(h|D)
+h_{MAP} = arg  \underset{h \in H}{\max} P(h|D)
 \end{equation*}
 
 In questo algoritmo si assume che l'insieme dei dati di training D è senza rumore, ovvero $d_i = c(x_i)$. Il concetto target c è contenuto nello spazio dell'ipotesi H. Inoltre si presume che non abbiamo nessuna ragione a priori di credere che un'ipotesi è più probabile di un'altra.
@@ -995,7 +995,7 @@ Perciò quando h è inconsistente con l'insieme dei dati D, $P(h|D) = 0 \times \
 P(h|D) = \dfrac{1 \times \dfrac{1}{|H|}}{\dfrac{|VS_{H,D}|}{|H|}}
 \end{equation*}
 
-Sotto le scelte di P(h) e $P(D|h)$, ogni ipotesi consistente ha una probabilità a posteriori di $\dfrac{1}{|VS_{H,D}}$ e ogni ipotesi inconsistente ha una probabilità a posteriori di 0. Perciò possiamo assumere che \textit{ogni ipotesi consistente è un'ipotesi MAP.}
+Sotto le scelte di P(h) e $P(D|h)$, ogni ipotesi consistente ha una probabilità a posteriori di $\dfrac{1}{|VS_{H,D}|}$ e ogni ipotesi inconsistente ha una probabilità a posteriori di 0. Perciò possiamo assumere che \textit{ogni ipotesi consistente è un'ipotesi MAP.}
 
 Una classe di leaners consistenti è una classe di algoritmi di apprendimento che produce un ipotesi che commette zero errori sugli esempi di training. Ogni leaner consistente produce un ipotesii MAP, se assumiamo una distribuzione di probabilità uniforme a priori su H e assumiamo che questa sia deterministica, su un insieme di dati di training senza rumore.
 
@@ -1006,12 +1006,12 @@ Il framework bayesiano consente un modo per caratterizzare il comportamento degl
 \fbox{\includegraphics[width=.8\textwidth, height=.5\textheight, keepaspectratio]{different-probabilistic-method}}
 \end{center}
 
-Riconsideriamo la definizione di $h_{MAP}$: $h_{MAP} = argmax_{h\in H} P(D|h)P(h)$, potremmo riscriverla cercando di massimizzarla/minimizzarla in termini di $\log_2$:
+Riconsideriamo la definizione di $h_{MAP}$: $h_{MAP} = \underset{h \in H}{argmax} P(D|h)P(h)$, potremmo riscriverla cercando di massimizzarla/minimizzarla in termini di $\log_2$:
 
 \begin{equation*}
 \begin{split}
-h_{MAP} = argmax_{h \in H}(\log_2(P(D|h) + \log_2(P(h))) \\
-h_{MAP} = argmin_{h \in H}(- \log_2(P(D|h) - \log_2(P(h)))
+h_{MAP} = \underset{h \in H}{argmax}(\log_2(P(D|h) + \log_2(P(h))) \\
+h_{MAP} = \underset{h \in H}{argmin}(- \log_2(P(D|h) - \log_2(P(h)))
 \end{split}
 \end{equation*}
 
@@ -1021,7 +1021,7 @@ La lunghezza della descrizione del messaggio i rispetto al codice C, $L_C (i)$, 
 
 In formule:
 \begin{equation*}
-h_{MAP} = argmin_{h \in H} (- \log_2 P(D|h) - \log_2 P(h))
+h_{MAP} = \underset{h \in H}{argmin} (- \log_2 P(D|h) - \log_2 P(h))
 \end{equation*} 
 
 Che possiamo interpretare alla luce del teorema dii Shannon come:
@@ -1030,7 +1030,7 @@ Che possiamo interpretare alla luce del teorema dii Shannon come:
 \item  $-\log_2 P(D|h)$ è la lunghezza della descrizione di D data h sotto la sua codifica ottimale $\rightarrow L_{C_{D|h}} = - \log_2 P(D|h)$ dove $C_{D|h}$ è il codice ottimale per descrivere i dati D assumendo che sia chi li via sia il ricevente conoscono l'ipotesi h.
 \end{itemize}
 
-Perciò l'ipotesi $h_MAP$ è l'ipotesi h che minimizza la somma: $h_{MAP} = argmin_{h \in H} (L_{C_H}(h) + L_{C_{D|h}}(D|h))$
+Perciò l'ipotesi $h_MAP$ è l'ipotesi h che minimizza la somma: $h_{MAP} = \underset{h \in H}{argmin} (L_{C_H}(h) + L_{C_{D|h}}(D|h))$
 
 Il \textbf{principio della lunghezza minima della descrizione } raccomanda di scegliere l'ipotesi che minimizza la somma delle due lunghezze relative alle descrizioni, una che rappresenta l'ipotesi e l'altra che rappresenta i dati data l'ipotesi: $h_{MDL} = argmin_{h \in H} L_{C_1}(h) + L_{C_2} (D|h)$. 
 
@@ -1038,11 +1038,11 @@ $L_{C_2}(D|h)$ è zero quando l'ipotesi non sbaglia a classificare i dati di tra
 
 Se confrontassimo 
 \begin{equation*}
-h_{MDL} = argmin_{h\in H} L_{C_1} (h) + L_{C_2}(D|h)
+h_{MDL} = \underset{h \in H}{argmin} \; L_{C_1} (h) + L_{C_2}(D|h)
 \end{equation*}
 con
 \begin{equation*}
-h_{MAP} = argmin_{h\in H} L_{C_H} (h) + L_{C_{D|h}}(D|h)
+h_{MAP} = \underset{h \in H}{argmin} \; L_{C_H} (h) + L_{C_{D|h}}(D|h)
 \end{equation*}
 
 risulta chiaro che le ipotesi MAP e il principio MDL sono strettamente collegati. Quando $C_1 = C_H$ e $C_2=C{D|h}$ allora $h_{MDL} = h_{MAP}$.
@@ -1077,7 +1077,7 @@ Una nuova istanza viene assegnata al valore target più probabile $v_{MAP}$, dat
 
 Secondo il teorema di  Bayes:
 \begin{equation*}
-v_{MAP} = argmax_{v_j\in V} \dfrac{P(a_1,a_2,\dots,a_n | v_j)P(v_j)}{P(a_1,a_2,\dots,a_n)} = argmax_{v_j \in V} P(a_1, a_2,\dots,a_n | v_j)P(v_j)
+v_{MAP} = \underset{v_j\in V}{argmax} \; \dfrac{P(a_1,a_2,\dots,a_n | v_j)P(v_j)}{P(a_1,a_2,\dots,a_n)} =\underset{v_j\in V}{argmax} \; P(a_1, a_2,\dots,a_n | v_j)P(v_j)
 \end{equation*}
 
 In questo caso possiamo stimare $P(v_j)$ attraverso la frequenza relativa del valore targe $v_j$ all'interno del training set. Questo approccio non è praticabile per $P(a_1,\dots,a_n|v_j)$, in quanto vi sonno troppe probabilità da stimare, ma proporzionalmente pochi dati di training.
@@ -1096,20 +1096,20 @@ In questo caso il numero di parametri distinti da stimare è uguale al numero di
 Lo step di apprendimento consiste nella stima dei vari $P(v_j)$ e di $P(a_i|v_j)$ basati sulla frequenza dei dati di training. L'insieme di queste stime corrisponde all'ipotesi appresa. Successivamente l'ipotesi viene usata per classificare ogni nuova istanza applicando la regola:
 
 \begin{equation*}
-v_{NB} = argmax_{v_j \in V} P(v_j) \prod_{i=1}^n P(a_i|v_j)
+v_{NB} = \underset{v_j\in V}{argmax} \; P(v_j) \prod_{i=1}^n P(a_i|v_j)
 \end{equation*}
 
 Ogni volta che il presupposto dell naive Bayes dell'indipendenza condizionale è soddisfatto, questa classificazione di Bayes $v_{NB}$ è identica alla classificazione MAP $v_{MAP}$.
 
 Il classificatore naive Bayes approssima il classificatore ottimale Bayes:
 \begin{equation*}
-v_{OBC} = argmax_{v_j \in V} P(v_j | D) = argmax_{v_j \in V} \sum\limits_{h_i \in H} P(v_j | h_i) P(h_i|D)
+v_{OBC} = \underset{v_j\in V}{argmax} \; P(v_j | D) = \underset{v_j\in V}{argmax} \; \sum\limits_{h_i \in H} P(v_j | h_i) P(h_i|D)
 \end{equation*}
 
 attraverso: 
 
 \begin{equation*}
-v_{NB} = argmax_{v_j \in V} P(v_j | h_{NB})P(h_{NB} | D) = argmax_{v_j \in V} P(v_j | h_{NB}) = argmax_{v_j \in V} P(v_j)  \prod_{i=1}^n P(a_i | v_j)
+v_{NB} = \underset{v_j\in V}{argmax} \; P(v_j | h_{NB})P(h_{NB} | D) = \underset{v_j\in V}{argmax} \; P(v_j | h_{NB}) = \underset{v_j\in V}{argmax} \; P(v_j)  \prod_{i=1}^n P(a_i | v_j)
 \end{equation*}
 
 Questo avviene solo  quando l'assunzione di indipendenza condizionale del classificatore Naive Bayes viene soddisfatta: $h_{NB} = h_{MAP}$. 
@@ -1118,7 +1118,7 @@ Questo avviene solo  quando l'assunzione di indipendenza condizionale del classi
 Moltiplicare numerose probabilità, le quali sono comprese tra 0 e 1, può produrre un numero float molto grande. Poiché log è una funzione crescente strettamente monotona, vale la seguente equazione:
 
 \begin{equation*}
-v_{NB} = argmax_{v_j \in V} \hat P (v_j) \prod_{i=1}^n \hat P (A_k = a_{ki} | v_j) = argmax_{v_j \in V} (\log_22 \hat P(v_j) + \sum\limits_{i=1}^n \log_2 \hat P (A_k = a_{ki} | v_j))
+v_{NB} = \underset{v_j\in V}{argmax} \; \hat P (v_j) \prod_{i=1}^n \hat P (A_k = a_{ki} | v_j) = \underset{v_j\in V}{argmax} \; (\log_22 \hat P(v_j) + \sum\limits_{i=1}^n \log_2 \hat P (A_k = a_{ki} | v_j))
 \end{equation*}
 È meglio eseguire tutti i calcoli sommando i logaritmi delle probabilità piuttosto che moltiplicando le probabilità. La classe con il punteggio finale di probabilità logaritmica non normalizzata più alto è ancora la più probabile.
 
@@ -1243,7 +1243,7 @@ Per classificare si utilizzano metodi dii apprendimento attraverso funzioni di a
 Gli attributi sono posizioni di testo, i valori sono parole, quindi usando un Naive Bayes Classifiers per classificare testi si ha:
 
 \begin{equation*}
-c_{NB} = argmax_{c_j\in C} P(c_j) \prod_i P(x_i|c_j)
+c_{NB} =  \underset{c_j\in C}{argmax} \; P(c_j) \prod_i P(x_i|c_j)
 \end{equation*}
 
 Assumendo che la classificazione è indipendente dalle posizioni delle parole, si potrebbero utilizzare gli stessi parametri per le stesse posizioni e ottenere quindi un modello bag of words.
@@ -1600,7 +1600,7 @@ Quando abbiamo un X nominale $\{m_1,\dots, m_k,\dots, m_K \}$, il generico eleme
 
 Sia gli \textbf{alberi di regressione}, sia gli \textbf{alberi di modelli} sono sempre basati sul partizionamento ricorsivo dello spazio definito dalle variabili indipendenti, ma alle foglie sono associate delle funzioni di regressione lineare. La differenza consiste nel fatto che gli alberi di regressione approssimano mediante una funzione costante a tratti, mentre gli alberi di modelli approssimano per mezzo di una funzione lineare a tratti.
 
-\section{Induzione dell'albero del modello graduale}
+\subsection{Induzione dell'albero del modello graduale}
 
 Questo problema riguarda principalmente i problemi di regressione all'interno del classico data mining. Date:
 
@@ -1709,6 +1709,7 @@ Il \textbf{ Reduced Error Grafting – REG}, errore di innesto ridotto, ha come 
 
 Per il confronto a coppie con Retis e M5', che sono i sistemi di induzione dell'albero modello all'avanguardia, viene utilizzato il test dei ranghi con segno non parametrico Wilcoxon a due campioni accoppiati.
 
+\newpage
 \section{Associazioni tra variabili}
 \subsection{Data mining descrittivo - Trovare le diendeze tra variabili}
 
